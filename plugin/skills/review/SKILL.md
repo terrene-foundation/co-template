@@ -4,7 +4,7 @@ description: Quality check and adversarial critique. Finds weaknesses, gaps, and
 argument-hint: "[what to review]"
 ---
 
-# /review $ARGUMENTS
+# /co-template:review $ARGUMENTS
 
 Review **$ARGUMENTS** with a critical eye. Find every weakness, gap, error, and improvement opportunity.
 
@@ -41,4 +41,4 @@ Date: [today]
 
 ## Next Step
 
-After the human addresses review findings, recommend `/finalize` to prepare the final output.
+After the human addresses review findings, recommend `/co-template:finalize` to prepare the final output.

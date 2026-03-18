@@ -3,7 +3,7 @@ name: execute
 description: Work through the plan one task at a time. Each task requires completion before moving to the next.
 ---
 
-# /execute
+# /co-template:execute
 
 Work through the approved plan from `02-planning/plan.md`, one task at a time.
 
@@ -25,4 +25,4 @@ Work through the approved plan from `02-planning/plan.md`, one task at a time.
 
 ## Next Step
 
-When all tasks are complete, recommend `/review` for quality checking.
+When all tasks are complete, recommend `/co-template:review` for quality checking.

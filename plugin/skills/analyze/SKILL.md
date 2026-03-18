@@ -4,7 +4,7 @@ description: Research and understand the problem space. Gather information, iden
 argument-hint: "[topic or question]"
 ---
 
-# /analyze $ARGUMENTS
+# /co-template:analyze $ARGUMENTS
 
 Research and analyze **$ARGUMENTS** thoroughly.
 
@@ -39,4 +39,4 @@ Date: [today]
 
 ## Next Step
 
-After analysis, recommend `/plan` to create a structured plan based on findings.
+After analysis, recommend `/co-template:plan` to create a structured plan based on findings.

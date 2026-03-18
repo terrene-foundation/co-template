@@ -3,7 +3,7 @@ name: plan
 description: Create a structured plan based on analysis. Stops for human approval before execution begins.
 ---
 
-# /plan
+# /co-template:plan
 
 Create a structured plan for the active project. This plan requires human approval before any execution begins.
 
@@ -48,4 +48,4 @@ Present the plan and ask:
 3. Is the order correct?
 4. Should any task be removed or added?
 
-Do NOT proceed to `/execute` until the human approves.
+Do NOT proceed to `/co-template:execute` until the human approves.

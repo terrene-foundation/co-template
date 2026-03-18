@@ -22,13 +22,13 @@ This CO workspace has five phases:
 
 | Phase | What happens | Skill |
 |-------|-------------|-------|
-| **01 Research** | Understand the problem space, gather information | `/co-template:analyze` |
-| **02 Plan** | Create a structured plan; stops for your approval | `/co-template:plan` |
-| **03 Execute** | Work through the plan one task at a time | `/co-template:execute` |
-| **04 Review** | Quality check, adversarial critique | `/co-template:review` |
-| **05 Finalize** | Polish, validate, prepare final output | `/co-template:finalize` |
+| **01 Research** | Understand the problem space, gather information | `/analyze` |
+| **02 Plan** | Create a structured plan; stops for your approval | `/plan` |
+| **03 Execute** | Work through the plan one task at a time | `/execute` |
+| **04 Review** | Quality check, adversarial critique | `/review` |
+| **05 Finalize** | Polish, validate, prepare final output | `/finalize` |
 
-Utility skills: `/co-template:ws` (status), `/co-template:wrapup` (save progress), `/co-template:checkpoint` (review learning).
+Utility skills: `/ws` (status), `/wrapup` (save progress), `/checkpoint` (review learning).
 
 ## Then ask
 
