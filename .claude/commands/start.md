@@ -9,9 +9,10 @@ Welcome the user to this CO workspace. This is a structured methodology for huma
 
 ## First, check the workspace
 
-1. Look for a `workspaces/` directory in the current project folder
-2. If it exists, list any active projects (non-template subdirectories)
-3. If it does not exist, explain that the user needs to set up a workspace:
+1. If `$ARGUMENTS` specifies a project name, focus on `workspaces/$ARGUMENTS/`
+2. Otherwise, look for a `workspaces/` directory in the current project folder
+3. If workspaces exist, list any active projects (non-template subdirectories)
+4. If no workspaces exist, explain that the user needs to set up a workspace:
    ```
    cp -r workspaces/_template workspaces/my-project
    ```
@@ -22,13 +23,13 @@ This CO workspace has five phases:
 
 | Phase | What happens | Skill |
 |-------|-------------|-------|
-| **01 Research** | Understand the problem space, gather information | `/analyze` |
-| **02 Plan** | Create a structured plan; stops for your approval | `/plan` |
-| **03 Execute** | Work through the plan one task at a time | `/execute` |
-| **04 Review** | Quality check, adversarial critique | `/review` |
-| **05 Finalize** | Polish, validate, prepare final output | `/finalize` |
+| **01 Research** | Understand the problem space, gather information | `/co-template:analyze` |
+| **02 Plan** | Create a structured plan; stops for your approval | `/co-template:plan` |
+| **03 Execute** | Work through the plan one task at a time | `/co-template:execute` |
+| **04 Review** | Quality check, adversarial critique | `/co-template:review` |
+| **05 Finalize** | Polish, validate, prepare final output | `/co-template:finalize` |
 
-Utility skills: `/ws` (status), `/wrapup` (save progress), `/checkpoint` (review learning).
+Utility skills: `/co-template:ws` (status), `/co-template:wrapup` (save progress), `/co-template:checkpoint` (review learning).
 
 ## Then ask
 
