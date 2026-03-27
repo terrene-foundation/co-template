@@ -22,12 +22,19 @@ Journal entries MUST include YAML frontmatter with these fields:
 ---
 type: DECISION | DISCOVERY | TRADE-OFF | RISK | CONNECTION | GAP
 date: YYYY-MM-DD
+created_at: [ISO-8601 timestamp]
+author: human | agent | co-authored
+session_id: [session ID if available]
 project: [project name]
 topic: [brief description]
 phase: analyze | plan | execute | review | finalize
 tags: [list of relevant tags]
 ---
 ```
+
+- `created_at`: precise creation timestamp for temporal analysis
+- `author`: who drove the insight — `human` (user identified it), `agent` (AI surfaced it), or `co-authored` (emerged through dialogue)
+- `session_id`: links the entry to the session that produced it
 
 ### 4. Use Correct Entry Types
 
@@ -42,7 +49,11 @@ Six entry types exist. Use the right one:
 | **CONNECTION** | Note a relationship between concepts, components, or findings | When cross-referencing reveals links that matter |
 | **GAP** | Flag something missing that needs attention | When analysis reveals missing data, untested assumptions, or unresolved questions |
 
-### 5. Self-Contained Entries
+### 5. For Discussion Section
+
+Every journal entry MUST include a `## For Discussion` section with 2-3 questions that probe the reasoning behind the entry. These questions should be specific to the entry content — not generic templates. They scaffold metacognition and prepare for oral follow-up.
+
+### 6. Self-Contained Entries
 
 Each journal entry MUST be self-contained — readable without requiring other context. Include enough background that a future session (or a different person) can understand the entry on its own.
 
