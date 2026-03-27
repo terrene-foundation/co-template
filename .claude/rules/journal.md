@@ -25,6 +25,7 @@ date: YYYY-MM-DD
 created_at: [ISO-8601 timestamp]
 author: human | agent | co-authored
 session_id: [session ID if available]
+session_turn: [conversation turn number]
 project: [project name]
 topic: [brief description]
 phase: analyze | plan | execute | review | finalize
@@ -33,8 +34,12 @@ tags: [list of relevant tags]
 ```
 
 - `created_at`: precise creation timestamp for temporal analysis
-- `author`: who drove the insight — `human` (user identified it), `agent` (AI surfaced it), or `co-authored` (emerged through dialogue)
+- `author`: who drove the insight, determined by decision tree:
+  - `human` — user stated the conclusion before the AI elaborated. Test: would this insight exist without the AI?
+  - `agent` — AI surfaced this unprompted. Test: did the user know this before the AI said it?
+  - `co-authored` — insight evolved through exchange; neither party alone reached it. When uncertain, prefer `co-authored` over `human`.
 - `session_id`: links the entry to the session that produced it
+- `session_turn`: approximate conversation turn number; creates temporal fingerprint (entries within a session should show increasing turns)
 
 ### 4. Use Correct Entry Types
 
@@ -51,7 +56,11 @@ Six entry types exist. Use the right one:
 
 ### 5. For Discussion Section
 
-Every journal entry MUST include a `## For Discussion` section with 2-3 questions that probe the reasoning behind the entry. These questions should be specific to the entry content — not generic templates. They scaffold metacognition and prepare for oral follow-up.
+Every journal entry MUST include a `## For Discussion` section with 2-3 questions that probe the reasoning behind the entry. Requirements:
+- At least one question must reference specific data, sources, or constraints from the entry
+- At least one must be a counterfactual ("If X had been different...")
+- Question structures must vary across entries (compare, challenge assumption, extend, invert, ask for evidence)
+- Questions must be answerable only by someone who genuinely engaged with the decision
 
 ### 6. Self-Contained Entries
 
