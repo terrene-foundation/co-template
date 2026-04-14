@@ -1,3 +1,9 @@
+---
+paths:
+  - "workspaces/**/journal/**"
+  - "workspaces/**"
+---
+
 # Journal Rules
 
 ## Scope
@@ -28,7 +34,7 @@ session_id: [session ID if available]
 session_turn: [conversation turn number]
 project: [project name]
 topic: [brief description]
-phase: analyze | plan | execute | review | finalize
+phase: analyze | plan | execute | review | learn | deliver
 tags: [list of relevant tags]
 ---
 ```
@@ -45,18 +51,19 @@ tags: [list of relevant tags]
 
 Six entry types exist. Use the right one:
 
-| Type | Purpose | When Created |
-|------|---------|-------------|
-| **DECISION** | Record a choice with rationale, alternatives considered, and consequences | When making architectural, design, strategic, or scope decisions |
-| **DISCOVERY** | Capture something learned — a concept, pattern, insight, or finding | When research, analysis, or exploration reveals new understanding |
-| **TRADE-OFF** | Document a trade-off evaluation — what was gained and what was sacrificed | When balancing competing concerns |
-| **RISK** | Record an identified risk, vulnerability, or concern | When stress-testing, reviewing, or validating reveals potential problems |
-| **CONNECTION** | Note a relationship between concepts, components, or findings | When cross-referencing reveals links that matter |
-| **GAP** | Flag something missing that needs attention | When analysis reveals missing data, untested assumptions, or unresolved questions |
+| Type           | Purpose                                                                   | When Created                                                                      |
+| -------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **DECISION**   | Record a choice with rationale, alternatives considered, and consequences | When making architectural, design, strategic, or scope decisions                  |
+| **DISCOVERY**  | Capture something learned — a concept, pattern, insight, or finding       | When research, analysis, or exploration reveals new understanding                 |
+| **TRADE-OFF**  | Document a trade-off evaluation — what was gained and what was sacrificed | When balancing competing concerns                                                 |
+| **RISK**       | Record an identified risk, vulnerability, or concern                      | When stress-testing, reviewing, or validating reveals potential problems          |
+| **CONNECTION** | Note a relationship between concepts, components, or findings             | When cross-referencing reveals links that matter                                  |
+| **GAP**        | Flag something missing that needs attention                               | When analysis reveals missing data, untested assumptions, or unresolved questions |
 
 ### 5. For Discussion Section
 
 Every journal entry MUST include a `## For Discussion` section with 2-3 questions that probe the reasoning behind the entry. Requirements:
+
 - At least one question must reference specific data, sources, or constraints from the entry
 - At least one must be a counterfactual ("If X had been different...")
 - Question structures must vary across entries (compare, challenge assumption, extend, invert, ask for evidence)

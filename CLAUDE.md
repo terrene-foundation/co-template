@@ -5,7 +5,7 @@ This is a **CO workspace** (Cognitive Orchestration) implementing structured hum
 ## CO Identity
 
 - **Application**: CO for [Domain] (CO[Abbreviation])
-- **CO Specification**: v1.1 (CC BY 4.0, Terrene Foundation)
+- **CO Specification**: v1.2 (CC BY 4.0, Terrene Foundation)
 - **Status**: [Proposed | Draft | In Development | Production]
 
 ## Absolute Directives
@@ -46,42 +46,49 @@ When you discover a missing [analysis/record/document], create it. Do not note i
 
 ## Commands
 
-| Command | Phase | Purpose |
-|---------|-------|---------|
-| `/start` | -- | Orientation; explains workflow, checks workspace, asks about the project |
-| `/analyze` | 01 | Research and understand the problem space |
-| `/plan` | 02 | Create a structured plan; stops for your approval |
-| `/execute` | 03 | Work through the plan one task at a time |
-| `/review` | 04 | Quality check and adversarial critique |
-| `/finalize` | 05 | Polish, validate, and prepare final output |
-| `/ws` | -- | Workspace status dashboard |
-| `/wrapup` | -- | Save session notes for continuity |
-| `/checkpoint` | -- | Review progress and learning |
+| Command    | Phase | Purpose                                                                  |
+| ---------- | ----- | ------------------------------------------------------------------------ |
+| `/start`   | --    | Orientation; explains workflow, checks workspace, asks about the project |
+| `/analyze` | 01    | Research and understand the problem space                                |
+| `/plan`    | 02    | Create a structured plan; stops for your approval                        |
+| `/execute` | 03    | Carry out the plan one task at a time                                    |
+| `/vet`     | 04    | Spec coverage + adversarial critique; produces finalized output          |
+| `/codify`  | 05    | Extract knowledge; codify into CO artifacts (.claude/)                   |
+| `/deliver` | 06    | Package and hand off final output                                        |
+| `/ws`      | --    | Workspace status dashboard                                               |
+| `/wrapup`  | --    | Save session notes for continuity                                        |
 
 ## Agents
 
 ### Domain Specialists (`agents/domain/`)
 
-| Agent | Purpose |
-|-------|---------|
-| **[domain-expert]** | [Primary domain knowledge and guidance] |
+| Agent                  | Purpose                                                     |
+| ---------------------- | ----------------------------------------------------------- |
+| **[domain-expert]**    | [Primary domain knowledge and guidance]                     |
 | **[quality-reviewer]** | [Quality assurance and critique; never says "this is fine"] |
 
 ### Management (`agents/management/`)
 
-| Agent | Purpose |
-|-------|---------|
-| **todo-manager** | Project task tracking |
-| **gh-manager** | GitHub issue management |
+| Agent            | Purpose                 |
+| ---------------- | ----------------------- |
+| **todo-manager** | Project task tracking   |
+| **gh-manager**   | GitHub issue management |
 
 ## Rules
 
-| Concern | Rule File | Scope |
-|---------|-----------|-------|
-| [Domain] integrity | `rules/domain-integrity.md` | Global |
-| Communication style | `rules/communication.md` | Global |
-| Git workflow | `rules/git.md` | Global |
-| Security | `rules/security.md` | Global |
+| Concern                 | Rule File                       |
+| ----------------------- | ------------------------------- |
+| [Domain] integrity      | `rules/domain-integrity.md`     |
+| Domain independence     | `rules/domain-independence.md`  |
+| CC artifact quality     | `rules/cc-artifacts.md`         |
+| Communication style     | `rules/communication.md`        |
+| Execution discipline    | `rules/execution-discipline.md` |
+| Specs authority         | `rules/specs-authority.md`      |
+| Artifact flow           | `rules/artifact-flow.md`        |
+| Journal knowledge trail | `rules/journal.md`              |
+| Rule authoring          | `rules/rule-authoring.md`       |
+| No placeholder content  | `rules/no-stubs.md`             |
+| Git workflow            | `rules/git.md`                  |
 
 ## Workspace Structure
 
@@ -89,22 +96,26 @@ Each project gets its own workspace:
 
 ```
 workspaces/my-project/
-  01-research/        # Research, analysis, discovery
-  02-planning/        # Plans, decisions, strategy
-  03-work/            # Active work products
-  04-review/          # Quality reviews, critiques
-  05-output/          # Final deliverables
-  journal/            # Insight journal
+  01-analyze/         # Phase 01: Research, analysis, discovery
+  02-plan/            # Phase 02: Plans, decisions, strategy
+  03-execute/         # Phase 03: Active work products
+  04-vet/             # Phase 04: Spec coverage, adversarial critique
+  05-codify/          # Phase 05: Codification log + proposals (audit trail)
+  06-deliver/         # Phase 06: Final deliverables, delivery receipt
+  journal/            # Knowledge trail (all phases)
   todos/
     active/           # Current tasks
     completed/        # Done tasks
 ```
+
+Phase 05 (/codify) has TWO output targets: `05-codify/` for the codification log and intermediate proposals, and `.claude/` for the actual codified artifacts.
 
 Create a new workspace: `cp -r workspaces/_template workspaces/my-project`
 
 ## [Your Domain] Context
 
 [CONFIGURE THIS SECTION. Replace with your domain's key knowledge:
+
 - Key references, standards, or frameworks
 - Active debates or competing approaches
 - Important terminology and definitions

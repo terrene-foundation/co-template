@@ -1,6 +1,6 @@
 ---
 name: gold-standards-validator
-description: Knowledge base compliance validator. Checks documents against Terrene Foundation naming conventions, licensing accuracy, terminology standards, and cross-reference integrity.
+description: Terrene standards validator. Use for naming, licensing, and terminology compliance.
 tools: Read, Glob, Grep, LS
 model: opus
 ---

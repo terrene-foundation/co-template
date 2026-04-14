@@ -21,24 +21,30 @@ Save to `04-review/review-[topic-slug].md`:
 
 ```markdown
 # Review: $ARGUMENTS
+
 Date: [today]
 
 ## Critical Issues (must fix)
+
 [Issues that would cause the output to fail its purpose]
 
 ## Major Issues (should fix)
+
 [Issues that weaken the output significantly]
 
 ## Minor Issues (worth fixing)
+
 [Issues that could be improved]
 
 ## Strengths
+
 [What works well - be specific]
 
 ## Recommendations
+
 [Prioritized list of what to fix first]
 ```
 
 ## Next Step
 
-After the human addresses review findings, recommend `/co-template:finalize` to prepare the final output.
+Review produces finalized output in `05-output/`. After the human addresses review findings, recommend `/co-template:learn` to capture knowledge, then `/co-template:deliver` to package and ship.

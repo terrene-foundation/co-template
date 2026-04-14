@@ -10,11 +10,11 @@ A ready-to-customize template for building a CO domain application. CO is a meth
 
 **Existing CO applications** (built from this template pattern):
 
-| Application | Domain | Repository |
-|---|---|---|
-| COC | Software development | [kailash-coc-claude-py](https://github.com/terrene-foundation/kailash-coc-claude-py) |
-| COR | Academic research | [co-research](https://github.com/terrene-foundation/co-research) |
-| COF | Finance education | [co-finance](https://github.com/terrene-foundation/co-finance) |
+| Application | Domain               | Repository                                                                           |
+| ----------- | -------------------- | ------------------------------------------------------------------------------------ |
+| COC         | Software development | [kailash-coc-claude-py](https://github.com/terrene-foundation/kailash-coc-claude-py) |
+| COR         | Academic research    | [co-research](https://github.com/terrene-foundation/co-research)                     |
+| COL-F       | Finance education    | [co-finance](https://github.com/terrene-foundation/co-finance)   |
 
 ## Quick Start
 
@@ -31,6 +31,7 @@ Then type `/start`.
 ### Option B: Claude Desktop Cowork (Plugin)
 
 **What you need:**
+
 - Claude Desktop with Cowork support
 - A Claude Pro, Max, or Team subscription
 
@@ -55,13 +56,14 @@ This template is not published to the plugin store. You must load it manually fr
 
 ### What happens after `/start`
 
-The AI will introduce itself, explain the five-phase workflow (Analyze, Plan, Execute, Review, Finalize), and ask about your project. Answer in plain language. You do not need to use technical terms or special commands. Describe what you want to accomplish, and it will guide you from there.
+The AI will introduce itself, explain the six-phase workflow (Analyze, Plan, Execute, Review, Learn, Deliver), and ask about your project. Answer in plain language. You do not need to use technical terms or special commands. Describe what you want to accomplish, and it will guide you from there.
 
 ### What a successful start looks like
 
 You will see:
+
 - The AI greeting you and naming itself based on your domain (e.g., "I'm your CO for Legal assistant")
-- A summary of what the five phases do
+- A summary of what the six phases do
 - A question asking you to describe your project or goal
 - A check for any existing workspace (if this is your first time, it will offer to create one)
 
@@ -104,17 +106,18 @@ The template includes two placeholder agents in `plugin/agents/domain/`:
 - `domain-expert.md` -- your primary knowledge specialist
 - `quality-reviewer.md` -- your quality critic (never says "this is fine")
 
-Customize these with your domain's knowledge. Add more agents as needed. Look at [COR's agents](https://github.com/terrene-foundation/co-research/tree/main/.claude/agents/research) (6 research specialists) and [COF's agents](https://github.com/terrene-foundation/co-finance/tree/main/.claude/agents) (24 agents across 5 categories) for examples.
+Customize these with your domain's knowledge. Add more agents as needed. Look at [COR's agents](https://github.com/terrene-foundation/co-research/tree/main/.claude/agents/research) (6 research specialists) and [COL-F's agents](https://github.com/terrene-foundation/co-finance/tree/main/.claude/agents) (24 agents across 5 categories) for examples.
 
 ### Step 4: Customize your workflow
 
-The template provides a generic five-phase workflow:
+The template provides a generic six-phase workflow:
 
 1. **Analyze** -- research the problem
 2. **Plan** -- create a structured plan (approval gate)
 3. **Execute** -- work through tasks
-4. **Review** -- quality critique
-5. **Finalize** -- prepare output
+4. **Review** -- quality critique, produce finalized output
+5. **Learn** -- extract knowledge into .claude/ artifacts (human approval required)
+6. **Deliver** -- package and ship final output
 
 Modify the skills in `plugin/skills/` to match your domain. Add domain-specific skills. For example:
 
@@ -128,27 +131,27 @@ Open `CLAUDE.md` and scroll to the bottom. Find the **[Your Domain] Context** se
 
 ## The Five CO Layers
 
-| Layer | What It Does | In This Template |
-|---|---|---|
-| **L1 Intent** | Specialized agents with domain knowledge | `agents/domain/` |
-| **L2 Context** | Institutional knowledge hierarchy | `CLAUDE.md` + `rules/` |
-| **L3 Guardrails** | Hard and soft enforcement | Hard refusals in CLAUDE.md, rules in `rules/` |
-| **L4 Instructions** | Structured workflow with gates | 5 phases, 9 skills, approval gates |
-| **L5 Learning** | Knowledge that compounds | `journal/`, `/checkpoint`, `/wrapup` |
+| Layer               | What It Does                             | In This Template                              |
+| ------------------- | ---------------------------------------- | --------------------------------------------- |
+| **L1 Intent**       | Specialized agents with domain knowledge | `agents/domain/`                              |
+| **L2 Context**      | Institutional knowledge hierarchy        | `CLAUDE.md` + `rules/`                        |
+| **L3 Guardrails**   | Hard and soft enforcement                | Hard refusals in CLAUDE.md, rules in `rules/` |
+| **L4 Instructions** | Structured workflow with gates           | 6 phases, 11 skills, approval gates           |
+| **L5 Learning**     | Knowledge that compounds                 | `journal/`, `/checkpoint`, `/wrapup`          |
 
 ## Limitations of the Cowork Plugin
 
-| Feature | CLI (Claude Code) | Cowork Plugin |
-|---|---|---|
-| Guardrail enforcement | Hooks programmatically enforce rules | Rules are advisory (hard refusals in CLAUDE.md help but are not programmatic) |
-| Session memory | `.session-notes` auto-read on startup | Manual: run `/wrapup` before closing, `/start` on next session |
-| Skill names | `/analyze`, `/plan`, etc. | `/co-template:analyze`, `/co-template:plan`, etc. (prefix required) |
-| Agent permissions | Full hooks and permission modes | No hooks or permission overrides (Cowork security restriction) |
-| File access | Full filesystem | Limited to the folder opened in Cowork |
+| Feature               | CLI (Claude Code)                     | Cowork Plugin                                                                 |
+| --------------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
+| Guardrail enforcement | Hooks programmatically enforce rules  | Rules are advisory (hard refusals in CLAUDE.md help but are not programmatic) |
+| Session memory        | `.session-notes` auto-read on startup | Manual: run `/wrapup` before closing, `/start` on next session                |
+| Skill names           | `/analyze`, `/plan`, etc.             | `/co-template:analyze`, `/co-template:plan`, etc. (prefix required)           |
+| Agent permissions     | Full hooks and permission modes       | No hooks or permission overrides (Cowork security restriction)                |
+| File access           | Full filesystem                       | Limited to the folder opened in Cowork                                        |
 
 ## Troubleshooting
 
-**The AI does not seem to know about CO or the five phases.**
+**The AI does not seem to know about CO or the six phases.**
 You may have opened the wrong folder. In Cowork, click "Open folder" and make sure you select the root of the template folder (the one containing `CLAUDE.md`), not a subfolder inside it.
 
 **Skills like `/co-template:start` do not work.**
@@ -180,7 +183,7 @@ co-template/
   plugin/                      # Cowork plugin
     .claude-plugin/plugin.json # Plugin manifest
     CLAUDE.md                  # Plugin context
-    skills/                    # 9 skills (start, analyze, plan, execute, review, finalize, ws, wrapup, checkpoint)
+    skills/                    # 11 skills (start, analyze, plan, execute, review, learn, deliver, ws, wrapup, checkpoint, journal)
     agents/                    # Same agents, packaged for plugin
   workspaces/
     _template/                 # Workspace template
@@ -205,4 +208,4 @@ co-template/
 - [Terrene Foundation](https://terrene.foundation)
 - [CO Specification](https://terrene.foundation/standards/co/) (CC BY 4.0)
 - [COR (Research)](https://github.com/terrene-foundation/co-research) -- reference implementation
-- [COF (Finance)](https://github.com/terrene-foundation/co-finance) -- reference implementation
+- [COL-F (Finance)](https://github.com/terrene-foundation/co-finance) -- reference implementation

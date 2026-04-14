@@ -34,30 +34,32 @@ When you discover a missing [analysis/record/document], create it. Do not note i
 
 ## Skills
 
-| Skill | Phase | Purpose |
-|-------|-------|---------|
-| `/co-template:start` | -- | New user orientation. Explains the CO workflow, checks workspace state, and asks about the project. |
-| `/co-template:analyze` | 01 | Research and understand the problem space. Gather information, identify constraints, map the landscape. |
-| `/co-template:plan` | 02 | Create a structured plan based on analysis. Stops for human approval before execution begins. |
-| `/co-template:execute` | 03 | Work through the plan one task at a time. Each task requires completion before moving to the next. |
-| `/co-template:review` | 04 | Quality check and adversarial critique. Finds weaknesses, gaps, and errors. Never says "this is fine." |
-| `/co-template:finalize` | 05 | Polish, validate, and prepare the final output. Last quality gate before delivery. |
-| `/co-template:ws` | -- | Show workspace status dashboard. Read-only. |
-| `/co-template:wrapup` | -- | Save session notes before ending. Captures context for the next session. |
-| `/co-template:checkpoint` | -- | Review progress and learning. What has been accomplished, what patterns emerged, what to improve. |
+| Skill                     | Phase | Purpose                                                                                                 |
+| ------------------------- | ----- | ------------------------------------------------------------------------------------------------------- |
+| `/co-template:start`      | --    | New user orientation. Explains the CO workflow, checks workspace state, and asks about the project.     |
+| `/co-template:analyze`    | 01    | Research and understand the problem space. Gather information, identify constraints, map the landscape. |
+| `/co-template:plan`       | 02    | Create a structured plan based on analysis. Stops for human approval before execution begins.           |
+| `/co-template:execute`    | 03    | Work through the plan one task at a time. Each task requires completion before moving to the next.      |
+| `/co-template:review`     | 04    | Adversarial critique; produces finalized output. Never says "this is fine."                             |
+| `/co-template:learn`      | 05    | Extract knowledge; upgrade CO artifacts (.claude/).                                                     |
+| `/co-template:deliver`    | 06    | Package and hand off final output.                                                                      |
+| `/co-template:ws`         | --    | Show workspace status dashboard. Read-only.                                                             |
+| `/co-template:wrapup`     | --    | Save session notes before ending. Captures context for the next session.                                |
+| `/co-template:checkpoint` | --    | Review progress and learning. What has been accomplished, what patterns emerged, what to improve.       |
 
 ## Agents
 
-| Agent | Purpose |
-|-------|---------|
-| **domain-expert** | Primary domain knowledge specialist. Provides context, explains concepts, identifies relevant references, and connects the user's work to the broader field. |
-| **quality-reviewer** | Quality assurance specialist. Reviews all output against domain standards. Never says "this is fine." Always finds at least one improvement. |
-| **gh-manager** | GitHub issue management for research milestones and collaboration |
-| **todo-manager** | Task tracking for research projects using workspace todo directories |
+| Agent                | Purpose                                                                                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **domain-expert**    | Primary domain knowledge specialist. Provides context, explains concepts, identifies relevant references, and connects the user's work to the broader field. |
+| **quality-reviewer** | Quality assurance specialist. Reviews all output against domain standards. Never says "this is fine." Always finds at least one improvement.                 |
+| **gh-manager**       | GitHub issue management for research milestones and collaboration                                                                                            |
+| **todo-manager**     | Task tracking for research projects using workspace todo directories                                                                                         |
 
 ## Customization
 
 Replace `co-template` with your domain name (e.g., `co-legal`, `co-medical`, `co-marketing`) in:
+
 1. `.claude-plugin/plugin.json` (the `name` field)
 2. All skill references in this file
 3. Run `co-convert to-plugin --name your-new-name --force` to regenerate

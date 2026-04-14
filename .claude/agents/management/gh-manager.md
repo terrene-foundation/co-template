@@ -1,6 +1,6 @@
 ---
 name: gh-manager
-description: GitHub issue management for research milestones and collaboration
+description: GitHub issue manager. Use for issues, PRs, and project milestone tracking.
 model: sonnet
 ---
 

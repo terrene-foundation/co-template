@@ -1,0 +1,53 @@
+{
+  "version": "1.2.0",
+  "type": "co-template",
+  "description": "CO USE template for domain applications",
+  "released": "2026-04-12",
+  "upstream": {
+    "name": "co",
+    "repo": "terrene-foundation/co",
+    "version": "1.2.0",
+    "version_url": "https://raw.githubusercontent.com/terrene-foundation/co/main/.claude/VERSION"
+  },
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-04-12",
+      "summary": "Sync from atelier 1.2.0 — specs authority phase command integration",
+      "changes": [
+        "NEW: rules/specs-authority.md — specs/ as single source of domain truth (8 MUST rules, delegation protocol)",
+        "MODIFIED: commands/analyze.md — new Step 6 creates specs/ with _index.md manifest",
+        "MODIFIED: commands/plan.md — specs read-gate (HARD STOP if missing), task→spec linkage",
+        "MODIFIED: commands/execute.md — specs context anchoring, deviation check with spec update",
+        "MODIFIED: commands/vet.md — specs as PRIMARY audit source, field-level assertions, cross-spec consistency",
+        "MODIFIED: commands/codify.md — specs/ added to project trail review",
+        "MODIFIED: commands/wrapup.md — added persistence list with specs/ entry",
+        "MODIFIED: rules/execution-discipline.md — MUST §5 Specs Context in Delegation, paths: includes specs/"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-04-09",
+      "summary": "Sync from atelier 1.1.0 — deterministic quality guide, rule-authoring meta-rule, gate enforcement",
+      "changes": [
+        "NEW: rules/rule-authoring.md — meta-rule for authoring rules (Loud/Linguistic/Layered test)",
+        "NEW: rules/git.md — git workflow discipline (conventional commits, WHY-not-WHAT bodies)",
+        "NEW: rules/no-stubs.md — zero-tolerance for placeholder content in canonical artifacts",
+        "NEW: rules/execution-discipline.md — execution and review phase discipline with gate enforcement",
+        "NEW: guides/deterministic-quality/ — 4-file guide suite (rule-authoring principles, session architecture, enforcement ladder)",
+        "MODIFIED: rules/cc-artifacts.md — added Clause 10 (new rules MUST follow rule-authoring meta-rule)"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-03-29",
+      "summary": "Initial version with hooks, settings, upgraded commands",
+      "changes": [
+        "Added shared hooks (session-start, session-end, pre-compact, auto-format, etc.)",
+        "Added settings.json with hook configuration",
+        "Upgraded /wrapup with context files and oversight checklist",
+        "Added /cc-audit with template alignment checks"
+      ]
+    }
+  ]
+}

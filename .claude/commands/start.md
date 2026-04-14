@@ -19,17 +19,20 @@ Welcome the user to this CO workspace. This is a structured methodology for huma
 
 ## Then explain the workflow
 
-This CO workspace has five phases:
+This CO workspace has six phases:
 
-| Phase | What happens | Skill |
-|-------|-------------|-------|
-| **01 Research** | Understand the problem space, gather information | `/co-template:analyze` |
-| **02 Plan** | Create a structured plan; stops for your approval | `/co-template:plan` |
-| **03 Execute** | Work through the plan one task at a time | `/co-template:execute` |
-| **04 Review** | Quality check, adversarial critique | `/co-template:review` |
-| **05 Finalize** | Polish, validate, prepare final output | `/co-template:finalize` |
+| Phase          | What happens                                              | Command    |
+| -------------- | --------------------------------------------------------- | ---------- |
+| **01 Analyze** | Understand the problem space, gather information          | `/analyze` |
+| **02 Plan**    | Create a structured plan; **stops for your approval**     | `/plan`    |
+| **03 Execute** | Carry out the plan one task at a time                     | `/execute` |
+| **04 Review**  | Spec coverage + adversarial critique; finalized output    | `/vet`     |
+| **05 Codify**  | Extract knowledge; codify into CO artifacts (.claude/)    | `/codify`  |
+| **06 Deliver** | Package and hand off final output                         | `/deliver` |
 
-Utility skills: `/co-template:ws` (status), `/co-template:wrapup` (save progress), `/co-template:checkpoint` (review learning).
+Phase 05 is special — it has TWO output targets: `05-codify/` for the audit trail AND `.claude/` for the codified artifacts. Every run makes the system stronger.
+
+Utility commands: `/ws` (status), `/wrapup` (save progress).
 
 ## Then ask
 

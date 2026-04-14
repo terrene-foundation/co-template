@@ -49,7 +49,7 @@ session_id: [current session ID if available, otherwise omit]
 session_turn: [approximate conversation turn number when this entry was created]
 project: [workspace name]
 topic: [topic description]
-phase: [current CO phase: analyze | plan | execute | review | finalize]
+phase: [current CO phase: analyze | plan | execute | review | learn | deliver]
 tags: []
 ---
 
@@ -63,7 +63,6 @@ tags: []
 ```
 
 4. Type-specific structure:
-
    - **DECISION**: Sections for Decision, Alternatives Considered, Rationale, Consequences
    - **DISCOVERY**: Sections for What Was Discovered, Why It Matters, Follow-Up
    - **TRADE-OFF**: Sections for Trade-Off, What Was Gained, What Was Sacrificed, Acceptable Because

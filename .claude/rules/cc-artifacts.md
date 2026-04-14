@@ -1,5 +1,5 @@
 ---
-globs:
+paths:
   - ".claude/agents/**"
   - ".claude/skills/**"
   - ".claude/rules/**"
@@ -90,7 +90,65 @@ Command files MUST stay under 150 lines. Move reference material to skills and r
 
 **Why**: Commands inject as user messages. Long commands compete with actual user intent in the token budget.
 
-### 6. Hooks Include Timeout Handling
+### 6. CLAUDE.md Must Be Lean
+
+CLAUDE.md MUST stay under 200 lines. It contains 3-5 repo-specific directives, absolute rules, and navigation tables. It MUST NOT restate rules (they load separately) or embed reference material.
+
+```markdown
+# DO: CLAUDE.md with repo identity + navigation + 3 absolute directives (~120 lines)
+
+## Absolute Directives
+
+### 1. [Repo-specific directive]
+
+## Rules Index
+
+| Rule | File | Scope |
+
+## Agents
+
+- **specialist** — Use for X
+
+# DO NOT: CLAUDE.md restating every rule (~600 lines)
+
+## Security Rules
+
+All queries must use parameterized queries... [repeats security.md]
+
+## Testing Rules
+
+Use 3-tier testing... [repeats testing.md]
+```
+
+**Why**: CLAUDE.md loads on every turn. Every line beyond navigation and directives is wasted context. Rules have their own files.
+
+### 7. Path-Scoped Rules Use `paths:` Frontmatter
+
+Domain-specific rules MUST use `paths:` (not `globs:`) as the YAML frontmatter key.
+
+```yaml
+# DO:
+---
+paths:
+  - "**/db/**"
+  - "**/infrastructure/**"
+---
+# DO NOT:
+---
+globs:
+  - "**/db/**"
+---
+```
+
+**Why**: `paths:` is the Claude Code documented key for rule file scoping. `globs:` is not recognized.
+
+### 8. /codify Deploys claude-code-architect
+
+Every `/codify` execution MUST include `claude-code-architect` in its validation team. All new or modified artifacts MUST be validated against cc-artifacts rules before completion.
+
+**Why**: Without artifact validation, `/codify` creates agents with 800-line knowledge dumps, unscoped rules, and commands that exceed 150 lines — compounding token waste across every future session.
+
+### 9. Hooks Include Timeout Handling
 
 Every hook MUST include a setTimeout fallback that returns `{ continue: true }` and exits.
 
@@ -107,6 +165,24 @@ const timeout = setTimeout(() => {
 ```
 
 **Why**: A hanging hook blocks the entire Claude Code session indefinitely.
+
+### 10. New Rules MUST Follow the Rule-Authoring Meta-Rule
+
+Every new rule MUST pass the Loud/Linguistic/Layered test defined in `rules/rule-authoring.md`.
+
+```markdown
+# DO:
+Rule uses MUST/MUST NOT modals, includes BLOCKED phrases for common
+rationalizations, has DO/DO NOT examples, has Why: lines, and has
+paths: frontmatter scoping it to relevant files.
+
+# DO NOT:
+Rule uses "should" or "try to" as primary modal, has no blocked
+phrases, no examples, no rationale, and loads globally despite
+being domain-specific.
+```
+
+**Why**: Rules without the Loud/Linguistic/Layered properties are ignored under pressure. Evidence: subprocess A/B test showed rule quality improved from 2/6 to 6/6 when the meta-rule was loaded (loom 0052-DISCOVERY §6).
 
 ## MUST NOT Rules
 
@@ -134,12 +210,12 @@ Skills and rules MUST NOT repeat instructions already present in CLAUDE.md.
 
 ### 3. No Global Rules That Should Be Path-Scoped
 
-Rules about domain-specific patterns MUST use YAML frontmatter path globs.
+Rules about domain-specific patterns MUST use YAML frontmatter `paths:` scoping.
 
 ```yaml
 # DO: Scoped rule (loads only when editing matching files)
 ---
-globs:
+paths:
   - "src/db/**"
   - "migrations/**"
 ---
@@ -154,6 +230,42 @@ globs:
 Hooks MUST NOT attempt to understand code meaning via regex. Hooks check structure; agents check semantics.
 
 **Why**: Regex-based semantic analysis is brittle and produces false positives.
+
+**Permitted exception**: `pre-compact.js` uses regex to detect which framework is in use (DataFlow/Nexus/Kaizen/Core SDK) for context preservation during compaction. This is structural tagging for checkpoint data, not agent decision-making — the hook never routes, classifies intent, or changes behavior based on the detection. Accepted per decision D1 in journal/0009.
+
+### 5. No BUILD Artifacts in USE Repos
+
+USE repo COC templates (coc-claude-py, coc-claude-rs) MUST NOT contain BUILD-specific artifacts:
+
+```
+# BUILD-only (remove from USE repos):
+- agents/frontend/          # BUILD repos don't do frontend work
+- rules/cross-sdk-inspection.md  # BUILD-only process rule
+- skills/*-bindings/        # Internal binding code patterns
+- skills/*-enterprise/      # Internal crate documentation
+- skills/*-governance/      # Internal governance crate docs
+
+# USE-only (keep in USE repos, remove from BUILD):
+- rules/deployment.md (cloud deployment version)
+- agents/deployment-specialist.md (cloud deployment)
+```
+
+**Why**: BUILD artifacts (SDK internals, binding patterns, crate docs) waste context in USE repos where developers build applications. USE artifacts (cloud deployment, user-facing patterns) waste context in BUILD repos where developers write SDK code.
+
+### 6. No Dangling Cross-References After Extraction
+
+When extracting reference material from agents/commands to skills, MUST verify all cross-references in the trimmed file still point to existing files. When removing skills/agents from a repo, MUST grep for references in remaining files and update them.
+
+```
+# DO: After removing skills/10-governance/ from coc-claude-rs
+grep -r "10-governance" coc-claude-rs/.claude/agents/  # Find references
+# Update each reference to point to existing alternative
+
+# DO NOT: Remove a skill directory without checking for references
+rm -rf skills/10-governance/  # Leaves dangling refs in agent files
+```
+
+**Why**: Dangling references cause file-not-found errors when agents try to load referenced skills, degrading agent performance.
 
 ## Cross-References
 

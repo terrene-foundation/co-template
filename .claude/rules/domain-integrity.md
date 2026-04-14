@@ -1,3 +1,8 @@
+---
+paths:
+  - "workspaces/**"
+---
+
 # [Domain] Integrity Rules
 
 ## Scope

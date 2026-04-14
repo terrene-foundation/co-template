@@ -1,6 +1,6 @@
 ---
 name: todo-manager
-description: Task tracking for research projects using workspace todo directories
+description: Task tracking specialist. Use for creating, updating, or reviewing project todos.
 model: sonnet
 ---
 
