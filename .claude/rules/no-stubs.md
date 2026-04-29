@@ -5,9 +5,11 @@ paths:
 
 # No Placeholders or Incomplete Content
 
+Origin: atelier commit 6b1b157 — placeholder-propagation risk specific to atelier's role as canonical reference for downstream domains.
+
 ## Scope
 
-These rules apply to ALL canonical artifacts — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, and any artifact destined for `.claude/`.
+These rules apply to ALL canonical artifacts in atelier — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, and any artifact destined for `.claude/`.
 
 **Exception**: Working drafts in `workspaces/` are excluded. Workspaces are explicitly in-progress; placeholder content is normal there until the work converges.
 
@@ -34,7 +36,7 @@ Canonical artifacts (anything in `.claude/`) MUST NOT contain:
 - "This section will be completed later" without a tracking reference
 - Lorem ipsum or generic placeholder text
 
-**Why**: Canonical artifacts are loaded by Claude on every relevant turn. Placeholder content forces Claude to interpret incomplete instructions probabilistically, which produces inconsistent behavior.
+**Why**: Canonical artifacts are loaded by Claude on every relevant turn. Placeholder content forces Claude to interpret incomplete instructions probabilistically, which produces inconsistent behavior. Atelier is the canonical reference for downstream domains — placeholders propagate to every domain on next sync.
 
 **Note**: `TODO` markers ARE acceptable in `workspaces/` directories during active drafting. They MUST be tracked and resolved before the artifact is promoted from a workspace into `.claude/` (this happens at `/vet` convergence and `/codify` approval).
 
@@ -45,7 +47,7 @@ Canonical artifacts MUST NOT contain:
 ```markdown
 # DO:
 
-"This rule prevents the failure mode where rule X loaded globally and consumed ~1,300 tokens per turn unnecessarily."
+"This rule prevents the failure mode documented in journal entry NNNN where rule X loaded globally and consumed ~1,300 tokens per turn unnecessarily."
 
 # DO NOT:
 
@@ -81,7 +83,7 @@ When creating a canonical artifact section:
 "As described in the cc-artifacts standards." (which standards? where?)
 ```
 
-**Why**: Dangling references are a known failure mode. When Claude encounters a reference it cannot resolve, it fabricates a plausible interpretation, which propagates errors.
+**Why**: Dangling references are a known failure mode (forge Report 06 anti-pattern: "Dead cross-reference"). When Claude encounters a reference it cannot resolve, it fabricates a plausible interpretation, which propagates errors.
 
 ## MUST NOT Rules
 

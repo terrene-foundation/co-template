@@ -1,15 +1,25 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-04-12",
+  "released": "2026-04-29",
   "upstream": {
     "name": "co",
     "repo": "terrene-foundation/co",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "version_url": "https://raw.githubusercontent.com/terrene-foundation/co/main/.claude/VERSION"
   },
   "changelog": [
+    {
+      "version": "1.2.1",
+      "date": "2026-04-29",
+      "summary": "Sync from atelier 1.2.1 — cc-audit fidelity convergence + Origin tag backfill",
+      "changes": [
+        "MODIFIED: 16 shared artifacts (4 agents, 4 commands, 8 rules) reflecting atelier audit fixes",
+        "Atelier-side fixes: phase-dir drift in /ws, dead skill ref in cc-artifacts, why-line gap in journal, phase enum drift, gh-manager 6-phase milestone mapping, communication MUST NOT pairs, hooks path canonical/legacy distinction, dead handoff refs reframed",
+        "Origin: tags backfilled on 8 of the 16 rule files synced (artifact-flow, cc-artifacts, communication, domain-independence, execution-discipline, git, journal, no-stubs)"
+      ]
+    },
     {
       "version": "1.2.0",
       "date": "2026-04-12",

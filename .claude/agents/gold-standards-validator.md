@@ -1,7 +1,7 @@
 ---
 name: gold-standards-validator
-description: Terrene standards validator. Use for naming, licensing, and terminology compliance.
-tools: Read, Glob, Grep, LS
+description: "Terrene naming, licensing, terminology compliance. Use for standards validation."
+tools: Read, Glob, Grep, Bash
 model: opus
 ---
 
@@ -100,7 +100,6 @@ For each violation:
 
 ## Related Agents
 
-- **intermediate-reviewer**: For broader quality review
-- **security-reviewer**: Escalate sensitivity findings
-- **care-expert**: Verify CARE terminology accuracy
-- **eatp-expert**: Verify EATP terminology accuracy
+- **intermediate-reviewer**: For broader quality review.
+
+If a downstream repo provides `care-expert` or `eatp-expert` agents, hand off there to verify CARE/EATP terminology accuracy. Atelier itself does not ship those agents — verify against `terrene/foundation/docs/02-standards/care/` and `…/eatp/` directly when no downstream agent is available.

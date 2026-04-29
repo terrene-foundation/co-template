@@ -1,9 +1,13 @@
 ---
 paths:
   - ".claude/**"
+  - "co-template/**"
+  - "co-codegen/**"
 ---
 
 # Domain Independence Rules
+
+Origin: atelier 1.0.0 baseline (commit 16c4f69) — load-bearing for atelier's role as cross-domain methodology source.
 
 ## Scope
 
@@ -46,19 +50,23 @@ When creating artifacts that will flow to co-template/, use placeholder markers 
 
 ### 3. Six-Phase Naming (CO v1.2)
 
-CO uses domain-neutral phase names AND canonical command names:
+CO defines a standard six-phase workflow with canonical commands. The phase **name** is the methodology concept; the canonical **command** is the slash command operators invoke.
 
-| Phase | Phase Name | Canonical Command | NOT (domain flavors)                     |
-| ----- | ---------- | ----------------- | ---------------------------------------- |
-| 01    | Analyze    | `/analyze`        | literature-review, requirements-analysis |
-| 02    | Plan       | `/plan`           | todos, research-plan                     |
-| 03    | Execute    | `/execute`        | implement, write, build                  |
-| 04    | Review     | `/vet`            | redteam, peer-review, critique           |
-| 05    | Codify     | `/codify`         | learn (pre-v1.2 name), evolve            |
-| 06    | Deliver    | `/deliver`        | publish, release, deploy, submit         |
+| Phase | Phase Name | Canonical Command | Workspace Dir             | NOT (domain flavors)                     |
+| ----- | ---------- | ----------------- | ------------------------- | ---------------------------------------- |
+| 01    | Analyze    | `/analyze`        | `01-analyze/`             | literature-review, requirements-analysis |
+| 02    | Plan       | `/plan`           | `02-plan/`                | todos, research-plan                     |
+| 03    | Execute    | `/execute`        | `03-execute/`             | implement, write, build                  |
+| 04    | Review     | `/vet`            | `04-vet/` → `06-deliver/` | redteam, peer-review, critique           |
+| 05    | Codify     | `/codify`         | `05-codify/` + `.claude/` | learn (pre-v1.2 name), evolve            |
+| 06    | Deliver    | `/deliver`        | `06-deliver/` → recipient | publish, release, deploy, submit         |
 
-Phase 04: canonical command is `/vet` because Claude Code reserves `/review`. Phase 05: renamed from "Learn" to "Codify" in v1.2 — the verb describes what the phase does (modify validated patterns into canonical practice). Phase 06: packages and ships.
+**Phase 04**: name is "Review" but canonical command is `/vet` because Claude Code reserves `/review` and the collision causes contention. Phase 04 produces finalized output, promoted from `04-vet/` to `06-deliver/` on convergence.
 
-Domain repos rename commands for their context (COC uses `/todos`, `/implement`, `/redteam`, `/codify`, `/release`+`/deploy`). co-template uses the canonical names.
+**Phase 05**: renamed from "Learn" to "Codify" in CO v1.2 because the verb describes what the phase actually does — modify validated patterns into canonical practice. Phase 05 has TWO output targets: `05-codify/` for the codification log and intermediate proposals (audit trail), and `.claude/` for the canonical codified artifacts. Per-proposal human approval is REQUIRED.
 
-**Why**: Neutral canonical names prevent methodology lock-in to any single domain's vocabulary.
+**Phase 06**: packages the finalized output from `06-deliver/` and hands it off to the recipient.
+
+Domain repos rename commands for their context (loom/COC uses `/todos`, `/implement`, `/redteam`, `/codify`, `/release`+`/deploy`). Atelier uses the canonical names.
+
+**Why**: Neutral canonical names prevent methodology lock-in to any single domain's vocabulary. Phase names are the cross-domain reference; command renames are operational flavor.

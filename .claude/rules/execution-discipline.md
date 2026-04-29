@@ -6,6 +6,8 @@ paths:
 
 # Execution Discipline Rules
 
+Origin: atelier commit 2f5ff0a — added in response to spec-coverage gaps, context anchoring drift, and draft/integrate confusion observed across early workspace runs.
+
 ## Scope
 
 These rules apply during the **execute** and **review** phases of any CO workflow.
@@ -61,22 +63,25 @@ Write the deliverable and call it done without checking that references, depende
 
 Reviews MUST run at specific phase boundaries, not per-edit. Phase boundary reviews use background agents for near-zero parent context cost.
 
-| Gate | After Phase | Enforcement | Reviewers |
-| --- | --- | --- | --- |
-| Execution done | `/execute` | **MUST** | claude-code-architect + quality-reviewer (background) |
-| Before delivery | `/deliver` | **MUST** | claude-code-architect + gold-standards-validator (blocking) |
-| Analysis complete | `/analyze` | RECOMMENDED | quality-reviewer |
-| Review passed | `/vet` | RECOMMENDED | domain-expert |
-| Knowledge captured | `/codify` | RECOMMENDED | gold-standards-validator |
+| Gate               | After Phase | Enforcement | Reviewers                                                   |
+| ------------------ | ----------- | ----------- | ----------------------------------------------------------- |
+| Execution done     | `/execute`  | **MUST**    | claude-code-architect + intermediate-reviewer (background)  |
+| Before delivery    | `/deliver`  | **MUST**    | claude-code-architect + gold-standards-validator (blocking) |
+| Analysis complete  | `/analyze`  | RECOMMENDED | intermediate-reviewer                                       |
+| Review passed      | `/vet`      | RECOMMENDED | co-expert                                                   |
+| Knowledge captured | `/codify`   | RECOMMENDED | gold-standards-validator                                    |
 
 ```markdown
 # DO:
+
 At end of /execute, spawn reviews as background agents:
 Agent({subagent_type: "claude-code-architect", run_in_background: true, prompt: "Review all changes..."})
-Agent({subagent_type: "quality-reviewer", run_in_background: true, prompt: "Quality audit..."})
+Agent({subagent_type: "intermediate-reviewer", run_in_background: true, prompt: "Quality audit..."})
+
 # Parent continues; reviews arrive as notifications.
 
 # DO NOT:
+
 "Skipping review to save time"
 "Reviews will happen in a follow-up session"
 "The changes are straightforward, no review needed"
@@ -84,12 +89,13 @@ Agent({subagent_type: "quality-reviewer", run_in_background: true, prompt: "Qual
 ```
 
 **BLOCKED responses when skipping MUST gates:**
+
 - "Skipping review to save time"
 - "Reviews will happen in a follow-up session"
 - "The changes are straightforward, no review needed"
 - "Already reviewed informally during implementation"
 
-**Why**: Reviews phrased as "recommended" were skipped 6/6 times under time pressure. Background agents make reviews nearly free — the review runs in a separate context and the parent sees only the verdict.
+**Why**: Reviews phrased as "recommended" were skipped 6/6 times under time pressure (loom 0052-DISCOVERY §3.3). Background agents make reviews nearly free — the review runs in a separate context and the parent sees only the verdict.
 
 ### 5. Specs Context in Delegation
 
@@ -98,11 +104,11 @@ Every specialist delegation prompt MUST include relevant spec file content from 
 ```markdown
 # DO:
 
-Agent(prompt: "Draft the user schema.\n\nFrom specs/data-model.md:\n[relevant section content]\n\nFrom specs/tenant-isolation.md:\n[relevant section content]")
+Agent(prompt: "Draft the sync rule.\n\nFrom specs/artifact-model.md:\n[relevant section content]\n\nFrom specs/sync-targets.md:\n[relevant section content]")
 
 # DO NOT:
 
-Agent(prompt: "Draft the user schema.")
+Agent(prompt: "Draft the sync rule.")
 ```
 
 **BLOCKED responses:**

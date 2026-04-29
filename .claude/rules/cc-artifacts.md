@@ -9,6 +9,8 @@ paths:
 
 # CC Artifact Quality Rules
 
+Origin: atelier 1.0.0 baseline (commit 16c4f69) — codifies CC artifact quality standards distilled from forge research reports and loom journal corpus.
+
 ## Scope
 
 These rules apply when creating or modifying CC artifacts (agents, skills, rules, commands, hooks).
@@ -172,11 +174,13 @@ Every new rule MUST pass the Loud/Linguistic/Layered test defined in `rules/rule
 
 ```markdown
 # DO:
+
 Rule uses MUST/MUST NOT modals, includes BLOCKED phrases for common
 rationalizations, has DO/DO NOT examples, has Why: lines, and has
 paths: frontmatter scoping it to relevant files.
 
 # DO NOT:
+
 Rule uses "should" or "try to" as primary modal, has no blocked
 phrases, no examples, no rationale, and loads globally despite
 being domain-specific.
@@ -193,7 +197,7 @@ Agent files MUST NOT exceed 400 lines. Extract reference material to a skill dir
 ```
 # DO: Agent (200 lines) references skill
 ## Full Documentation
-- `.claude/skills/30-claude-code-patterns/` — CC architecture reference
+- `.claude/skills/cc-artifact-patterns/` — CC architecture reference
 
 # DO NOT: Agent (600 lines) embeds the entire reference
 ## CC Architecture
@@ -269,6 +273,6 @@ rm -rf skills/10-governance/  # Leaves dangling refs in agent files
 
 ## Cross-References
 
-- `.claude/skills/30-claude-code-patterns/` — Full CC architecture patterns
+- `.claude/skills/cc-artifact-patterns/` — Full CC architecture patterns
 - `.claude/agents/claude-code-architect.md` — CC artifact specialist
 - `.claude/guides/co-setup/03-creating-components.md` — Component creation guide

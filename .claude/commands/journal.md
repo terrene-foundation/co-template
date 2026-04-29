@@ -47,7 +47,7 @@ session_id: [current session ID if available, otherwise omit]
 session_turn: [approximate conversation turn number when this entry was created]
 project: [workspace name]
 topic: [topic description]
-phase: [current CO phase: analyze | plan | execute | review | learn | deliver]
+phase: [current CO phase: analyze | plan | execute | vet | codify | deliver]
 tags: []
 ---
 

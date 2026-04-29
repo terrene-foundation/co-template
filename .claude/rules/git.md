@@ -1,5 +1,7 @@
 # Git Workflow Rules
 
+Origin: inbound sync from loom 2.8.0 deterministic-quality artifact suite (atelier 1.1.0, commit b1aa2af).
+
 ## Conventional Commits
 
 All commits MUST use the conventional format:
