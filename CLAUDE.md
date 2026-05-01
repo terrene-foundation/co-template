@@ -55,6 +55,8 @@ When you discover a missing [analysis/record/document], create it. Do not note i
 | `/vet`     | 04    | Spec coverage + adversarial critique; produces finalized output          |
 | `/codify`  | 05    | Extract knowledge; codify into CO artifacts (.claude/)                   |
 | `/deliver` | 06    | Package and hand off final output                                        |
+| `/sweep`   | --    | Repo-wide outstanding-work audit (todos, issues, vet-gaps, sync currency) |
+| `/autonomize` | -- | Adopt autonomous execution posture for the rest of the session            |
 | `/ws`      | --    | Workspace status dashboard                                               |
 | `/wrapup`  | --    | Save session notes for continuity                                        |
 
