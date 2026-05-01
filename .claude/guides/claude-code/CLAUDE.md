@@ -192,7 +192,7 @@ Think of Claude Code as a **highly capable junior developer** with access to a *
 │   ├── e2e-god-mode.md # E2E testing requirements
 │   ├── env-models.md   # API keys & model names
 │   ├── git.md          # Git workflow rules
-│   ├── zero-tolerance.md     # No stubs/TODOs/placeholders
+│   ├── no-stubs.md     # No stubs/TODOs/placeholders
 │   ├── patterns.md     # Kailash pattern rules
 │   ├── security.md     # Security rules
 │   └── testing.md      # Testing policies (real infrastructure recommended)

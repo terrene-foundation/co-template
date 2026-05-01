@@ -83,7 +83,7 @@ Every CO setup consists of five component types. Each maps to a specific CO laye
 | Agents    | `dataflow-specialist`, `nexus-specialist`, `kaizen-specialist`, `mcp-specialist`                           | `care-implementation-expert`, `co-domain-expert`                                                                                      |
 | Agents    | `uiux-designer`, `react-specialist`, `flutter-specialist`, `react-specialist`, `uiux-designer`             | —                                                                                                                                     |
 | Skills    | SDK-specific (01-25)                                                                                       | Standards reference (26-34)                                                                                                           |
-| Rules     | `zero-tolerance.md` (strict MUST), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md` | `zero-tolerance.md` (soft RECOMMENDED), `agents.md` (RECOMMENDED), `constitution.md`, `publication-quality.md`, `arxiv-submission.md` |
+| Rules     | `no-stubs.md` (strict MUST), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md` | `no-stubs.md` (soft RECOMMENDED), `agents.md` (RECOMMENDED), `constitution.md`, `publication-quality.md`, `arxiv-submission.md` |
 | Hooks     | `validate-workflow.js`, `validate-deployment.js`                                                           | `validate-arxiv-content.js`, `validate-publication-content.js`                                                                        |
 
 ### Shared Across Both Archetypes
@@ -116,7 +116,7 @@ Request: "Create a user registration API"
 4. WRITING PHASE
    └── Claude writes code/docs
    └── HOOK FIRES: validate-workflow.js checks output
-   └── RULE APPLIED: zero-tolerance.md prevents placeholders
+   └── RULE APPLIED: no-stubs.md prevents placeholders
 
 5. REVIEW PHASE
    └── Claude delegates to reviewer

@@ -75,7 +75,7 @@ Rules are Markdown files that Claude reads and follows:
 | `e2e-god-mode.md`   | E2E testing           | Implement everything, no placeholders                 |
 | `env-models.md`     | API keys & models     | .env is single source of truth                        |
 | `git.md`            | Git workflow          | Branch strategy, commit rules                         |
-| `zero-tolerance.md` | No stubs/TODOs        | No placeholders in production code                    |
+| `no-stubs.md` | No stubs/TODOs        | No placeholders in production code                    |
 | `patterns.md`       | SDK patterns          | Correct API usage, imports                            |
 | `security.md`       | Security requirements | OWASP, secrets, input validation                      |
 | `testing.md`        | Testing policies      | Real infrastructure recommended, test-first, coverage |
@@ -497,7 +497,7 @@ MUST NOT [prohibited action].
 
 1. **Rules are mandatory instructions** - Claude reads and follows them
 
-2. **8 rule files cover all domains** - agents, e2e, env-models, git, zero-tolerance, patterns, security, testing
+2. **8 rule files cover all domains** - agents, e2e, env-models, git, no-stubs, patterns, security, testing
 
 3. **MUST rules define requirements** - What Claude must do
 

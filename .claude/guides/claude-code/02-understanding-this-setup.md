@@ -159,7 +159,7 @@ Claude: [Uses DataFlow patterns from skills]
 │  e2e-god-mode.md     → E2E testing requirements              │
 │  env-models.md       → API keys & model names                │
 │  git.md              → Git workflow requirements              │
-│  zero-tolerance.md         → No stubs/TODOs/placeholders           │
+│  no-stubs.md         → No stubs/TODOs/placeholders           │
 │  patterns.md         → Kailash pattern enforcement            │
 │  security.md         → Security requirements                  │
 │  testing.md          → Testing policies (Real infrastructure recommended)          │

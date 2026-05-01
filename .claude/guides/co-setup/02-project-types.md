@@ -27,7 +27,7 @@ Software development projects. The AI writes code, tests it, deploys it.
 | Agents    | Frontend: `uiux-designer`, `react-specialist`, `flutter-specialist`, `react-specialist`, `uiux-designer`                          |
 | Agents    | Deployment: `release-specialist`, `testing-specialist`                                                                            |
 | Skills    | SDK-specific (01-core-sdk through 25-ai-patterns)                                                                                 |
-| Rules     | `zero-tolerance.md` (strict — MUST NOT), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md`, `env-models.md` |
+| Rules     | `no-stubs.md` (strict — MUST NOT), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md`, `env-models.md` |
 | Hooks     | `validate-workflow.js` (SDK pattern enforcement), `validate-deployment.js`                                                        |
 
 **`start.md` orientation**: Product-building. "You describe what you want, the AI builds it."
@@ -62,7 +62,7 @@ Strategic, legal, or governance knowledge work. The AI researches, drafts, revie
 | Agents    | Publications: `publication-expert`                                                                                                                     |
 | Skills    | Standards reference (26-eatp, 27-care, 28-coc, co-reference)                                                                                           |
 | Skills    | Governance (29-constitution, 30-arxiv, 31-publication, 32-governance-layer, 33-care-implementation, 34-co-domain)                                      |
-| Rules     | `zero-tolerance.md` (soft — RECOMMENDED), `agents.md` (RECOMMENDED)                                                                                    |
+| Rules     | `no-stubs.md` (soft — RECOMMENDED), `agents.md` (RECOMMENDED)                                                                                    |
 | Rules     | `constitution.md`, `publication-quality.md`, `arxiv-submission.md`, `governance-layer-positioning.md`, `co-domain-application.md`, `terrene-naming.md` |
 | Hooks     | `validate-arxiv-content.js`, `validate-publication-content.js`                                                                                         |
 
