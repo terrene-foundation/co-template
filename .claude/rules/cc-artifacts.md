@@ -188,6 +188,67 @@ being domain-specific.
 
 **Why**: Rules without the Loud/Linguistic/Layered properties are ignored under pressure. Evidence: subprocess A/B test showed rule quality improved from 2/6 to 6/6 when the meta-rule was loaded (loom 0052-DISCOVERY §6).
 
+### 11. Audit Tools Ship With Committed Test Fixtures
+
+Every mechanical audit tool (lint, grep-based check, sweep) added to `/cc-audit`, `/sweep`, or a hook MUST ship with at least one committed test fixture per scope-restriction predicate the tool relies on. Fixtures live under `.claude/audit-fixtures/<tool-name>/` with a per-fixture expected-output file.
+
+```text
+# DO — fixture committed alongside the lint
+.claude/audit-fixtures/frontmatter-lint/
+  fixture-01-real-rule.md          ← real rule shape, expects empty output
+  fixture-01-real-rule.expected
+  fixture-02-invalid-key.md        ← invalid key in opening frontmatter, expects flag
+  fixture-02-invalid-key.expected
+  fixture-03-body-example.md       ← invalid key in body fenced block, expects empty output
+  fixture-03-body-example.expected
+
+# DO NOT — only prose description in spec, no committed fixture
+specs/lint-mechanism.md says "test the lint with a stub file containing X..."
+(no fixture on disk; future contributor must reconstruct from prose)
+```
+
+**BLOCKED responses:**
+
+- "Synthetic fixtures are temp files; committing them is overhead"
+- "The validation gate is described in the spec; fixtures duplicate that"
+- "I'll add fixtures later when someone modifies the audit tool"
+- "The audit tool is too simple to need fixtures"
+
+**Why**: Mechanical audit tools have non-obvious scope-restriction predicates (block-scoping, glob anchoring, regex word boundaries) that future modifications can silently weaken. Committed fixtures make those regressions mechanically detectable before the audit produces false positives at scale and gets disabled, which would restore the original bug class.
+
+Origin: atelier `cc-audit-lint-generalize` 2026-05-03 (load-bearing `i==1` invariant case study + adversarial /vet round).
+
+### 12. Mechanical Sweeps Use Positive Allowlists Where Vocabulary Is Enumerable
+
+When a mechanical audit sweep (in `/cc-audit`, `/sweep`, or a hook) checks for membership in an enumerable vocabulary, the sweep MUST be implemented as a positive allowlist (flag everything not in the allowlist) rather than an enumerated denylist (flag only specific known-bad entries).
+
+```text
+# DO — positive allowlist (catches unknown bad entries)
+awk '... /^[A-Za-z][A-Za-z0-9-]*:/ && !/^paths:/' .claude/rules/*.md
+# Flags any YAML-style key in opening frontmatter except paths:.
+# Catches any future typo (pathRegex:, applies_to:, match:, etc.)
+# without enumerating each one.
+
+# DO NOT — enumerated denylist (catches only specifically known bad entries)
+awk '... /^(globs|applies_to|pathRegex|match|scope):/ ...' .claude/rules/*.md
+# Catches exactly the keys someone has thought of. Misses every novel
+# typo until it appears, gets diagnosed, gets added to the list, and
+# the list is re-shipped.
+```
+
+**BLOCKED responses:**
+
+- "Denylist is more conservative; allowlist might false-positive"
+- "We don't know all the valid keys yet; can't write an allowlist"
+- "The denylist works fine; just add new entries when bugs appear"
+- "Allowlist requires more thought; denylist is faster to ship"
+
+**Why**: A denylist scales linearly with brainstormed typos and never closes the bug class — audit sweeps exist to catch silent failures, which by definition are "things that should be flagged but currently aren't." An allowlist closes the class on day one by shifting the cost from diagnosing future silent failures to documenting valid vocabulary upfront, which is small and one-time for enumerable vocabularies (frontmatter keys, hook events, license names).
+
+**Scope clarification**: This rule applies when the vocabulary IS enumerable. For non-enumerable vocabularies (e.g., free-form prose, user-generated content), positive allowlists are not feasible; denylists or pattern matching may be the only option. A sweep using denylist style for a non-enumerable vocabulary should note the rationale in its surrounding documentation; this is guidance, not a separate MUST.
+
+Origin: atelier `cc-audit-lint-generalize` 2026-05-03 (allowlist vs denylist trade-off).
+
 ## MUST NOT Rules
 
 ### 1. No Knowledge Dumps in Agents
