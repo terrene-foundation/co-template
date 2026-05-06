@@ -31,6 +31,32 @@ description: "A comprehensive specialist for Claude Code architecture who can au
 
 **Why**: Descriptions are loaded into every agent selection decision. Long descriptions waste tokens on every turn.
 
+### 1b. Skill Descriptions Under 200 Characters
+
+The `description:` field in `skills/*/SKILL.md` MUST be ≤200 characters. Failure-mode language only — keyword-dump patterns (`Use when asking about 'X', 'Y', 'Z', 'X with Y', ...` with ≥4 quoted alternates) are BLOCKED. CC uses LLM semantic matching, not keyword lookup; long quoted-alternate lists do NOT improve activation, they inflate the listing budget and risk dropping ALL skills out of the activation listing.
+
+```yaml
+# DO — ≤200 chars, failure-mode framing
+description: "CO methodology reference. Use for the 8 principles, 5 layers, 6 phases, or domain applications (COC, COR, COE, COG)."
+
+# DO — ≤200 chars, MANDATORY framing for skills with strong precondition
+description: "Atelier as broker between methodology source and downstream consumers. Use for tier classification, downstream impact analysis, sync routing, codification placement."
+
+# DO NOT — keyword dump pattern (defeats semantic activation, inflates listing)
+description: "CO methodology reference covering principles, layers, phases. Use when asking about 'CO', 'cognitive orchestration', 'methodology', '8 principles', 'authority sandbox', '5 layers', '6 phases', 'analyze', 'plan', 'execute', 'vet', 'codify', 'deliver', 'COC', 'COR', 'COE', 'COG', 'COL', 'COComp', or 'domain applications'."
+```
+
+**BLOCKED rationalizations:**
+
+- "More keywords help discovery" (no — semantic matching, not keyword lookup)
+- "200 chars is too short for a complex skill" (use the SKILL.md body for depth; description is the activation hook)
+- "Other skills have long descriptions, mine should match" (those are the ones being trimmed)
+- "The cap is arbitrary" (it isn't — total listing budget divides across all installed skills; longer descriptions get TRUNCATED out of the listing entirely)
+
+**Why**: When ANY skill exceeds the per-entry cap OR the cumulative listing exceeds the budget fraction, CC drops descriptions from the listing — those skills become invisible to semantic activation. Loom 2026-05-06 evidence: 47 of 47 skill descriptions were dropped because cumulative description bytes exceeded the ~1% budget fraction (≈10KB across 47 entries → ~213 chars/entry average; 18 skills exceeded that average and pushed cumulative over). Trimming the worst offenders to ≤200 chars freed ~3.5KB and restored full listing visibility. Same root-cause pattern as Rule 1's agent-description token cost: the description is the LLM's semantic-match input, not a search index — terseness is correctness.
+
+Origin: inbound from loom 2.21.0 base-variant Phase 1 (loom commit 933bed5, 2026-05-06) — codifies the 47-truncation evidence into a CC-universal rule applicable to all CO repos via atelier authority chain.
+
 ### 2. Skills Follow Progressive Disclosure
 
 SKILL.md MUST answer 80% of routine questions without requiring sub-file reads. Deep reference goes in separate files.
@@ -216,7 +242,7 @@ specs/lint-mechanism.md says "test the lint with a stub file containing X..."
 
 **Why**: Mechanical audit tools have non-obvious scope-restriction predicates (block-scoping, glob anchoring, regex word boundaries) that future modifications can silently weaken. Committed fixtures make those regressions mechanically detectable before the audit produces false positives at scale and gets disabled, which would restore the original bug class.
 
-Origin: atelier `cc-audit-lint-generalize` 2026-05-03 (load-bearing `i==1` invariant case study + adversarial /vet round).
+Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0002-DISCOVERY (load-bearing `i==1` invariant), journal/0007-RISK (block-scoping erosion), /vet adversarial round M3.
 
 ### 12. Mechanical Sweeps Use Positive Allowlists Where Vocabulary Is Enumerable
 
@@ -247,7 +273,7 @@ awk '... /^(globs|applies_to|pathRegex|match|scope):/ ...' .claude/rules/*.md
 
 **Scope clarification**: This rule applies when the vocabulary IS enumerable. For non-enumerable vocabularies (e.g., free-form prose, user-generated content), positive allowlists are not feasible; denylists or pattern matching may be the only option. A sweep using denylist style for a non-enumerable vocabulary should note the rationale in its surrounding documentation; this is guidance, not a separate MUST.
 
-Origin: atelier `cc-audit-lint-generalize` 2026-05-03 (allowlist vs denylist trade-off).
+Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0006-TRADE-OFF (allowlist vs denylist trade-off); journal/0003-CONNECTION (enforcement-ladder level-3 strengthening).
 
 ## MUST NOT Rules
 

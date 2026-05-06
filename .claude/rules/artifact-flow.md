@@ -58,9 +58,16 @@ co/ creates COC-specific content (SDK patterns, framework agents)
 
 ### 3. Template Repos Are Distribution Targets
 
-co-template/ and kailash-coc-claude-{py,rs}/ are rebuilt by `/sync`. Never edit them directly.
+co-template/ and Loom's USE templates are rebuilt by `/sync` (or `/sync-to-coc` for the Loom-managed set). Never edit them directly.
 
 **Why**: Direct edits are overwritten on next sync.
+
+Loom's USE-template fleet (loom 2.21.0+) has two branches:
+
+- **Kailash variants** — `kailash-coc-claude-{py,rs,rb}`. Stack-pinned to the Kailash SDK; receive CC+CO from atelier and COC from loom's BUILD repos (`kailash-py`, `kailash-rs`).
+- **Base variants** — `coc-claude-base` (CC-only) and `coc-base` (multi-CLI: claude+codex+gemini), under `terrene-foundation/` org. Language-agnostic for arbitrary stacks (Go, TypeScript, Rust, Java, polyglot, etc.); receive CC+CO from atelier and onboarding artifacts (`STACK.md` schema, generic specialists) from loom. **No BUILD source** (`build:null` in loom's sync-manifest); /codify proposals from base-variant consumers route to loom directly, not through atelier.
+
+Atelier ships CC+CO once via `/sync-to-coc`; loom adapts and emits to both branches.
 
 ### 4. Domain Repos Create Knowledge Upstream
 
