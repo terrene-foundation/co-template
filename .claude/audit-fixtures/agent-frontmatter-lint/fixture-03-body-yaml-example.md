@@ -1,0 +1,26 @@
+---
+name: example-agent-with-body-block
+description: Valid agent whose body contains a fenced YAML example with the wrong key.
+tools:
+  - Read
+model: inherit
+---
+
+# Example Agent (Block-Scoping Test)
+
+This fixture exercises the block-scoping invariant. The opening frontmatter
+uses only valid keys. The body below contains a fenced YAML block showing
+the wrong-key bug as a teaching example — that block has `i>=2` and the
+lint MUST NOT flag it.
+
+```yaml
+# DO NOT — wrong key for agent (skill key applied to agent)
+---
+name: bad-agent
+allowed-tools:
+  - Read
+---
+```
+
+The body example uses `allowed-tools:`, but the lint's `i==1` predicate
+restricts matching to the opening frontmatter block only.
