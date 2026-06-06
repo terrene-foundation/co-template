@@ -275,6 +275,31 @@ awk '... /^(globs|applies_to|pathRegex|match|scope):/ ...' .claude/rules/*.md
 
 Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0006-TRADE-OFF (allowlist vs denylist trade-off); journal/0003-CONNECTION (enforcement-ladder level-3 strengthening).
 
+### 13. Workspace-Walking Hooks Filter Leading-Underscore Meta-Dirs
+
+Hooks that enumerate `workspaces/<name>/` MUST filter out directories whose name starts with an underscore (`_archive`, `_template`, `_draft`, and any future meta-dir). The same filter MUST apply in every `for ... of entries` loop that walks the workspaces directory, not just the active-workspace detector.
+
+```javascript
+// DO — skip leading-underscore meta-dirs
+const projects = entries.filter(
+  (e) => e.isDirectory() && !e.name.startsWith("_"),
+);
+
+// DO NOT — walk unfiltered (lets `_archive`, `_template` surface as active)
+const projects = entries.filter((e) => e.isDirectory());
+```
+
+**BLOCKED responses:**
+
+- "`_archive` is rarely the most-recent dir, so the bug is theoretical"
+- "We'll add the filter when someone actually hits the failure mode"
+- "The hook only runs at session start, so the blast radius is small"
+- "Operators can just rename `_archive` to something without an underscore"
+
+**Why**: An archival move (`mv workspaces/<project> workspaces/_archive/<project>`) bumps `_archive/`'s modification time to most-recent, so a most-recently-modified scan surfaces `_archive` as the active workspace and routes session-end stubs (journal entries, status writes) into `workspaces/_archive/...` — silent drift the next session must triage. Leading-underscore is atelier's documented convention for workspace meta-dirs (CLAUDE.md: phase commands skip `_archive/` and `_template/`); filtering by prefix keeps the contract durable as new meta-dir conventions emerge instead of enumerating each name.
+
+Origin: inbound from loom workspace-walking-hook fix (2026-05-02) — an archival move of several workspaces into `_archive/` caused session-end stubs to land in `workspaces/_archive/`; codified here because atelier owns the `_archive/`/`_template/` convention CLAUDE.md documents.
+
 ## MUST NOT Rules
 
 ### 1. No Knowledge Dumps in Agents

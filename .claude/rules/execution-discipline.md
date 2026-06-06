@@ -118,3 +118,7 @@ Agent(prompt: "Draft the sync rule.")
 - "I remember the spec content from earlier"
 
 **Why**: Specialists without domain context produce technically correct but intent-misaligned output. The delegation prompt is the specialist's only window into the project's domain truth. Origin: loom specs-authority system, failure mode FM-4 (agent delegation context loss).
+
+## Related Rules
+
+How work is **decomposed and delegated** across subagents — parallel-decomposition triggers, brief-claim verification, gate-level mechanical sweeps, delegate tool-inventory checks, and post-exit deliverable verification — lives in `rules/delegation-orchestration.md` (extracted from this file 2026-06-05 to keep both under the 200-line cap). The full post-exit verification protocol is in `rules/subagent-delegation-verification.md`.

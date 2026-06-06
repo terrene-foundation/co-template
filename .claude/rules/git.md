@@ -118,3 +118,63 @@ cc-artifacts.md and execution-discipline.md.
 - MUST NOT commit large binaries (>10MB single file)
 
 **Why:** Direct pushes bypass CI and review. Leaked secrets require immediate key rotation. Large binaries permanently bloat the repo since git never forgets them.
+
+### Destructive Working-Tree Ops MUST Verify a Clean Tree First
+
+`git reset --hard <ref>`, `git clean -f[d]`, and `rm -rf` of untracked paths SILENTLY and IRRECOVERABLY destroy uncommitted work — unstaged edits AND untracked-not-ignored files have NO reflog. Running any of them without first confirming `git status --porcelain` is empty is BLOCKED. Prefer `git reset --keep <ref>` (aborts on a dirty tree) and `git stash -u` over `git clean -f`.
+
+```markdown
+# DO — --keep aborts on a dirty tree; dry-run before any clean:
+
+git status --porcelain # confirm empty first
+git reset --keep origin/main
+git clean -n # preview what would be deleted
+
+# DO NOT — bare destructive op with no working-tree check:
+
+git reset --hard origin/main # wipes modified + untracked; no reflog
+git clean -fd # deletes untracked; unrecoverable
+```
+
+**Why:** These are the most destructive ops that do NOT rewrite history, so — unlike a force-push, which the reflog can undo — the loss is unrecoverable. `git reset --keep` and `git clean -n` convert a silent, irreversible wipe into a loud refusal or a preview, which is the difference between a near-miss and a lost session.
+
+### Issue Closure MUST Cite a Code Reference
+
+Closing an issue MUST cite a commit SHA, a PR number, or a merged-PR link in the closing comment. Closing with no code reference is BLOCKED.
+
+```markdown
+# DO — closure points to the change that resolved it:
+
+gh issue close 42 --comment "Resolved in a1b2c3d (PR #57)."
+
+# DO NOT — closure with no traceable code reference:
+
+gh issue close 42 --comment "Done."
+gh issue close 42 # no comment at all
+```
+
+**Why:** An issue closed without a code reference breaks traceability — a future reader cannot tell whether it was fixed, deferred, or abandoned, and cannot find the change that addressed it. The reference is what makes `git log --grep` and issue history a usable audit trail instead of a dead end.
+
+### Commit Bodies MUST Claim Only What the Diff Contains
+
+A commit body MUST describe ONLY changes actually present in the diff. Over-claiming a refactor, a deletion, or a side-effect that the diff does not contain is BLOCKED. If a claim was made in error on an already-pushed commit, push a FOLLOW-UP commit that delivers what the prior message said — MUST NOT amend a pushed commit.
+
+```markdown
+# DO — body matches the diff; correct a pushed error with a follow-up:
+
+fix(spec): tighten Phase 04 convergence wording
+
+# (later, the claim was wrong → new commit, not an amend)
+
+docs(spec): deliver the Phase 04 example the prior commit claimed
+
+# DO NOT — claim work the diff does not contain, or amend after push:
+
+fix(spec): rewrite all phase definitions and add 6 examples
+
+# (diff only touched one paragraph)
+
+git commit --amend # on a commit already pushed to the remote
+```
+
+**Why:** Over-claiming poisons `git log --grep`, the cheapest institutional-knowledge search — a reader trusts the message and never opens the diff. Amending a pushed commit rewrites shared history and forces every collaborator to reconcile a diverged branch, so the follow-up commit is the honest, non-destructive correction.

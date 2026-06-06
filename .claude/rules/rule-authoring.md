@@ -74,6 +74,34 @@ Every new rule MUST include a one-line `Origin:` reference pointing to the journ
 
 **Why:** A rule is a frozen response to a past failure. Without provenance, future agents cannot judge whether the rule still applies after the underlying failure mode has been fixed.
 
+### 7. Empirical-Validation Fixtures Reproduce The Originating Incident's Conditions
+
+When a rule's `Origin:` (Rule 6) names a specific incident AND the rule ships empirical-validation fixtures (subprocess A/B test, ablation, probe), each fixture MUST reproduce the incident's conditions — NOT an idealized version where the agent has already been told what to look for. Authors MUST enumerate the incident conditions before designing scenarios, and MUST reject any fixture that silently drops one.
+
+```markdown
+# DO
+
+Fixture conditions match the incident: the tempting wrong action is in
+scope, the disqualifying signal is NOT pre-announced, and the agent
+must derive the correct call from the same context the incident gave it.
+
+# DO NOT
+
+Fixture inlines "(this option is disqualified)" into the prompt, or
+materializes a brief that pre-resolves the ambiguity the rule defends
+against. The agent passes because the test removed the hard part.
+```
+
+**BLOCKED rationalizations:**
+
+- "Close enough to the incident"
+- "Idealizing makes the test cleaner"
+- "We'll write the harder fixture later"
+- "The current pass/fail differential is the signal"
+- "The incident was an edge case anyway"
+
+**Why:** A rule's empirical claim is a research artifact distinct from its enforcement clauses — it asserts "this rule changes agent behavior under these conditions." When the fixture does not reproduce the originating conditions, the claim measures something the incident never involved, and every revalidation cycle drifts further from what the rule actually defends against. Idealized fixtures pass for the wrong reason and license a rule that may not survive contact with the next real occurrence.
+
 ## MUST NOT
 
 - Rationale paragraphs longer than 2 sentences per `Why:` line
@@ -86,7 +114,7 @@ Every new rule MUST include a one-line `Origin:` reference pointing to the journ
 
 - Rules longer than 200 lines
 
-**Why:** Rules longer than 200 lines are skimmed; the agent misses load-bearing clauses. Extract reference material into a guide or skill.
+**Why:** Rules longer than 200 lines are skimmed AND over-density measurably degrades the OUTPUT QUALITY of the agent that loads them — not just its token budget. Evidence (directional): a dense rule-slice dropped a consuming agent's plan score from 93 to 82, and a curated-minimal rule beat the verbose version by a wider margin as the model weakened. Curation — keep the load-bearing clauses, extract depth into a guide or skill — is therefore an output-quality requirement, not only budget hygiene.
 
 ## The "Loud, Linguistic, Layered" Test
 

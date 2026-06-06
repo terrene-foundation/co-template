@@ -214,9 +214,69 @@ the other creates silent drift)
 
 **Why:** Workspace specs describe semantics while canonical artifacts encode implementation; restating implementation in specs creates parallel sources of truth that drift silently. The reference style forces the canonical artifact to be the single source of truth and forces specs to focus on what they uniquely contribute — semantics, invariants, and rationale.
 
-**Exception:** Educational specs in `.claude/rules/` that show DO / DO NOT implementations per `rules/cc-artifacts.md` MUST §3 are explicitly NOT covered by this rule — those examples teach by restating. The exception applies only to *workspace* specs (under `workspaces/<project>/specs/`), not canonical rule files.
+**Exception:** Educational specs in `.claude/rules/` that show DO / DO NOT implementations per `rules/cc-artifacts.md` MUST §3 are explicitly NOT covered by this rule — those examples teach by restating. The exception applies only to _workspace_ specs (under `workspaces/<project>/specs/`), not canonical rule files.
 
-Origin: atelier `cc-audit-lint-generalize` 2026-05-03 (test fixtures and spec canonicalization deferred to /codify; /vet adversarial round L1).
+### 10. Every Spec Edit Triggers a Sibling Re-Derivation Sweep
+
+When an edit changes a contract, field shape, term, or assertion in one spec, the editor MUST `grep` ALL sibling specs in the domain set (every file listed in `_index.md`) for references to the changed element and re-derive each dependent assertion in the same action. Reviewing only the edited file and shipping an APPROVE verdict while a sibling still cites the old truth is BLOCKED.
+
+```markdown
+# DO — edit one spec, sweep every sibling that cites the changed element
+
+Edit: `specs/eligibility.md` renames the criterion field `tenure_months` → `tenure_years`.
+Sweep: grep `_index.md` siblings for `tenure_months` →
+
+- `specs/scoring.md` cites it in the weighting formula → re-derive to `tenure_years`
+- `specs/appeals.md` references the old threshold → re-derive
+  Both updated in the SAME action as the eligibility edit.
+
+# DO NOT — narrow-scope edit, silent cross-spec drift survives
+
+Edit: rename `tenure_months` → `tenure_years` in `specs/eligibility.md` only.
+Review reads `eligibility.md`, finds it internally consistent → APPROVE.
+(`scoring.md` and `appeals.md` still say `tenure_months`; downstream consumers
+of those siblings now compute against a field that no longer exists.)
+```
+
+**BLOCKED responses:**
+
+- "The edited spec is internally consistent, so review passes"
+- "The sibling specs are out of scope for this change"
+- "Cross-spec references will be reconciled in a later pass"
+- "Only the file I touched needs re-derivation"
+
+**Why:** Field-shape divergence, downstream-consumer drift, and terminology drift are invisible to a review scoped to the edited file alone — the sibling that still cites the old truth reads as correct in isolation and is the one downstream consumers build against. The sweep is mechanical (`_index.md` enumerates the full domain set; the changed element is a literal `grep` target), so the cost of closing the drift class is one search per edit, not a re-read of every spec.
+
+### 11. The Orchestrator Amends Stale Todo Text at Launch
+
+Before delegating a planned todo, the orchestrator MUST re-read the spec the todo targets and, if the spec or project state moved since `/plan` wrote the todo, amend the todo text to the current truth at launch — not hand the delegated agent wording that predates the move. Launching a delegation against a todo the orchestrator knows is stale is BLOCKED.
+
+```markdown
+# DO — reconcile the todo against current spec state at launch
+
+/plan wrote: "Draft the reviewer-assignment section per `specs/peer-review.md` §3
+(single blind, one reviewer)."
+At launch the orchestrator re-reads §3 → it now says double-blind, two reviewers.
+Orchestrator amends the todo to "double-blind, two reviewers" BEFORE delegating,
+and delegates against the amended text.
+
+# DO NOT — delegate the pre-move wording and let the agent hit the conflict
+
+Orchestrator delegates the original todo verbatim. The agent reads
+`specs/peer-review.md` §3, finds it contradicts the todo, stalls mid-execution
+to ask which is authoritative — or worse, drafts against the stale todo.
+```
+
+**BLOCKED responses:**
+
+- "The agent can reconcile the todo against the spec itself"
+- "The todo was approved at /plan, so its wording is fixed"
+- "Re-checking every todo at launch is overhead"
+- "The agent will flag the conflict if it matters"
+
+**Why:** A delegated agent that discovers a todo-vs-spec conflict mid-execution either stalls for a clarification round-trip or silently drafts against the stale wording — both cost more than the orchestrator's one-time re-read at launch, when the spec is the established authority (Rule 5 keeps it current) and the todo is the artifact that lagged. This is the launch-time reconciliation step that Rules 5 and 7 do not cover: Rule 5 keeps the spec current and Rule 7 ships spec content into the delegation prompt, but neither updates the todo's own instruction text, which the agent reads as its primary directive.
+
+Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0011-GAP (test fixtures and spec canonicalization deferred to /codify); /vet adversarial round L1.
 
 ## MUST NOT
 

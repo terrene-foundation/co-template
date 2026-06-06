@@ -1,15 +1,29 @@
 {
-  "version": "1.4.1",
+  "version": "1.5.0",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-05-06",
+  "released": "2026-06-06",
   "upstream": {
     "name": "co",
     "repo": "terrene-foundation/co",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "version_url": "https://raw.githubusercontent.com/terrene-foundation/co/main/.claude/VERSION"
   },
   "changelog": [
+    {
+      "version": "1.5.0",
+      "date": "2026-06-06",
+      "summary": "Sync from atelier 1.5.0 — adopt hook-independent CC/CO artifacts (15 new rules, 5 base-rule updates, 8 guides, 4 skill dirs + 1 skill file). Held: trust-posture/hook-enforcement cluster (requires a hook substrate co-template lacks).",
+      "changes": [
+        "NEW rules (15): autonomous-execution, time-pressure-discipline, recommendation-quality, verify-resource-existence, sweep-completeness, spec-accuracy, governed-throughput, probe-driven-verification, value-prioritization, subagent-delegation-verification, resolve-on-discovery, upstream-issue-hygiene, user-flow-validation, delegation-orchestration, multi-operator-coordination",
+        "MODIFIED base rules (5): cc-artifacts.md, rule-authoring.md, git.md, specs-authority.md, execution-discipline.md (atelier authoritative for CC meta-rules)",
+        "NEW guides (8): claude-code/13-agentic-architecture, claude-code/14-tool-design-patterns, claude-code/15-prompt-engineering, claude-code/16-context-reliability, deterministic-quality/04-parallel-agent-bundles, model-optimization/01-model-selection-by-task, portability/01-artifact-neutrality, portability/02-multi-target-parity",
+        "NEW skill dirs (4): command-authoring, skill-authoring, cc-orchestration-patterns, test-harness-probe",
+        "NEW skill file: co-reference/behavioral-guidelines.md",
+        "EDIT (sync-local): removed the dangling `skills/hook-authoring/` Related-link in skills/skill-authoring/SKILL.md — hook-authoring is HELD (hook substrate not present downstream)",
+        "HELD (not synced): rules trust-posture, hook-output-discipline, journal-author-discipline, repo-scope-discipline, self-referential-codify; skills hook-authoring, trust-posture; agent management/settings-manager; all .claude/hooks/ — all wire into atelier's hook substrate co-template lacks"
+      ]
+    },
     {
       "version": "1.4.1",
       "date": "2026-05-06",
