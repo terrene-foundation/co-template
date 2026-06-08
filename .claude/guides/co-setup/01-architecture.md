@@ -92,10 +92,9 @@ The three always-shared core-workflow files use the **canonical CO** command nam
 
 | Component | Files                                                                                                |
 | --------- | ---------------------------------------------------------------------------------------------------- |
-| Agents    | `co-expert`, `claude-code-architect`, `gold-standards-validator`, `analyst`, `intermediate-reviewer` |
+| Agents    | `claude-code-architect`, `gold-standards-validator` |
 | Agents    | `todo-manager`, `gh-manager` (under `agents/management/`)                        |
-| Skills    | `co-reference`, `cc-artifact-patterns`, `atelier-broker-model`                                       |
-| Hooks     | `validate-bash-command.js`, `user-prompt-rules-reminder.js`, `pre-compact.js`                        |
+| Skills    | `co-reference`, `cc-artifact-patterns` |
 | Rules     | `git.md`                                                                                             |
 
 ## Component Interaction Model

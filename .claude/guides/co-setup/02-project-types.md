@@ -143,9 +143,6 @@ Every repo gets:
 │   ├── ws.md              # Copy as-is
 │   └── wrapup.md          # Copy as-is
 ├── agents/
-│   ├── analyst.md                 # Copy as-is
-│   ├── intermediate-reviewer.md   # Copy as-is
-│   ├── co-expert.md               # Copy as-is
 │   ├── claude-code-architect.md   # Copy as-is
 │   ├── gold-standards-validator.md # Copy as-is
 │   └── management/
