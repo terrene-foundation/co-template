@@ -150,8 +150,7 @@ Every repo gets:
 │   ├── gold-standards-validator.md # Copy as-is
 │   └── management/
 │       ├── todo-manager.md         # Copy as-is
-│       ├── gh-manager.md           # Copy as-is
-│       └── settings-manager.md     # Copy as-is
+│       └── gh-manager.md           # Copy as-is
 ├── rules/
 │   ├── git.md                    # Copy as-is
 │   └── security.md               # Write for this archetype
