@@ -87,17 +87,41 @@ delegate to claude-code-architect: "Review the diff against the FULL rule corpus
 
 MUST NOT treat the specialist agent type (L1) as a substitute for L2 slice injection.
 
+```text
+# DO — name the specialist AND inject the curated slice
+delegate to claude-code-architect with the matching MUST clauses appended  # L1 + L2
+
+# DO NOT — name the specialist and skip the slice
+delegate to claude-code-architect, no clauses injected  # L1 alone is not governance
+```
+
 **Why:** The specialist's system prompt does not carry the baseline rule corpus. Only curated slice injection moves the compliance needle; the agent type is useful context at best, never the mechanism.
 
 ### 2. No Full-Corpus Injection "To Be Safe"
 
 MUST NOT inject the full rule corpus into a shard prompt to be safe.
 
+```text
+# DO — inject only the matching rules' clauses, sliced
+prompt += the 3-5 MUST clauses the path-glob matched  # minimal, load-bearing
+
+# DO NOT — concatenate every rule file "to be safe"
+prompt += every_rule_file_concatenated  # crowds the task out of working memory
+```
+
 **Why:** Over-injection measurably degrades the shard's output — a dense, undifferentiated rule dump crowds the task out of working memory. Minimal curated slices are the only correct injection.
 
 ### 3. No Claiming "Governed" From Agent Type Alone
 
 MUST NOT call a shard "governed" because its agent type is a specialist, with no slices injected and no full-context merge gate.
+
+```text
+# DO — "governed" = slices injected (L2) AND full-context merge gate ran (L3)
+shard: specialist type + curated slice + full-context /vet at merge  → governed
+
+# DO NOT — claim "governed" from the agent type alone
+"It used claude-code-architect, so it's governed"  # no L2, no L3 — ungoverned
+```
 
 **Why:** "Governed" means the invariants were injected (L2) AND the merge gate ran full-context (L3). An agent type without either is ungoverned regardless of its name.
 

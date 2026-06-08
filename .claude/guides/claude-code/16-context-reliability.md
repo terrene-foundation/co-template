@@ -360,5 +360,5 @@ The through-line: the conversation is volatile and the workspace is durable. Eve
 
 ## Navigation
 
-- **Previous**: [12 - Troubleshooting](12-troubleshooting.md)
+- **Previous**: [15 - Prompt Engineering](15-prompt-engineering.md)
 - **Home**: [README.md](README.md)

@@ -4,7 +4,7 @@ paths:
   - ".claude/skills/**"
   - ".claude/rules/**"
   - ".claude/commands/**"
-  - "scripts/hooks/**"
+  - ".claude/hooks/**"
 ---
 
 # CC Artifact Quality Rules
@@ -39,23 +39,20 @@ The `description:` field in `skills/*/SKILL.md` MUST be ≤200 characters. Failu
 # DO — ≤200 chars, failure-mode framing
 description: "CO methodology reference. Use for the 8 principles, 5 layers, 6 phases, or domain applications (COC, COR, COE, COG)."
 
-# DO — ≤200 chars, MANDATORY framing for skills with strong precondition
-description: "Atelier as broker between methodology source and downstream consumers. Use for tier classification, downstream impact analysis, sync routing, codification placement."
-
 # DO NOT — keyword dump pattern (defeats semantic activation, inflates listing)
-description: "CO methodology reference covering principles, layers, phases. Use when asking about 'CO', 'cognitive orchestration', 'methodology', '8 principles', 'authority sandbox', '5 layers', '6 phases', 'analyze', 'plan', 'execute', 'vet', 'codify', 'deliver', 'COC', 'COR', 'COE', 'COG', 'COL', 'COComp', or 'domain applications'."
+description: "CO methodology reference covering principles, layers, phases. Use when asking about 'CO', 'cognitive orchestration', 'methodology', '8 principles', '5 layers', '6 phases', 'analyze', 'plan', 'execute', 'vet', 'codify', 'deliver', 'COC', 'COR', 'COE', 'COG', 'COL', or 'domain applications'."
 ```
 
 **BLOCKED rationalizations:**
 
 - "More keywords help discovery" (no — semantic matching, not keyword lookup)
-- "200 chars is too short for a complex skill" (use the SKILL.md body for depth; description is the activation hook)
+- "200 chars is too short for a complex skill" (use the SKILL.md body for depth)
 - "Other skills have long descriptions, mine should match" (those are the ones being trimmed)
-- "The cap is arbitrary" (it isn't — total listing budget divides across all installed skills; longer descriptions get TRUNCATED out of the listing entirely)
+- "The cap is arbitrary" (the listing budget divides across all skills; long descriptions get TRUNCATED out of the listing entirely)
 
-**Why**: When ANY skill exceeds the per-entry cap OR the cumulative listing exceeds the budget fraction, CC drops descriptions from the listing — those skills become invisible to semantic activation. Loom 2026-05-06 evidence: 47 of 47 skill descriptions were dropped because cumulative description bytes exceeded the ~1% budget fraction (≈10KB across 47 entries → ~213 chars/entry average; 18 skills exceeded that average and pushed cumulative over). Trimming the worst offenders to ≤200 chars freed ~3.5KB and restored full listing visibility. Same root-cause pattern as Rule 1's agent-description token cost: the description is the LLM's semantic-match input, not a search index — terseness is correctness.
+**Why**: When any skill exceeds the per-entry cap OR the cumulative listing exceeds the budget fraction, CC drops descriptions from the listing and those skills become invisible to semantic activation (loom 2026-05-06: 47/47 descriptions dropped; trimming the worst offenders to ≤200 chars restored full visibility). The description is the LLM's semantic-match input, not a search index — terseness is correctness.
 
-Origin: inbound from loom 2.21.0 base-variant Phase 1 (loom commit 933bed5, 2026-05-06) — codifies the 47-truncation evidence into a CC-universal rule applicable to all CO repos via atelier authority chain.
+Origin: inbound from loom 2.21.0 base-variant Phase 1 (loom commit 933bed5, 2026-05-06) — codifies the 47-truncation evidence into a CC-universal rule.
 
 ### 2. Skills Follow Progressive Disclosure
 
@@ -82,26 +79,16 @@ See the files in this directory for details.
 Every MUST rule MUST include a concrete example showing both the correct and incorrect pattern.
 
 ```markdown
-# DO: Rule with example
+# DO: a MUST clause carries an adjacent DO + DO NOT code block
 
 ### 1. Use Parameterized Queries
 
-``python
+(DO: `cursor.execute("... WHERE id = ?", (user_id,))`)
+(DO NOT: `cursor.execute(f"... WHERE id = {user_id}")`)
 
-# DO:
+# DO NOT: a MUST clause stated as prose with no example
 
-cursor.execute("SELECT \* FROM users WHERE id = ?", (user_id,))
-
-# DO NOT:
-
-cursor.execute(f"SELECT \* FROM users WHERE id = {user_id}")
-``
-
-# DO NOT: Rule without example
-
-### 1. Use Parameterized Queries
-
-All queries must use parameterized queries.
+### 1. Use Parameterized Queries — all queries must be parameterized.
 ```
 
 **Why**: Without examples, Claude interprets rules differently each session. Examples anchor consistent behavior.
@@ -123,29 +110,19 @@ Command files MUST stay under 150 lines. Move reference material to skills and r
 CLAUDE.md MUST stay under 200 lines. It contains 3-5 repo-specific directives, absolute rules, and navigation tables. It MUST NOT restate rules (they load separately) or embed reference material.
 
 ```markdown
-# DO: CLAUDE.md with repo identity + navigation + 3 absolute directives (~120 lines)
+# DO: CLAUDE.md = repo identity + navigation + 3-5 directives (~120 lines)
 
-## Absolute Directives
+## Absolute Directives → ### 1. [Repo-specific directive]
 
-### 1. [Repo-specific directive]
+## Rules Index → | Rule | File | Scope |
 
-## Rules Index
-
-| Rule | File | Scope |
-
-## Agents
-
-- **specialist** — Use for X
+## Agents → - **specialist** — Use for X
 
 # DO NOT: CLAUDE.md restating every rule (~600 lines)
 
-## Security Rules
+## Security Rules → All queries must be parameterized... [repeats security.md]
 
-All queries must use parameterized queries... [repeats security.md]
-
-## Testing Rules
-
-Use 3-tier testing... [repeats testing.md]
+## Testing Rules → Use 3-tier testing... [repeats testing.md]
 ```
 
 **Why**: CLAUDE.md loads on every turn. Every line beyond navigation and directives is wasted context. Rules have their own files.
@@ -169,136 +146,6 @@ globs:
 ```
 
 **Why**: `paths:` is the Claude Code documented key for rule file scoping. `globs:` is not recognized.
-
-### 8. /codify Deploys claude-code-architect
-
-Every `/codify` execution MUST include `claude-code-architect` in its validation team. All new or modified artifacts MUST be validated against cc-artifacts rules before completion.
-
-**Why**: Without artifact validation, `/codify` creates agents with 800-line knowledge dumps, unscoped rules, and commands that exceed 150 lines — compounding token waste across every future session.
-
-### 9. Hooks Include Timeout Handling
-
-Every hook MUST include a setTimeout fallback that returns `{ continue: true }` and exits.
-
-```javascript
-// DO:
-const TIMEOUT_MS = 5000;
-const timeout = setTimeout(() => {
-  console.log(JSON.stringify({ continue: true }));
-  process.exit(1);
-}, TIMEOUT_MS);
-
-// DO NOT:
-// (no timeout — hook hangs indefinitely if processing stalls)
-```
-
-**Why**: A hanging hook blocks the entire Claude Code session indefinitely.
-
-### 10. New Rules MUST Follow the Rule-Authoring Meta-Rule
-
-Every new rule MUST pass the Loud/Linguistic/Layered test defined in `rules/rule-authoring.md`.
-
-```markdown
-# DO:
-
-Rule uses MUST/MUST NOT modals, includes BLOCKED phrases for common
-rationalizations, has DO/DO NOT examples, has Why: lines, and has
-paths: frontmatter scoping it to relevant files.
-
-# DO NOT:
-
-Rule uses "should" or "try to" as primary modal, has no blocked
-phrases, no examples, no rationale, and loads globally despite
-being domain-specific.
-```
-
-**Why**: Rules without the Loud/Linguistic/Layered properties are ignored under pressure. Evidence: subprocess A/B test showed rule quality improved from 2/6 to 6/6 when the meta-rule was loaded (loom 0052-DISCOVERY §6).
-
-### 11. Audit Tools Ship With Committed Test Fixtures
-
-Every mechanical audit tool (lint, grep-based check, sweep) added to `/cc-audit`, `/sweep`, or a hook MUST ship with at least one committed test fixture per scope-restriction predicate the tool relies on. Fixtures live under `.claude/audit-fixtures/<tool-name>/` with a per-fixture expected-output file.
-
-```text
-# DO — fixture committed alongside the lint
-.claude/audit-fixtures/frontmatter-lint/
-  fixture-01-real-rule.md          ← real rule shape, expects empty output
-  fixture-01-real-rule.expected
-  fixture-02-invalid-key.md        ← invalid key in opening frontmatter, expects flag
-  fixture-02-invalid-key.expected
-  fixture-03-body-example.md       ← invalid key in body fenced block, expects empty output
-  fixture-03-body-example.expected
-
-# DO NOT — only prose description in spec, no committed fixture
-specs/lint-mechanism.md says "test the lint with a stub file containing X..."
-(no fixture on disk; future contributor must reconstruct from prose)
-```
-
-**BLOCKED responses:**
-
-- "Synthetic fixtures are temp files; committing them is overhead"
-- "The validation gate is described in the spec; fixtures duplicate that"
-- "I'll add fixtures later when someone modifies the audit tool"
-- "The audit tool is too simple to need fixtures"
-
-**Why**: Mechanical audit tools have non-obvious scope-restriction predicates (block-scoping, glob anchoring, regex word boundaries) that future modifications can silently weaken. Committed fixtures make those regressions mechanically detectable before the audit produces false positives at scale and gets disabled, which would restore the original bug class.
-
-Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0002-DISCOVERY (load-bearing `i==1` invariant), journal/0007-RISK (block-scoping erosion), /vet adversarial round M3.
-
-### 12. Mechanical Sweeps Use Positive Allowlists Where Vocabulary Is Enumerable
-
-When a mechanical audit sweep (in `/cc-audit`, `/sweep`, or a hook) checks for membership in an enumerable vocabulary, the sweep MUST be implemented as a positive allowlist (flag everything not in the allowlist) rather than an enumerated denylist (flag only specific known-bad entries).
-
-```text
-# DO — positive allowlist (catches unknown bad entries)
-awk '... /^[A-Za-z][A-Za-z0-9-]*:/ && !/^paths:/' .claude/rules/*.md
-# Flags any YAML-style key in opening frontmatter except paths:.
-# Catches any future typo (pathRegex:, applies_to:, match:, etc.)
-# without enumerating each one.
-
-# DO NOT — enumerated denylist (catches only specifically known bad entries)
-awk '... /^(globs|applies_to|pathRegex|match|scope):/ ...' .claude/rules/*.md
-# Catches exactly the keys someone has thought of. Misses every novel
-# typo until it appears, gets diagnosed, gets added to the list, and
-# the list is re-shipped.
-```
-
-**BLOCKED responses:**
-
-- "Denylist is more conservative; allowlist might false-positive"
-- "We don't know all the valid keys yet; can't write an allowlist"
-- "The denylist works fine; just add new entries when bugs appear"
-- "Allowlist requires more thought; denylist is faster to ship"
-
-**Why**: A denylist scales linearly with brainstormed typos and never closes the bug class — audit sweeps exist to catch silent failures, which by definition are "things that should be flagged but currently aren't." An allowlist closes the class on day one by shifting the cost from diagnosing future silent failures to documenting valid vocabulary upfront, which is small and one-time for enumerable vocabularies (frontmatter keys, hook events, license names).
-
-**Scope clarification**: This rule applies when the vocabulary IS enumerable. For non-enumerable vocabularies (e.g., free-form prose, user-generated content), positive allowlists are not feasible; denylists or pattern matching may be the only option. A sweep using denylist style for a non-enumerable vocabulary should note the rationale in its surrounding documentation; this is guidance, not a separate MUST.
-
-Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0006-TRADE-OFF (allowlist vs denylist trade-off); journal/0003-CONNECTION (enforcement-ladder level-3 strengthening).
-
-### 13. Workspace-Walking Hooks Filter Leading-Underscore Meta-Dirs
-
-Hooks that enumerate `workspaces/<name>/` MUST filter out directories whose name starts with an underscore (`_archive`, `_template`, `_draft`, and any future meta-dir). The same filter MUST apply in every `for ... of entries` loop that walks the workspaces directory, not just the active-workspace detector.
-
-```javascript
-// DO — skip leading-underscore meta-dirs
-const projects = entries.filter(
-  (e) => e.isDirectory() && !e.name.startsWith("_"),
-);
-
-// DO NOT — walk unfiltered (lets `_archive`, `_template` surface as active)
-const projects = entries.filter((e) => e.isDirectory());
-```
-
-**BLOCKED responses:**
-
-- "`_archive` is rarely the most-recent dir, so the bug is theoretical"
-- "We'll add the filter when someone actually hits the failure mode"
-- "The hook only runs at session start, so the blast radius is small"
-- "Operators can just rename `_archive` to something without an underscore"
-
-**Why**: An archival move (`mv workspaces/<project> workspaces/_archive/<project>`) bumps `_archive/`'s modification time to most-recent, so a most-recently-modified scan surfaces `_archive` as the active workspace and routes session-end stubs (journal entries, status writes) into `workspaces/_archive/...` — silent drift the next session must triage. Leading-underscore is atelier's documented convention for workspace meta-dirs (CLAUDE.md: phase commands skip `_archive/` and `_template/`); filtering by prefix keeps the contract durable as new meta-dir conventions emerge instead of enumerating each name.
-
-Origin: inbound from loom workspace-walking-hook fix (2026-05-02) — an archival move of several workspaces into `_archive/` caused session-end stubs to land in `workspaces/_archive/`; codified here because atelier owns the `_archive/`/`_template/` convention CLAUDE.md documents.
 
 ## MUST NOT Rules
 
@@ -341,50 +188,9 @@ paths:
 
 **Why**: A 400-token SQL rule loading on every turn when editing CSS is pure waste.
 
-### 4. No Semantic Analysis in Hooks
-
-Hooks MUST NOT attempt to understand code meaning via regex. Hooks check structure; agents check semantics.
-
-**Why**: Regex-based semantic analysis is brittle and produces false positives.
-
-**Permitted exception**: `pre-compact.js` uses regex to detect which framework is in use (DataFlow/Nexus/Kaizen/Core SDK) for context preservation during compaction. This is structural tagging for checkpoint data, not agent decision-making — the hook never routes, classifies intent, or changes behavior based on the detection. Accepted per decision D1 in journal/0009.
-
-### 5. No BUILD Artifacts in USE Repos
-
-USE repo COC templates (coc-claude-py, coc-claude-rs) MUST NOT contain BUILD-specific artifacts:
-
-```
-# BUILD-only (remove from USE repos):
-- agents/frontend/          # BUILD repos don't do frontend work
-- rules/cross-sdk-inspection.md  # BUILD-only process rule
-- skills/*-bindings/        # Internal binding code patterns
-- skills/*-enterprise/      # Internal crate documentation
-- skills/*-governance/      # Internal governance crate docs
-
-# USE-only (keep in USE repos, remove from BUILD):
-- rules/deployment.md (cloud deployment version)
-- agents/deployment-specialist.md (cloud deployment)
-```
-
-**Why**: BUILD artifacts (SDK internals, binding patterns, crate docs) waste context in USE repos where developers build applications. USE artifacts (cloud deployment, user-facing patterns) waste context in BUILD repos where developers write SDK code.
-
-### 6. No Dangling Cross-References After Extraction
-
-When extracting reference material from agents/commands to skills, MUST verify all cross-references in the trimmed file still point to existing files. When removing skills/agents from a repo, MUST grep for references in remaining files and update them.
-
-```
-# DO: After removing skills/10-governance/ from coc-claude-rs
-grep -r "10-governance" coc-claude-rs/.claude/agents/  # Find references
-# Update each reference to point to existing alternative
-
-# DO NOT: Remove a skill directory without checking for references
-rm -rf skills/10-governance/  # Leaves dangling refs in agent files
-```
-
-**Why**: Dangling references cause file-not-found errors when agents try to load referenced skills, degrading agent performance.
-
 ## Cross-References
 
+- `.claude/rules/cc-enforcement.md` — the companion enforcement/audit rule (`/codify` gate, hook timeout + structure-not-semantics, audit fixtures, positive-allowlist sweeps, workspace meta-dir filtering, no-dangling-refs after extraction). The clauses formerly numbered MUST §8–§13 and MUST NOT §4–§6 here now live there, renumbered.
 - `.claude/skills/cc-artifact-patterns/` — Full CC architecture patterns
 - `.claude/agents/claude-code-architect.md` — CC artifact specialist
 - `.claude/guides/co-setup/03-creating-components.md` — Component creation guide

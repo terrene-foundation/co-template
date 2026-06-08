@@ -99,7 +99,7 @@ Agent({subagent_type: "intermediate-reviewer", run_in_background: true, prompt: 
 
 ### 5. Specs Context in Delegation
 
-Every specialist delegation prompt MUST include relevant spec file content from `specs/`. The orchestrator reads `specs/_index.md`, selects relevant files, and includes them inline. See `rules/specs-authority.md` MUST Rule 7 for the full protocol.
+Every specialist delegation prompt MUST include relevant spec file content from `specs/`. The orchestrator reads `specs/_index.md`, selects relevant files, and includes them inline. See `rules/specs-delegation.md` MUST §1 (Agent Delegation Includes Relevant Spec Files) for the full protocol.
 
 ```markdown
 # DO:

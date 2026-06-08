@@ -17,7 +17,7 @@ These rules apply to ALL phases of any CO workflow, ALL agents, ALL artifacts. A
 
 ### 1. Fix What You Discover, This Run
 
-If you found it, you own it. A pre-existing failure, broken cross-reference, or stale citation discovered mid-task MUST be fixed in THIS run — not deferred, not logged, not acknowledged-only.
+If you found it, you own it. By default, a pre-existing failure, broken cross-reference, or stale citation discovered mid-task MUST be fixed in THIS run — not deferred, not logged, not acknowledged-only. This default has exactly ONE bounded carve-out — the named **Exception** at the end of this clause (user says skip, OR the fix needs an out-of-authority decision); absent that carve-out, the fix is unconditional. The default and the Exception are not in tension: the default governs every discovery, and the Exception is the only path that converts "fix it now" into "surface the choice + track a todo" — never into silent dismissal.
 
 ```markdown
 # DO:
@@ -42,7 +42,7 @@ flagging for later." (acknowledgement without a fix)
 
 **Why:** Deferring creates a ratchet — every session inherits more unresolved defects, and "pre-existing" becomes the institutional excuse that defers every fix forever. The marginal cost of fixing a dead cross-reference the moment you see it is near zero; the cost of letting it propagate to every downstream domain on next sync is not.
 
-**Exception:** The user explicitly says "skip this," OR the fix requires a decision outside your authority (e.g., deleting a referenced artifact rather than repairing the reference) — in which case you surface the specific choice with a recommendation and a tracked todo. Silent dismissal is still BLOCKED.
+**Exception (the one bounded carve-out to the default above):** The fix-it-now default holds UNLESS one of exactly two conditions applies — (1) the user explicitly says "skip this," OR (2) the fix requires a decision outside your authority (e.g., deleting a referenced artifact rather than repairing the reference). When a carve-out condition applies, you do NOT defer silently: you surface the specific choice with a recommendation AND open a tracked todo, which is itself an action taken in THIS run. The carve-out narrows WHAT you do (surface + track instead of repair); it never licenses doing nothing. Silent dismissal — naming or logging the defect with no surfaced choice and no tracked todo — is the BLOCKED behavior above and is NOT covered by this carve-out.
 
 ### 2. "Pre-Existing" Is Unprovable After a Context Boundary
 

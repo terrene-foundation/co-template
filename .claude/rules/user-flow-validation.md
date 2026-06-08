@@ -79,7 +79,7 @@ nothing was described above. Disposition: confused; cannot proceed.
 
 ### 4. Prose Deliverables (Rules, Commands, Skills, Guides) Have A Walk Too
 
-For rule files, command files, skill files, guides, and other prescriptive prose, the walk is: the file loads under the actual runtime; frontmatter parses; paths resolve; the artifact's claims about its own behavior are verified by exercising it; the DO / DO NOT examples render without error; and the BLOCKED patterns the rule describes actually fire when matched against a fixture scenario (per `rules/cc-artifacts.md` MUST §11 — committed audit fixtures).
+For rule files, command files, skill files, guides, and other prescriptive prose, the walk is: the file loads under the actual runtime; frontmatter parses; paths resolve; the artifact's claims about its own behavior are verified by exercising it; the DO / DO NOT examples render without error; and the BLOCKED patterns the rule describes actually fire when matched against a fixture scenario (per `rules/cc-enforcement.md` MUST §4 — committed audit fixtures).
 
 ```text
 # DO — prose walk receipts
@@ -145,6 +145,16 @@ The following are each independently BLOCKED:
 - Substituting "the reviewer approved" or "the automated checks passed" for the walk.
 - Recording a "done" claim that says "tested" or "walked" without the action + observed output + consumer disposition receipt.
 - Walking a substitute path (a similar command, a previous version, a fixture standing in for the real artifact) instead of the actual consumer-facing deliverable.
+
+```text
+# DO — walk the actual deliverable, receipt the action + output + disposition
+Ran the real command; observed the literal output; recorded operator disposition
+(proceeds unblocked). → done applies.
+
+# DO NOT — declare done on a check, a reviewer, a bare claim, or a stand-in
+"Checks passed, reviewer approved — done."   "Walked it, looks good." (no receipt)
+"Walked a similar command instead of this one." (substitute path, not the deliverable)
+```
 
 **Why:** Each is the same evasion in a different costume. Declaring done without the walk is the originating failure mode — work that passes every gate but fails the consumer on first contact. Reviewers and checks verify the draft and the author's own assertions, not the consumer's literal path. A claim without a receipt is unfalsifiable. A substitute verifies the substitute, not the path the consumer will actually hit.
 

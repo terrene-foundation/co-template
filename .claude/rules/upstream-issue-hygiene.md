@@ -125,16 +125,46 @@ Cross-refs:     [links into our journals and finding logs]
 
 MUST NOT file any external issue, PR, or comment containing a downstream project name, internal path, workspace ID, finding tag, or session-provenance footer.
 
+```markdown
+# DO — file only the upstream-surface defect, zero downstream identifiers
+
+"The published parser drops the trailing field on empty input; contract §3 promises it is preserved."
+
+# DO NOT — file a body carrying our name, path, and finding tag
+
+"S-H3 (acme-onboarding, workspaces/acme/journal/0012): the parser we wrap drops the field."
+```
+
 **Why:** Once on the public record, redaction is partial — most trackers preserve edit history and the original body stays recoverable.
 
 ### 2. No Standing Approval
 
 MUST NOT treat "the user approved one filing" as standing approval for future filings.
 
+```markdown
+# DO — re-present each new body and wait for its own approval
+
+"Second defect found upstream. Here is the body for THIS one — approve filing? (y/N)"
+
+# DO NOT — auto-file the second because the first was approved
+
+(filed the second issue citing "the user already approved this class of filing")
+```
+
 **Why:** Each issue body is unique and carries its own leakage risk; standing approval erodes the per-issue gate that is the only body-level check.
 
 ### 3. No Unscrubbed Pipeline Inputs
 
 MUST NOT route any body into a distribution pipeline — a proposal, a sync payload, or any artifact that will be split and pushed to multiple downstream consumers — without scrubbing it per Rule 2 first.
+
+```markdown
+# DO — scrub per Rule 2 BEFORE the body enters any distribution pipeline
+
+scrub the draft (drop name/path/tag) → then add it to the sync payload
+
+# DO NOT — drop a raw body into a multi-consumer pipeline, scrub "later"
+
+add the unscrubbed draft to the proposal now; "we'll redact before each consumer reads it"
+```
 
 **Why:** A body that enters a distribution pipeline reaches many consumers at once; any leaked identifier becomes permanently correlatable across all of them before any later check runs. A pipeline input is a public-surface artifact, not a private note.

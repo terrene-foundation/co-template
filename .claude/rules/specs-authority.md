@@ -10,9 +10,7 @@ paths:
 
 # Specs Authority Rules
 
-The `specs/` directory is the single source of domain truth for a project. It contains detailed specification files organized by the project's own ontology — components, modules, user needs, domains — whatever structure fits the project. Phase commands read targeted spec files before acting and update them when domain truth changes.
-
-`specs/` is NOT a process artifact (that is what `workspaces/` does). It is the detailed record of WHAT the system is and does, not HOW we are building it. Plans, todos, and journals continue to serve their existing roles.
+The `specs/` directory is the single source of domain truth for a project — detailed specification files organized by the project's own ontology (components, modules, user needs, domains). Phase commands read targeted spec files before acting and update them when domain truth changes. `specs/` is NOT a process artifact (that is what `workspaces/` does): it records WHAT the system is and does, not HOW we are building it. Plans, todos, and journals keep their existing roles.
 
 Origin: Analysis of 6 alignment drift failure modes across CO phase system. Specs/ addresses brief-to-plan lossy compression (FM-1), phase transition context thinning (FM-2), multi-session amnesia (FM-3), agent delegation context loss (FM-4), and silent scope mutation (FM-6).
 
@@ -29,7 +27,6 @@ Origin: Analysis of 6 alignment drift failure modes across CO phase system. Spec
 | ----------------- | ------ | --------------------------------------------- |
 | authentication.md | Auth   | Login/register flows, JWT, session management |
 | data-model.md     | Data   | All entities, relationships, constraints      |
-| dashboard.md      | UI     | Real-time display, charts, responsive layout  |
 
 # DO NOT — \_index.md contains the actual specifications
 
@@ -50,8 +47,6 @@ specs/
   _index.md
   authentication.md
   billing.md
-  data-model.md
-  notifications.md
   tenant-isolation.md
 
 # DO NOT — process-organized (duplicates workspaces/)
@@ -60,7 +55,6 @@ specs/
   intent.md
   decisions.md
   progress.md
-  boundaries.md
 ```
 
 **Why:** Process-organized specs duplicate the workspace directory structure (plans, todos, journal already handle process). Domain-organized specs capture the detailed truth about WHAT the system does, which is exactly what drifts during execution.
@@ -70,29 +64,26 @@ specs/
 Each spec file MUST be comprehensive enough to be the authority on its topic. Every nuance, constraint, edge case, contract, and decision relevant to that domain MUST be captured. A spec file that summarizes is a spec file that loses the details that cause drift.
 
 ```markdown
-# DO — detailed authority
+# DO — detailed authority (names the exact contracts, thresholds, edge cases)
 
 ## Login Flow
 
-1. User submits email + password to POST /api/v1/auth/login
-2. Server validates credentials against bcrypt hash in users table
-3. On success: generate JWT (RS256, 24h expiry), set HttpOnly cookie
-4. On failure: increment failed_attempts on user record
-5. If failed_attempts >= 5: lock account, require email verification
-6. Rate limit: 10 attempts per IP per minute (429 response)
+1. POST /api/v1/auth/login → validate against bcrypt hash in users table
+2. On success: JWT (RS256, 24h expiry), HttpOnly cookie
+3. On 5th failed attempt: lock account, require email verification
+4. Rate limit: 10 attempts per IP per minute (429)
 
 ## Edge Cases
 
-- Locked account + valid password: return 423 with unlock instructions
-- Expired JWT mid-request: return 401, client redirects to login
-- Concurrent sessions: allowed, max 5 per user, oldest evicted
+- Locked + valid password: 423 with unlock instructions
+- Expired JWT mid-request: 401, client redirects; concurrent sessions max 5, oldest evicted
 
 # DO NOT — thin summary
 
 ## Login Flow
 
-Users can log in with email and password. JWT tokens are used for auth.
-Failed logins are tracked. Rate limiting is applied.
+Users log in with email and password. JWT tokens are used. Failed logins
+are tracked. Rate limiting is applied.
 ```
 
 **Why:** Thin summaries lose the exact details that agents need to execute correctly. "JWT tokens are used" doesn't tell the agent RS256 vs HS256, expiry duration, or cookie strategy. These omissions become the bugs.
@@ -102,16 +93,12 @@ Failed logins are tracked. Rate limiting is applied.
 Each phase MUST read `specs/_index.md` at start, identify relevant spec files, and read those files before taking action. Phases MUST NOT read the entire `specs/` directory — only the files relevant to the current work.
 
 ```
-# DO — targeted reads
-/execute (working on auth task):
-  1. Read specs/_index.md → find authentication.md
-  2. Read specs/authentication.md → full context for auth work
-  3. Execute against spec, not memory
+# DO — targeted reads (/execute on an auth task)
+Read specs/_index.md → find authentication.md → read it → execute against
+the spec, not memory.
 
 # DO NOT — skip specs, work from memory
-/execute (working on auth task):
-  1. Remember vaguely what the analysis said
-  2. Execute based on partial recall
+Recall vaguely what the analysis said → execute on partial recall.
 ```
 
 **Why:** Working from memory instead of specs is the root cause of incremental mutation divergence (FM-5). Agents recall 3 of 15 details. The other 12 become bugs.
@@ -151,7 +138,7 @@ When execution deviates from a spec (different approach, technology, or user-obs
 
 ## Notifications
 
-Notifications are delivered to users in near-real-time.
+Notifications are delivered in near-real-time.
 
 # (spec still says WebSocket; output does polling; nobody knows)
 ```
@@ -165,27 +152,13 @@ Notifications are delivered to users in near-real-time.
 - "The spec is aspirational; the output is what matters"
 - "I'll update the spec after execution stabilizes"
 
-### 7. Agent Delegation Includes Relevant Spec Files
-
-When delegating to a specialist, the orchestrator MUST read `_index.md`, select relevant spec files, and include their content in the delegation prompt. For specs over 200 lines, include only the relevant section with a note pointing to the full file.
-
-```
-# DO — include spec content in delegation prompt
-Agent(prompt: "Build user schema.\n\nFrom specs/data-model.md:\n[content]\n\nFrom specs/tenant-isolation.md:\n[content]")
-
-# DO NOT — delegate without specs context
-Agent(prompt: "Build user schema.")
-```
-
-**Why:** Specialists without spec context produce intent-misaligned output — e.g., schemas without constraints because requirements weren't communicated (FM-4).
-
-### 8. Large Spec Files Are Split
+### 7. Large Spec Files Are Split
 
 When a spec file exceeds 300 lines, it MUST be split into sub-domain files and `_index.md` updated. Each sub-file must be self-contained for its sub-domain. Completeness (MUST Rule 3) takes priority over brevity, but a single 1000-line spec defeats token efficiency.
 
 **Why:** Oversized spec files crowd out execution reasoning when loaded into context, and make delegation prompts enormous. Splitting preserves detail while keeping each file actionable.
 
-### 9. Workspace Specs Reference Canonical Artifacts (Not Restate)
+### 8. Workspace Specs Reference Canonical Artifacts (Not Restate)
 
 When a workspace spec describes the mechanism of a canonical artifact (a command, rule, skill, hook, or agent under `.claude/`), the spec MUST cite the artifact by `<path>:<line>` (or `<path> §<section>`) rather than restating the artifact's verbatim content.
 
@@ -193,16 +166,13 @@ When a workspace spec describes the mechanism of a canonical artifact (a command
 # DO — workspace spec references canonical source
 
 The lint at `.claude/commands/cc-audit.md:35` flags any non-`paths:` key in
-opening rule frontmatter. Block-scoping is preserved by the `i==1` predicate
-(see line 35 of the canonical command).
+opening rule frontmatter; block-scoping is preserved by the `i==1` predicate.
 
 # DO NOT — workspace spec restates the implementation
 
 awk 'FNR==1{i=0} /^---$/{i++; next} i==1 && ...' .claude/rules/*.md
-
-(verbatim copy of the awk line that already lives in
-`.claude/commands/cc-audit.md:35` — update to one without
-the other creates silent drift)
+(verbatim copy of the awk line already in `.claude/commands/cc-audit.md:35` —
+editing one without the other creates silent drift)
 ```
 
 **BLOCKED responses:**
@@ -216,67 +186,9 @@ the other creates silent drift)
 
 **Exception:** Educational specs in `.claude/rules/` that show DO / DO NOT implementations per `rules/cc-artifacts.md` MUST §3 are explicitly NOT covered by this rule — those examples teach by restating. The exception applies only to _workspace_ specs (under `workspaces/<project>/specs/`), not canonical rule files.
 
-### 10. Every Spec Edit Triggers a Sibling Re-Derivation Sweep
+## Delegation Clauses Moved
 
-When an edit changes a contract, field shape, term, or assertion in one spec, the editor MUST `grep` ALL sibling specs in the domain set (every file listed in `_index.md`) for references to the changed element and re-derive each dependent assertion in the same action. Reviewing only the edited file and shipping an APPROVE verdict while a sibling still cites the old truth is BLOCKED.
-
-```markdown
-# DO — edit one spec, sweep every sibling that cites the changed element
-
-Edit: `specs/eligibility.md` renames the criterion field `tenure_months` → `tenure_years`.
-Sweep: grep `_index.md` siblings for `tenure_months` →
-
-- `specs/scoring.md` cites it in the weighting formula → re-derive to `tenure_years`
-- `specs/appeals.md` references the old threshold → re-derive
-  Both updated in the SAME action as the eligibility edit.
-
-# DO NOT — narrow-scope edit, silent cross-spec drift survives
-
-Edit: rename `tenure_months` → `tenure_years` in `specs/eligibility.md` only.
-Review reads `eligibility.md`, finds it internally consistent → APPROVE.
-(`scoring.md` and `appeals.md` still say `tenure_months`; downstream consumers
-of those siblings now compute against a field that no longer exists.)
-```
-
-**BLOCKED responses:**
-
-- "The edited spec is internally consistent, so review passes"
-- "The sibling specs are out of scope for this change"
-- "Cross-spec references will be reconciled in a later pass"
-- "Only the file I touched needs re-derivation"
-
-**Why:** Field-shape divergence, downstream-consumer drift, and terminology drift are invisible to a review scoped to the edited file alone — the sibling that still cites the old truth reads as correct in isolation and is the one downstream consumers build against. The sweep is mechanical (`_index.md` enumerates the full domain set; the changed element is a literal `grep` target), so the cost of closing the drift class is one search per edit, not a re-read of every spec.
-
-### 11. The Orchestrator Amends Stale Todo Text at Launch
-
-Before delegating a planned todo, the orchestrator MUST re-read the spec the todo targets and, if the spec or project state moved since `/plan` wrote the todo, amend the todo text to the current truth at launch — not hand the delegated agent wording that predates the move. Launching a delegation against a todo the orchestrator knows is stale is BLOCKED.
-
-```markdown
-# DO — reconcile the todo against current spec state at launch
-
-/plan wrote: "Draft the reviewer-assignment section per `specs/peer-review.md` §3
-(single blind, one reviewer)."
-At launch the orchestrator re-reads §3 → it now says double-blind, two reviewers.
-Orchestrator amends the todo to "double-blind, two reviewers" BEFORE delegating,
-and delegates against the amended text.
-
-# DO NOT — delegate the pre-move wording and let the agent hit the conflict
-
-Orchestrator delegates the original todo verbatim. The agent reads
-`specs/peer-review.md` §3, finds it contradicts the todo, stalls mid-execution
-to ask which is authoritative — or worse, drafts against the stale todo.
-```
-
-**BLOCKED responses:**
-
-- "The agent can reconcile the todo against the spec itself"
-- "The todo was approved at /plan, so its wording is fixed"
-- "Re-checking every todo at launch is overhead"
-- "The agent will flag the conflict if it matters"
-
-**Why:** A delegated agent that discovers a todo-vs-spec conflict mid-execution either stalls for a clarification round-trip or silently drafts against the stale wording — both cost more than the orchestrator's one-time re-read at launch, when the spec is the established authority (Rule 5 keeps it current) and the todo is the artifact that lagged. This is the launch-time reconciliation step that Rules 5 and 7 do not cover: Rule 5 keeps the spec current and Rule 7 ships spec content into the delegation prompt, but neither updates the todo's own instruction text, which the agent reads as its primary directive.
-
-Origin: workspace `cc-audit-lint-generalize` 2026-05-03; journal/0011-GAP (test fixtures and spec canonicalization deferred to /codify); /vet adversarial round L1.
+The delegation-coupled clauses formerly here (was MUST §7 agent-delegation-includes-specs, §10 sibling-re-derivation-sweep, §11 launch-time-todo-reconciliation) now live in `rules/specs-delegation.md` MUST §1–§3 — split out to keep both files under the 200-line cap. They govern how `specs/` flows into delegation; this file governs the spec lifecycle they consume.
 
 ## MUST NOT
 

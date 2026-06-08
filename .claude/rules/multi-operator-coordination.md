@@ -76,5 +76,5 @@ The per-session capacity budget (`rules/autonomous-execution.md` § Respect the 
 
 ## Cross-References
 
-- `rules/autonomous-execution.md` — the per-session capacity budget this rule re-keys to per-operator (MUST §5).
+- `rules/autonomous-execution.md` — the per-session capacity budget this rule re-keys to per-operator (MUST §3).
 - `rules/journal.md` — journals are a knowledge trail, NOT a coordination signal (MUST §1).

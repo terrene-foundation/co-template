@@ -19,22 +19,22 @@ Software development projects. The AI writes code, tests it, deploys it.
 
 **Archetype-specific components**:
 
-| Component | What to include                                                                                                                   |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Commands  | `/deploy`, `/test`, `/api`, `/db`, `/sdk`, `/ai`, `/design`, `/validate`                                                          |
-| Commands  | `/i-audit`, `/i-harden`, `/i-polish`, `/learn`                                                                                    |
-| Agents    | Framework specialists: `dataflow-specialist`, `nexus-specialist`, `kaizen-specialist`, `mcp-specialist`                           |
-| Agents    | Frontend: `uiux-designer`, `react-specialist`, `flutter-specialist`, `react-specialist`, `uiux-designer`                          |
-| Agents    | Deployment: `release-specialist`, `testing-specialist`                                                                            |
-| Skills    | SDK-specific (01-core-sdk through 25-ai-patterns)                                                                                 |
-| Rules     | `no-stubs.md` (strict — MUST NOT), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md`, `env-models.md` |
-| Hooks     | `validate-workflow.js` (SDK pattern enforcement), `validate-deployment.js`                                                        |
+| Component | What to include                                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Commands  | `/deploy`, `/test`, `/api`, `/db`, `/sdk`, `/ai`, `/design`, `/validate`                                                                                                 |
+| Commands  | COC core-workflow flavors: `/todos` (→`/plan`), `/implement` (→`/execute`), `/redteam` (→`/vet`), `/release`+`/deploy` (→`/deliver`); `/codify` keeps its canonical name |
+| Agents    | Framework specialists: one `[framework]-specialist` per framework/SDK/runtime the codebase uses (e.g. in a codegen project, a specialist for each major library)         |
+| Agents    | Frontend: `[frontend-framework]-specialist`, `[design]-specialist` (e.g. in a UI project, one per framework/design system in use)                                        |
+| Agents    | Deployment: `release-specialist`, `testing-specialist`                                                                                                                   |
+| Skills    | SDK-specific (01-core-sdk through 25-ai-patterns)                                                                                                                        |
+| Rules     | `no-stubs.md` (strict — MUST NOT), `agents.md` (MANDATORY), `testing.md`, `patterns.md`, `e2e-god-mode.md`, `env-models.md`                                              |
+| Hooks     | `validate-workflow.js` (SDK pattern enforcement), `validate-deployment.js`                                                                                               |
 
 **`start.md` orientation**: Product-building. "You describe what you want, the AI builds it."
 
 **`analyze.md` framework**: Platform model, AAA framework, network effects, product-market fit.
 
-**`redteam.md` approach**: User flow testing with Playwright/Marionette, end-to-end validation, parity checks.
+**`vet.md` approach** (COC archetype flavor: `redteam.md`): User flow testing with Playwright/Marionette, end-to-end validation, parity checks.
 
 ---
 
@@ -62,7 +62,7 @@ Strategic, legal, or governance knowledge work. The AI researches, drafts, revie
 | Agents    | Publications: `publication-expert`                                                                                                                     |
 | Skills    | Standards reference (26-eatp, 27-care, 28-coc, co-reference)                                                                                           |
 | Skills    | Governance (29-constitution, 30-arxiv, 31-publication, 32-governance-layer, 33-care-implementation, 34-co-domain)                                      |
-| Rules     | `no-stubs.md` (soft — RECOMMENDED), `agents.md` (RECOMMENDED)                                                                                    |
+| Rules     | `no-stubs.md` (soft — RECOMMENDED), `agents.md` (RECOMMENDED)                                                                                          |
 | Rules     | `constitution.md`, `publication-quality.md`, `arxiv-submission.md`, `governance-layer-positioning.md`, `co-domain-application.md`, `terrene-naming.md` |
 | Hooks     | `validate-arxiv-content.js`, `validate-publication-content.js`                                                                                         |
 
@@ -70,7 +70,7 @@ Strategic, legal, or governance knowledge work. The AI researches, drafts, revie
 
 **`analyze.md` framework**: Anchor document alignment, standards cross-reference, governance precedents, regulatory context.
 
-**`redteam.md` approach**: Adversarial governance testing (constitutional capture, logical gaps, positioning integrity, strategic exposure).
+**`vet.md` approach**: Adversarial governance testing (constitutional capture, logical gaps, positioning integrity, strategic exposure).
 
 ---
 
@@ -101,7 +101,7 @@ Non-coding content creation. The AI helps design, write, and organize educationa
 
 **`analyze.md` framework**: Learning objectives, audience analysis, prerequisite mapping, assessment strategy.
 
-**`redteam.md` approach**: Learner experience testing, knowledge gap analysis, assessment validity.
+**`vet.md` approach**: Learner experience testing, knowledge gap analysis, assessment validity.
 
 ---
 
@@ -117,7 +117,7 @@ Projects that implement governance standards in code. Part coding, part governan
 - Must align with CARE/EATP/CO standards
 - Tests include both code tests and standards conformance
 
-**Archetype-specific components**: Combine coding agents (tdd-implementer, testing-specialist) with standards experts (`co-reference` skill, `co-reference` skill). Use coding rules (strict no-stubs, testing) with governance-aware agent teams in commands.
+**Archetype-specific components**: Combine coding agents (tdd-implementer, testing-specialist) with standards experts (`co-expert`, `gold-standards-validator`). Use coding rules (strict no-stubs, testing) with governance-aware agent teams in commands.
 
 ---
 
@@ -134,25 +134,20 @@ Every repo gets:
 ```
 .claude/
 ├── commands/
-│   ├── implement.md      # Core workflow (adapt agent teams)
-│   ├── codify.md          # Core workflow (adapt agent teams)
-│   ├── todos.md           # Core workflow (adapt expert consultation)
+│   ├── plan.md            # Core workflow (adapt agent teams); COC archetype renames to todos.md
+│   ├── execute.md         # Core workflow (adapt agent teams); COC archetype renames to implement.md
+│   ├── codify.md          # Core workflow (adapt expert consultation); name kept across archetypes
 │   ├── start.md           # Write from scratch for this archetype
 │   ├── analyze.md         # Write from scratch for this archetype
-│   ├── redteam.md         # Write from scratch for this archetype
+│   ├── vet.md             # Write from scratch for this archetype; COC archetype renames to redteam.md
 │   ├── ws.md              # Copy as-is
 │   └── wrapup.md          # Copy as-is
 ├── agents/
-│   ├── analyst.md           # Copy as-is
-│   ├── analyst.md   # Copy as-is
-│   ├── reviewer.md  # Copy as-is
+│   ├── claude-code-architect.md   # Copy as-is
 │   ├── gold-standards-validator.md # Copy as-is
-│   ├── security-reviewer.md      # Copy as-is
-│   ├── open-source-strategist.md # Copy if relevant
 │   └── management/
-│       ├── todo-manager.md       # Copy as-is
-│       ├── gh-manager.md         # Copy as-is
-│       └── release-specialist.md # Copy as-is
+│       ├── todo-manager.md         # Copy as-is
+│       └── gh-manager.md           # Copy as-is
 ├── rules/
 │   ├── git.md                    # Copy as-is
 │   └── security.md               # Write for this archetype
@@ -170,11 +165,11 @@ Add the commands, agents, skills, rules, and hooks from the archetype table abov
 
 - `start.md` — Orientation for this project type
 - `analyze.md` — Research framework for this domain
-- `redteam.md` — Testing/validation approach for this domain
+- `vet.md` (COC archetype flavor: `redteam.md`) — Testing/validation approach for this domain
 
 ### Step 5: Adapt shared commands
 
-In `implement.md`, `codify.md`, and `todos.md`:
+In the core-workflow files `plan.md`, `execute.md`, and `codify.md` (the COC coding archetype renames these to `todos.md`, `implement.md`, `codify.md`):
 
 - Replace the **Agent Teams** section with agents appropriate to this project
 - Keep the workflow structure (completion evidence, decision log, pattern observation) unchanged
@@ -194,6 +189,6 @@ The canonical source repository for shared CO components is:
 
 - Shared components (utility commands, shared agents, guides)
 - The CO setup guide itself
-- Improvements to the core workflow commands (implement, codify, todos)
+- Improvements to the core workflow commands (`plan`, `execute`, `codify`; COC archetype flavors `todos`, `implement`, `codify`)
 
 When improvements are made in the canonical source, they should be propagated to other repos using the process described in [04 - Propagation](04-propagation.md).

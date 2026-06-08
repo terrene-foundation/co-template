@@ -75,7 +75,7 @@ When creating a canonical artifact section:
 ```markdown
 # DO:
 
-"See `rules/cc-artifacts.md` MUST §8 — every /codify execution MUST include claude-code-architect."
+"See `rules/cc-enforcement.md` MUST §1 — every /codify execution MUST include claude-code-architect."
 
 # DO NOT:
 
