@@ -1,9 +1,16 @@
 # Recommendation Quality Rules — No Suggestion Without a Recommendation
 
-<!-- Universal rule (no paths: scoping): recommendations are surfaced in every
-     conversation, including ones that touch no files — path-scoping would fail
-     to load it in exactly the pure-deliberation sessions where it matters most.
-     Universal like communication.md, per rule-authoring.md MUST §5. -->
+<!-- Deliberately NO paths: frontmatter — this is an always-on universal rule.
+     rule-authoring.md MUST §5 requires paths: scoping EXCEPT for rules that
+     "apply universally"; its example allowlist (communication, git, security,
+     independence) is illustrative, not exhaustive. recommendation-quality
+     qualifies under that same operative criterion: it governs ALL agent output
+     that asks for user direction — any phase, any domain, including pure-
+     deliberation sessions that touch NO files. Path-scoping would fail to load
+     it in exactly those file-less sessions where surfaced choices most need a
+     recommendation. So it follows the communication.md convention: no frontmatter
+     block, load always. This comment documents the omission as deliberate so a
+     frontmatter-presence sweep does not flag it as a missing-paths defect. -->
 
 Origin: inbound sync from loom 2026-06-05 — lifts the no-menu-without-a-pick pattern from loom rules/recommendation-quality.md, adapted for atelier (vendor/codegen specifics stripped, phase names remapped to CO v1.2). Structurally codifies the standing "always recommend with principles" practice: every open decision point is paired with one specific recommendation, principle-based justification, a default, and the trade-off. This rule EXTENDS `rules/communication.md` § "Frame Decisions as Impact" — communication.md says present the impact of each option; this rule says ALSO commit to one pick.
 

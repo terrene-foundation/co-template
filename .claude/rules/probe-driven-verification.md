@@ -176,4 +176,4 @@ Output gave 2 options; schema relaxed to { options: >=1 } so it passes.
 
 ## Relationship to Existing Rules
 
-Extends `rules/cc-artifacts.md` MUST NOT §4 (hooks check structure, agents check semantics) — structural checks may be mechanical, semantic checks need a probe. Reinforces `rules/execution-discipline.md` MUST §1 — at `/vet`, fulfillment of a semantic requirement MUST be scored by a probe, never inferred from a keyword match. Connects to `rules/specs-authority.md`: a spec states the required behavior; the probe is how `/vet` verifies the output meets it.
+Extends `rules/cc-enforcement.md` MUST NOT §1 (hooks check structure, agents check semantics) — structural checks may be mechanical, semantic checks need a probe. Reinforces `rules/execution-discipline.md` MUST §1 — at `/vet`, fulfillment of a semantic requirement MUST be scored by a probe, never inferred from a keyword match. Connects to `rules/specs-authority.md`: a spec states the required behavior; the probe is how `/vet` verifies the output meets it.

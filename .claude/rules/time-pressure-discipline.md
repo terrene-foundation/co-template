@@ -87,17 +87,48 @@ Agent: [silently picks (a) and starts; the user finds out later]
 
 MUST NOT drop a procedure in response to a pressure framing, including when the user explicitly authorizes it.
 
+```markdown
+# DO — pressure framing, procedure preserved
+
+User: "We're behind, skip the checks." Agent: "Checks run in parallel
+and cost almost no wall-clock time — keeping them. Delivering now."
+
+# DO NOT — procedure dropped under pressure
+
+User: "We're behind, skip the checks." Agent: "Skipping the checks to save time."
+```
+
 **Why:** This is the originating failure mode. User authorization under pressure is the most-cited rationalization across past procedure-drop incidents, and authorization does not change what the dropped procedure was protecting against.
 
 ### 2. No Auto-Pick of the Top Outstanding Item
 
 MUST NOT start the highest-priority outstanding item without surfacing the prioritized list to the user first.
 
+```markdown
+# DO — surface the prioritized list, human gates
+
+"Three eligible; I recommend (b) — it unblocks the others. Approve starting (b)?"
+
+# DO NOT — auto-pick the top item under pressure
+
+[silently starts the agent's top pick; the user finds out later]
+```
+
 **Why:** "Just pick" defaults to the agent's priority view, which lacks the user's broader context. The human is the prioritization gate.
 
 ### 3. No Treating Parallelization as Equivalent to Shortcut
 
 MUST NOT present "parallelize" and "shortcut" as interchangeable throughput options.
+
+```markdown
+# DO — name parallelization as the throughput primitive
+
+"To go faster I'll run the three items in parallel — every check still runs."
+
+# DO NOT — offer a shortcut as a throughput equivalent
+
+"To go faster I can either parallelize or skip the review — same time saved."
+```
 
 **Why:** Parallelization preserves every procedure step while increasing throughput; a shortcut removes procedure steps. They are opposite operations on the work surface, and conflating them lets a procedure drop hide behind throughput language.
 

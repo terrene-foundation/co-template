@@ -203,24 +203,26 @@ Which agents to deploy for this workflow.
 
 ### The Core Workflow
 
-Every project has these 5+1 commands:
+Every project has these six phase commands. These are the **canonical CO** command names — domain-agnostic, used as-is in non-coding archetypes:
 
-| Command      | Phase | Purpose                                  |
-| ------------ | ----- | ---------------------------------------- |
-| `/analyze`   | 01    | Research and validate before execution   |
-| `/todos`     | 02    | Create roadmap; stops for human approval |
-| `/implement` | 03    | Execute one task at a time; repeat       |
-| `/redteam`   | 04    | Stress-test and validate                 |
-| `/codify`    | 05    | Capture knowledge for future sessions    |
-| `/ws`        | —     | Check progress anytime                   |
+| Command    | Phase | Purpose                                             |
+| ---------- | ----- | --------------------------------------------------- |
+| `/analyze` | 01    | Research and validate before execution              |
+| `/plan`    | 02    | Decompose into approved tasks; stops for human gate |
+| `/execute` | 03    | Carry out planned work one task at a time; repeat   |
+| `/vet`     | 04    | Stress-test and validate; promote on convergence    |
+| `/codify`  | 05    | Capture validated patterns for future sessions      |
+| `/deliver` | 06    | Package finalized work; hand off to the recipient   |
 
-Plus `/wrapup` (session notes).
+Plus the cross-cutting utilities: `/ws` (check progress anytime) and `/wrapup` (session notes).
+
+**COC coding-archetype flavor**: the COC (codegen) domain renames the middle phases for its context — `/todos` (maps to `/plan`), `/implement` (maps to `/execute`), `/redteam` (maps to `/vet`), and `/release`+`/deploy` (map to `/deliver`). These are operational flavors of the canonical phases, not separate phases; `/analyze`, `/codify`, and `/deliver` keep their canonical names. See `rules/domain-independence.md` § 3 (Six-Phase Naming) for the full phase-to-flavor mapping.
 
 ---
 
 ## Hooks
 
-**Location**: `scripts/hooks/` with registration in `.claude/settings.json`
+**Location**: `.claude/hooks/` with registration in `.claude/settings.json`
 
 **Purpose**: Deterministic enforcement outside the AI's context. CO L3 Tier 2.
 
@@ -238,7 +240,7 @@ Plus `/wrapup` (session notes).
 ### Hook Template (JavaScript)
 
 ```javascript
-// scripts/hooks/hook-name.js
+// .claude/hooks/hook-name.js
 const fs = require("fs");
 const path = require("path");
 
@@ -266,13 +268,13 @@ console.log(JSON.stringify(result));
     "UserPromptSubmit": [
       {
         "type": "command",
-        "command": "node scripts/hooks/user-prompt-rules-reminder.js"
+        "command": "node .claude/hooks/user-prompt-rules-reminder.js"
       }
     ],
     "PreToolUse": [
       {
         "type": "command",
-        "command": "node scripts/hooks/validate-bash-command.js",
+        "command": "node .claude/hooks/validate-bash-command.js",
         "matcher": { "tool_name": "Bash" }
       }
     ]

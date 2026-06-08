@@ -1,15 +1,33 @@
 {
-  "version": "1.5.0",
+  "version": "1.5.2",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-06-06",
+  "released": "2026-06-08",
   "upstream": {
     "name": "co",
     "repo": "terrene-foundation/co",
-    "version": "1.5.0",
+    "version": "1.5.2",
     "version_url": "https://raw.githubusercontent.com/terrene-foundation/co/main/.claude/VERSION"
   },
   "changelog": [
+    {
+      "version": "1.5.2",
+      "date": "2026-06-08",
+      "summary": "Full non-held resync from atelier 1.5.2 — bring the CC/CO rule + guide corpus current (1.5.0 → 1.5.2), de-framework the Claude Code guide set, and close two long-standing gaps (independence/terrene-naming rules absent; cc-artifact-patterns skill dangling). Held cluster + customized command backports still held (GH atelier#15).",
+      "changes": [
+        "NEW rules (4): independence.md (incl. MUST NOT §5 Foundation-owned-MAY / proprietary-MUST-NOT, A2-003), terrene-naming.md (OCEAN→Terrene + License Accuracy, pointer to independence §5), cc-enforcement.md (split-half of cc-artifacts: /codify gate, audit fixtures, positive-allowlist sweeps), specs-delegation.md (split-half of specs-authority: agent-delegation-includes-specs)",
+        "UPDATED rules (17): artifact-flow, autonomous-execution, cc-artifacts (now split → references cc-enforcement), execution-discipline, governed-throughput, multi-operator-coordination, no-stubs, probe-driven-verification, recommendation-quality, resolve-on-discovery, spec-accuracy, specs-authority (now split → references specs-delegation), sweep-completeness, time-pressure-discipline, upstream-issue-hygiene, user-flow-validation, verify-resource-existence",
+        "NEW skill: cc-artifact-patterns/ — closes a pre-existing dangling reference (cc-artifacts.md + cc-enforcement.md cite it as the CC architecture reference; the skill was never present downstream)",
+        "UPDATED guides (14): claude-code/{13-agentic-architecture,16-context-reliability,README}, co-setup/{01-architecture,02-project-types,03-creating-components,04-propagation,README}, deterministic-quality/{02-session-architecture,03-enforcement-ladder,README}, model-optimization/README, portability/{01-artifact-neutrality,02-multi-target-parity}",
+        "NEW guides (2): co-setup/09-proposal-protocol, portability/README",
+        "DELETED de-framework guide set (14): claude-code/00–12 + claude-code/CLAUDE.md — the framework-specific Claude Code onboarding manual (loom/Kailash USE-template content that contradicted the agnostic-authority identity); the 4 neutral pattern guides (13–16) + README are kept and refreshed",
+        "DELETED stale guides (4): model-optimization/{01-opus-vs-sonnet-research,02-ecosystem-inventory,03-recommendations,04-implementation-plan} — superseded upstream by 01-model-selection-by-task (already present)",
+        "EDIT (sync-local, 5): scrubbed dangling held-item refs introduced by verbatim copy — cc-enforcement.md Cross-References bullet to hook-output-discipline.md (HELD); hook-authoring skill refs in claude-code/13-agentic-architecture, claude-code/README, portability/01-artifact-neutrality, portability/02-multi-target-parity (redirected to cc-enforcement.md or removed)",
+        "PRESERVED (flagged): guides/conversion/ (4 files) — atelier has no conversion/; status ambiguous (template-specific vs. stale); self-contained, no dangling refs; held for a dedicated keep-or-remove decision",
+        "STILL HELD (not synced, GH atelier#15): rules trust-posture, hook-output-discipline, journal-author-discipline, repo-scope-discipline, self-referential-codify; skills hook-authoring, trust-posture; agent management/settings-manager; all .claude/hooks/ — wire into a hook substrate co-template lacks. Customized phase-command backports also held (per-repo merge needed).",
+        "NOTE: CLAUDE.md left untouched (configurable template, never overwritten per artifact-flow.md MUST §3); its Rules Index does not yet enumerate the 4 new rules — cosmetic, deferred to a template-curation pass"
+      ]
+    },
     {
       "version": "1.5.0",
       "date": "2026-06-06",

@@ -1,29 +1,9 @@
-# Model Optimization Workspace
+# Model Optimization — Spending Capability Where It Earns Its Premium
 
-**Date**: 2026-03-11
-**Status**: Ready for review
-**Purpose**: Optimize Claude model assignments (Opus vs Sonnet) across the entire COC ecosystem
+A tiered model family is not interchangeable: a stronger tier costs more and waits longer, a faster tier is cheap and direct, and the gap between them is real money and real latency. This guide collects the heuristics for matching a task to the tier whose strengths the task actually exercises — paying the premium where failures are expensive and depth is required, and keeping the fast tier where failures are cheap and directness wins.
 
-## Repos Audited
+## Guide Index
 
-| #   | Repo                   | Type                    |
-| --- | ---------------------- | ----------------------- |
-| 1   | Governance KB          | Governance KB           |
-| 2   | Kailash Python SDK     | BUILD (SDK development) |
-| 3   | Kailash Python USE     | USE template (end-user) |
-| 4   | Kailash Rust BUILD/USE | BUILD + USE template    |
-
-## Documents
-
-| Document                        | Purpose                                          |
-| ------------------------------- | ------------------------------------------------ |
-| `01-opus-vs-sonnet-research.md` | Comparative performance analysis with benchmarks |
-| `02-ecosystem-inventory.md`     | Complete inventory across all 4 repos            |
-| `03-recommendations.md`         | Per-repo model assignments with rationale        |
-| `04-implementation-plan.md`     | Exact changes to apply to each repo              |
-
-## Guiding Principle
-
-> "Token use is secondary to performance. Do not sacrifice ANY performance for token use."
-
-Sonnet is recommended ONLY where research demonstrates equivalent or superior performance to Opus for that task category. Where evidence is marginal, Opus is retained.
+| File                                                           | What it covers                                                                                                                                                                                            |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [01-model-selection-by-task.md](01-model-selection-by-task.md) | Task-category heuristics for choosing a model tier — which categories warrant the stronger tier (deep reasoning, adversarial review, high-stakes generation) and which are well served by the faster one. |

@@ -139,6 +139,6 @@ Two corollaries follow, and both are absolute:
 
 ## Cross-References
 
-- `guides/claude-code/07-the-hook-system.md` — deterministic enforcement (a hook that blocks at a gate) versus probabilistic guidance (a rule a model reads); the drift audit illustrated here is the deterministic-enforcement shape applied to emission rather than to tool use.
-- `guides/claude-code/08-the-rule-system.md` — what frontmatter priority and scope mean for when a rule loads, which is the invariant principle 2 protects across targets.
+- `rules/cc-enforcement.md` — deterministic enforcement (a hook that blocks at a gate) versus probabilistic guidance (a rule a model reads); the drift audit illustrated here is the deterministic-enforcement shape applied to emission rather than to tool use.
+- `rules/cc-artifacts.md` MUST §7 + `rules/rule-authoring.md` — what frontmatter scope (`paths:`) means for when a rule loads, which is the invariant principle 2 protects across targets.
 - `rules/no-stubs.md` — dangling cross-references and placeholder content are a within-target analogue of cross-target drift: an artifact that looks complete but is silently broken for the consumer who relies on it.

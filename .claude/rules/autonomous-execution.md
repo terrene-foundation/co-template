@@ -109,8 +109,8 @@ When a gate-level review or self-verification surfaces a latent gap in the **sam
 
 Not every phase boundary is a human gate; distinguishing the two prevents both rubber-stamping and bottlenecking.
 
-- **Structural (human required):** plan approval (`/plan`), delivery authorization (`/deliver`), and any change to the operating envelope itself. The human decides.
-- **Execution (autonomous convergence):** analysis quality (`/analyze`), draft correctness (`/execute`), validation rigor (`/vet`), knowledge capture (`/codify`). The human observes but does NOT block; the phase converges on its own quality bar.
+- **Structural (human required):** plan approval (`/plan`), per-proposal codification approval (`/codify` — each promotion into `.claude/` is a HARD per-proposal human gate, per CLAUDE.md and `.claude/commands/codify.md`), delivery authorization (`/deliver`), and any change to the operating envelope itself. The human decides.
+- **Execution (autonomous convergence):** analysis quality (`/analyze`), draft correctness (`/execute`), validation rigor (`/vet`). The human observes but does NOT block; the phase converges on its own quality bar.
 
 **Why:** Treating execution gates as human gates wastes the autonomy the envelope already granted; treating structural gates as autonomous removes the human from decisions that are theirs to make.
 

@@ -48,7 +48,7 @@ All COC-specific artifacts (codegen agents, SDK skills, testing rules, framework
 
 ```
 # DO:
-kailash-py /codify → proposal → Loom/ → /sync → COC templates
+Loom BUILD repo /codify → proposal → Loom/ → /sync → COC templates
 
 # DO NOT:
 co/ creates COC-specific content (SDK patterns, framework agents)
@@ -64,7 +64,7 @@ co-template/ and Loom's USE templates are rebuilt by `/sync` (or `/sync-to-coc` 
 
 Loom's USE-template fleet (loom 2.21.0+) has two branches:
 
-- **Kailash variants** — `kailash-coc-claude-{py,rs,rb}`. Stack-pinned to the Kailash SDK; receive CC+CO from atelier and COC from loom's BUILD repos (`kailash-py`, `kailash-rs`).
+- **Stack-pinned variants** — pinned to a specific downstream stack; receive CC+CO from atelier and COC from loom's BUILD repos. Loom owns the stack-specific naming and the BUILD-repo topology (atelier knows only its immediate neighbor, loom).
 - **Base variants** — `coc-claude-base` (CC-only) and `coc-base` (multi-CLI: claude+codex+gemini), under `terrene-foundation/` org. Language-agnostic for arbitrary stacks (Go, TypeScript, Rust, Java, polyglot, etc.); receive CC+CO from atelier and onboarding artifacts (`STACK.md` schema, generic specialists) from loom. **No BUILD source** (`build:null` in loom's sync-manifest); /codify proposals from base-variant consumers route to loom directly, not through atelier.
 
 Atelier ships CC+CO once via `/sync-to-coc`; loom adapts and emits to both branches.

@@ -366,7 +366,7 @@ Use fresh + summary when:
 
 A prompt instruction is **probabilistic guidance**: the model follows it almost always, but "almost always" is not a guarantee, and the rare miss is unpredictable. A hook is **deterministic enforcement**: it is code that runs every time, regardless of what the model decides. The question is never "is this important?" — it is "what does a single failure cost?" For a style preference, a 5% miss rate is invisible. For an irreversible or harmful action, a 5% miss rate is unacceptable.
 
-For the full hook event model and the configured hooks in this setup, see [Guide 07 — The Hook System](07-the-hook-system.md), Part 10.
+For the timeout-fallback and structured-handoff disciplines and the canonical emit shape, see [`rules/cc-enforcement.md`](../../rules/cc-enforcement.md).
 
 ### Structured Handoff for Human Escalation
 
@@ -439,6 +439,5 @@ Sketch the architecture and identify: where does each piece of information live?
 
 ## Navigation
 
-- **Previous**: [12 - Troubleshooting](12-troubleshooting.md)
 - **Next**: [14 - Tool Design Patterns](14-tool-design-patterns.md)
 - **Home**: [README.md](README.md)

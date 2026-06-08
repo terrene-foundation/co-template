@@ -115,19 +115,69 @@ Append-only `## §X Change log` sections describing PAST transitions in past ten
 
 ## MUST NOT Rules
 
-- Ship a spec naming an artifact path, section anchor, command, or cross-reference that fails `grep` / `find` against the real deliverable.
+### 1. No Unresolvable Citations
+
+MUST NOT ship a spec naming an artifact path, section anchor, command, or cross-reference that fails `grep` / `find` against the real deliverable.
+
+```markdown
+# DO — the cited symbol resolves today
+
+The `/vet` gate is defined at `.claude/commands/vet.md`.
+
+# DO NOT — citation points at an artifact that does not exist
+
+The drift gate is defined at `.claude/commands/drift-check.md` (no such file).
+```
 
 **Why:** Every shipped phantom is a lookaway tombstone — the failure mode this rule exists to prevent.
 
-- Use Phase-1 / Phase-2 / Promised / Target / Scaffold / Now-Later framings inside a spec section.
+### 2. No Split-State Framings
+
+MUST NOT use Phase-1 / Phase-2 / Promised / Target / Scaffold / Now-Later framings inside a spec section.
+
+```markdown
+# DO — one column, what is real today
+
+Coverage: the analyze phase reads `brief.md` and emits `01-analyze/`.
+
+# DO NOT — split-state framing inside the spec
+
+Coverage: Now — reads brief.md. Later (Phase-2) — auto-derives the brief.
+```
 
 **Why:** Split-state framings normalize "spec describes intent, deliverable describes reality" — exactly the divergence this rule blocks.
 
-- Treat "honest about what's missing" as a virtue for spec content, or maintain gap trackers as permanent residents of spec files.
+### 3. No Gap-Tracking as a Spec Virtue
+
+MUST NOT treat "honest about what's missing" as a virtue for spec content, or maintain gap trackers as permanent residents of spec files.
+
+```markdown
+# DO — gaps go to the workstream surface, not the spec
+
+specs/sync-model.md describes shipped sync behavior; the missing-target
+gap is tracked in `workspaces/sync-model/todos/active/add-base-variant.md`.
+
+# DO NOT — permanent gap tracker living inside the spec
+
+specs/sync-model.md says: "Known gaps: base-variant target not yet wired (honest disclosure)."
+```
 
 **Why:** Honesty about gaps is right for journals and delivery notes; in spec content it converts a truth surface into a roadmap surface. Permanent gap trackers signal the spec is partly aspirational — readers stop trusting any section.
 
-- Write a spec section for an artifact or behavior not yet real. That content is a brief or a plan; it belongs in `brief.md` or `02-plan/`, not `specs/`.
+### 4. No Spec Section for Behavior That Is Not Real
+
+MUST NOT write a spec section for an artifact or behavior not yet real. That content is a brief or a plan; it belongs in `brief.md` or `02-plan/`, not `specs/`.
+
+```markdown
+# DO — unbuilt behavior lives in the plan surface
+
+02-plan/tasks.md proposes a reconcile phase; specs/phase-model.md lists only
+the six phases that exist.
+
+# DO NOT — spec a behavior the deliverable does not yet have
+
+specs/phase-model.md says: "§7 Reconcile phase: sweeps cross-repo drift." (not built)
+```
 
 **Why:** A spec for behavior that does not exist is a design doc; the truth surface and the design surface must stay distinct.
 

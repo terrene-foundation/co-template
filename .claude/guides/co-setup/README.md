@@ -20,6 +20,6 @@ Propagating updates from the canonical source (terrene) to other repos? See [04 
 
 ## CO vs COC
 
-- **CO** (Cognitive Orchestration) — The domain-agnostic base methodology. 7 first principles, 5-layer architecture. Applies to any human-AI collaboration.
+- **CO** (Cognitive Orchestration) — The domain-agnostic base methodology. 8 first principles, 5-layer architecture. Applies to any human-AI collaboration.
 - **COC** (CO for Codegen) — CO applied to software development. The first domain application. Adds testing requirements, SDK specialists, deployment workflows.
 - This setup guide covers **CO** — the general structure. COC-specific content lives in the coding archetype.

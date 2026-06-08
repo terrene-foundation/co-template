@@ -6,7 +6,7 @@ How to apply updates from the canonical source to other repositories.
 
 The canonical source repository for shared CO components is:
 
-- Core workflow improvements (implement.md, codify.md, todos.md)
+- Core workflow improvements (`plan.md`, `execute.md`, `codify.md`; COC archetype flavors `todos.md`, `implement.md`, `codify.md`)
 - Shared agents (analysis, review, management, standards experts)
 - Guides (claude-code, co-setup)
 - Shared rules (git.md)
@@ -15,31 +15,31 @@ The canonical source repository for shared CO components is:
 
 ### Always propagate
 
-| Component               | Files                                   | Reason                                                                       |
-| ----------------------- | --------------------------------------- | ---------------------------------------------------------------------------- |
-| Core workflow structure | `implement.md`, `codify.md`, `todos.md` | Shared improvements (completion evidence, decision log, pattern observation) |
-| Utility commands        | `ws.md`, `wrapup.md`, `checkpoint.md`   | Identical across all repos                                                   |
-| Guides                  | `co-setup/`, `claude-code/`             | Universal reference material                                                 |
+| Component               | Files                                                                                                 | Reason                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Core workflow structure | `plan.md`, `execute.md`, `codify.md` (COC archetype flavors: `todos.md`, `implement.md`, `codify.md`) | Shared improvements (completion evidence, decision log, pattern observation) |
+| Utility commands        | `ws.md`, `wrapup.md`                                                                                  | Identical across all repos                                                   |
+| Guides                  | `co-setup/`, `claude-code/`                                                                           | Universal reference material                                                 |
 
 ### Propagate with adaptation
 
-| Component                      | Adaptation needed                        |
-| ------------------------------ | ---------------------------------------- |
-| `implement.md` agent teams     | Replace with project-appropriate agents  |
-| `codify.md` agent teams        | Replace with project-appropriate agents  |
-| `todos.md` expert consultation | Replace with project-appropriate experts |
+| Component                                                        | Adaptation needed                        |
+| ---------------------------------------------------------------- | ---------------------------------------- |
+| `execute.md` agent teams (COC archetype flavor: `implement.md`)  | Replace with project-appropriate agents  |
+| `codify.md` agent teams                                          | Replace with project-appropriate agents  |
+| `plan.md` expert consultation (COC archetype flavor: `todos.md`) | Replace with project-appropriate experts |
 
 ### Never propagate
 
-| Component                 | Reason                                                                        |
-| ------------------------- | ----------------------------------------------------------------------------- |
-| `start.md`                | Project-type-specific orientation                                             |
-| `analyze.md`              | Project-type-specific research framework                                      |
-| `redteam.md`              | Project-type-specific testing approach                                        |
-| Archetype-specific agents | SDK agents don't apply to governance; governance agents don't apply to coding |
-| Archetype-specific skills | Domain knowledge is project-specific                                          |
-| Archetype-specific rules  | Different strictness levels and concerns                                      |
-| Project-specific hooks    | Different validation and enforcement needs                                    |
+| Component                                     | Reason                                                                        |
+| --------------------------------------------- | ----------------------------------------------------------------------------- |
+| `start.md`                                    | Project-type-specific orientation                                             |
+| `analyze.md`                                  | Project-type-specific research framework                                      |
+| `vet.md` (COC archetype flavor: `redteam.md`) | Project-type-specific testing approach                                        |
+| Archetype-specific agents                     | SDK agents don't apply to governance; governance agents don't apply to coding |
+| Archetype-specific skills                     | Domain knowledge is project-specific                                          |
+| Archetype-specific rules                      | Different strictness levels and concerns                                      |
+| Project-specific hooks                        | Different validation and enforcement needs                                    |
 
 ## How to Propagate
 
@@ -54,13 +54,13 @@ git diff --name-only HEAD~N -- .claude/commands/ .claude/guides/ .claude/rules/
 
 For each modified file, determine:
 
-- **Shared structure change** (e.g., new workflow step in implement.md) → Propagate to all repos
-- **Terrene-specific content change** (e.g., new governance agent in implement.md agent teams) → Do not propagate
+- **Shared structure change** (e.g., new workflow step in `execute.md`, the COC archetype's `implement.md`) → Propagate to all repos
+- **Terrene-specific content change** (e.g., new governance agent in `execute.md` agent teams) → Do not propagate
 - **New shared component** (e.g., new guide) → Propagate to all repos
 
 ### Step 3: Apply changes
 
-**For shared structure changes** (like adding completion evidence to implement.md):
+**For shared structure changes** (like adding completion evidence to `execute.md`):
 
 1. Read the target repo's version of the file
 2. Identify the insertion point (same section structure)

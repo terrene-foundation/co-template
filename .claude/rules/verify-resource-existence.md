@@ -97,6 +97,18 @@ by inspecting the document that makes it.)
 
 MUST NOT recommend creating or obtaining a credential (an access token, a service account, a key) before the existence check has run.
 
+```markdown
+# DO:
+
+403 on the resource → first run the existence check; recommend a credential
+only if the check confirms the resource is there.
+
+# DO NOT:
+
+403 on the resource → "request a broader token and retry." (the resource may
+be gone; the new credential unlocks nothing.)
+```
+
 **Why:** Obtaining a credential is operator-time-expensive and error-prone. Spending that time on a non-existent target is the worst-case waste — the operator does real work to obtain access that unlocks nothing.
 
 ### 2. No Second Loop on the Permission Axis Without Re-Verifying Existence
@@ -120,6 +132,16 @@ signal that permission is the wrong axis. Check existence.)
 ### 3. No Same-Document Self-Attestation of a Convergence Verdict
 
 MUST NOT assert a convergence verdict in the very document that makes the convergence claim. The receipt MUST be external — a journal entry or a commit SHA — per MUST Rule 4.
+
+```markdown
+# DO:
+
+"Convergence reached — receipt: journal/0014-DISCOVERY § round-history table."
+
+# DO NOT:
+
+"Convergence reached." (asserted in the same disposition doc; no external receipt.)
+```
 
 **Why:** Same-document self-attestation is structurally identical to "the documentation says this resource exists" — neither can be verified by inspecting itself. Convergence is a `/vet` outcome; its evidence lives in the journal, not in the disposition prose.
 

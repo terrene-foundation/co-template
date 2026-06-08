@@ -94,17 +94,48 @@ tightening the underlying skill text]
 
 MUST NOT substitute a cheaper check for a mandated multi-step protocol step without surfacing the decision to the human first.
 
+```markdown
+# DO — surface the substitution before swapping
+
+"The point-by-point coverage read is expensive; I'm considering a cheap
+cross-reference proxy that loses coverage. Skip / substitute / run full / other?"
+
+# DO NOT — swap silently
+
+[runs the cheap proxy, reports it as the coverage result, declares clean]
+```
+
 **Why:** This is the originating failure mode — invisible to readers, propagating as institutional drift across sessions and downstream domains.
 
 ### 2. No Precedent-Based Authorization
 
 MUST NOT cite "an earlier sweep did the same" as authorization for today's substitution.
 
+```markdown
+# DO — re-surface the decision each time
+
+"This step is expensive again; surfacing the substitution for a fresh human call."
+
+# DO NOT — lean on precedent
+
+"Yesterday's sweep substituted this step, so today's can too."
+```
+
 **Why:** The earlier substitution was its own undetected failure; treating it as precedent compounds the gap instead of closing it.
 
 ### 3. No Relabeling the Proxy as the Mandated Result
 
 MUST NOT report a proxy's output under the name of the mandated step it replaced.
+
+```markdown
+# DO — label the proxy by its own name
+
+"Spec coverage: cross-reference proxy passed (full read NOT run). Coverage unverified."
+
+# DO NOT — relabel the proxy as the mandated result
+
+"Spec coverage: clean."
+```
 
 **Why:** Relabeling removes the audit trail that lets the next reader know the mandated step did not run, converting a known shortcut into hidden, unrecoverable institutional knowledge.
 
