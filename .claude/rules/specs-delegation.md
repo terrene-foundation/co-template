@@ -26,13 +26,13 @@ When delegating to a specialist, the orchestrator MUST read `_index.md`, select 
 
 ```
 # DO — include spec content in delegation prompt
-Agent(prompt: "Build user schema.\n\nFrom specs/data-model.md:\n[content]\n\nFrom specs/tenant-isolation.md:\n[content]")
+Agent(prompt: "Draft the [deliverable].\n\nFrom specs/[domain-model].md:\n[content]\n\nFrom specs/[constraint-spec].md:\n[content]")
 
 # DO NOT — delegate without specs context
-Agent(prompt: "Build user schema.")
+Agent(prompt: "Draft the [deliverable].")
 ```
 
-**Why:** Specialists without spec context produce intent-misaligned output — e.g., schemas without constraints because requirements weren't communicated (FM-4).
+**Why:** Specialists without spec context produce intent-misaligned output — e.g., a deliverable that omits the documented constraints because the requirements were never communicated (FM-4).
 
 ### 2. Every Spec Edit Triggers a Sibling Re-Derivation Sweep
 

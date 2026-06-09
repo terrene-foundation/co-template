@@ -56,6 +56,8 @@ Every `MUST` or `MUST NOT` clause MUST include a concrete example showing both t
 
 **Why:** Without examples, the agent reconstructs meaning from context and gets it wrong at edges. The example is the unambiguous anchor.
 
+**Exemption:** a clause whose correct-vs-blocked distinction is degenerate — an abstract structural requirement where a DO/DO NOT pair would merely restate the clause — MAY carry only its `**Why:**` line. Rules 3–6 here, and `cc-artifacts.md` Rule 4, are themselves such clauses. When instruction-vs-restatement is in doubt, include the example.
+
 ### 4. Every MUST Clause Has A `**Why:**` Line
 
 Every `MUST` and `MUST NOT` clause MUST be followed by a `**Why:**` line (2 sentences max) explaining the failure mode the rule prevents.
@@ -64,7 +66,7 @@ Every `MUST` and `MUST NOT` clause MUST be followed by a `**Why:**` line (2 sent
 
 ### 5. Rules Are Path-Scoped Unless Truly Universal
 
-Every rule MUST include `paths:` YAML frontmatter scoping it to the file patterns where it applies. Only rules that apply universally (`communication`, `git`, `security`, `independence`) may omit `paths:`.
+Every rule MUST include `paths:` YAML frontmatter scoping it to the file patterns where it applies. Only rules that apply universally (`communication`, `git`, `independence`) may omit `paths:`.
 
 **Why:** Rules without `paths:` pay full token cost in every session's baseline. Rules with `paths:` load once per session on first matching file read. Wide patterns (`**/*.py`) are fine.
 

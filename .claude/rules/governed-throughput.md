@@ -14,6 +14,8 @@ Origin: inbound sync from loom 2026-06-05 — lifts the three-layer governed-par
 
 These rules apply whenever an orchestrator delegates work to parallel or orchestrated subagents — during `/analyze`, `/execute`, or `/vet` on any CO workflow, in any domain (research, governance, education, finance, codegen).
 
+The `claude-code-architect` subagent named in the merge-gate examples below is **atelier's** concrete reviewer roster. A downstream repo that loads this synced rule substitutes its own equivalent — some co-\* repos ship a reduced roster; map the named reviewer to a local agent with the matching capability (consistent with `rules/delegation-orchestration.md` Scope and `rules/execution-discipline.md` § Gate-Level Reviews).
+
 A parallel subagent runs LEAN by default: its delegation prompt carries the task and the tool/skill listing, NOT the repo's rule corpus. Subagents do NOT auto-inherit the rules the orchestrator operates under. The obligation to convey governance is the ORCHESTRATOR's. This is by design — lean prompts produce the highest-quality raw output, and over-injecting the full corpus measurably degrades it. The job is to add back ONLY the load-bearing invariants the orchestrator is accountable for, and to keep a full-context review at the merge as the quality backstop.
 
 ### The three layers

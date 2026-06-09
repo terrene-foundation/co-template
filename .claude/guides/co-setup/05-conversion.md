@@ -4,15 +4,15 @@ CO applications ship in two formats: Claude Code CLI (`.claude/`) and Cowork Plu
 
 ## The Two Formats
 
-| Aspect | CLI (`.claude/`) | Plugin (`plugin/`) |
-|--------|-------------------|--------------------|
-| Runtime | Claude Code (terminal) | Claude Desktop Cowork |
-| Commands | `.claude/commands/{name}.md` | `plugin/skills/{name}/SKILL.md` |
-| Invocation | `/analyze` | `/plugin-name:analyze` |
-| Agents | `.claude/agents/` | `plugin/agents/` (identical) |
-| Rules | `.claude/rules/` | Not packaged |
-| Hooks | Full support | Not available |
-| Manifest | None | `.claude-plugin/plugin.json` |
+| Aspect     | CLI (`.claude/`)             | Plugin (`plugin/`)              |
+| ---------- | ---------------------------- | ------------------------------- |
+| Runtime    | Claude Code (terminal)       | Claude Desktop Cowork           |
+| Commands   | `.claude/commands/{name}.md` | `plugin/skills/{name}/SKILL.md` |
+| Invocation | `/analyze`                   | `/plugin-name:analyze`          |
+| Agents     | `.claude/agents/`            | `plugin/agents/` (identical)    |
+| Rules      | `.claude/rules/`             | Not packaged                    |
+| Hooks      | Full support                 | Not available                   |
+| Manifest   | None                         | `.claude-plugin/plugin.json`    |
 
 ## The Conversion Tool
 
@@ -43,15 +43,15 @@ scripts/co-convert.sh status    # Show what exists in each format
 
 ## What Gets Converted
 
-| Component | Converted? | How |
-|-----------|-----------|-----|
-| Commands/Skills | Yes | File structure + reference transformation |
-| Agents | Yes | Direct copy (identical content) |
-| plugin.json | Generated | Created with defaults if missing |
-| plugin/CLAUDE.md | Generated | Skills table, agents table, absolute directives |
-| Rules | No | Plugin format doesn't support rules |
-| Hooks | No | Cowork doesn't support hooks |
-| Root CLAUDE.md | No | Maintained separately (too complex to auto-generate) |
+| Component        | Converted? | How                                                  |
+| ---------------- | ---------- | ---------------------------------------------------- |
+| Commands/Skills  | Yes        | File structure + reference transformation            |
+| Agents           | Yes        | Direct copy (identical content)                      |
+| plugin.json      | Generated  | Created with defaults if missing                     |
+| plugin/CLAUDE.md | Generated  | Skills table, agents table, absolute directives      |
+| Rules            | No         | Plugin format doesn't support rules                  |
+| Hooks            | No         | Cowork doesn't support hooks                         |
+| Root CLAUDE.md   | No         | Maintained separately (too complex to auto-generate) |
 
 ## Reference Transformation
 

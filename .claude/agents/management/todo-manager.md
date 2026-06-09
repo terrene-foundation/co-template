@@ -30,6 +30,8 @@ phase: analyze | plan | execute | vet | codify | deliver
 created: YYYY-MM-DD
 ---
 
+> The `phase:` value tracks the canonical **command** (`/vet`), not the CO phase **name** ("Review" for Phase 04, per `rules/domain-independence.md` § Six-Phase Naming). gh-manager milestones use the phase name — map `phase: vet` ↔ milestone "Review".
+
 ## Description
 
 What needs to be done and why.

@@ -118,7 +118,7 @@ Pointers to full documentation.
 
 When this rule applies (all files, specific directories, specific file types).
 
-## MUST Rules (or RECOMMENDED Rules)
+## MUST Rules
 
 ### 1. Rule Name
 
@@ -140,8 +140,8 @@ When this rule doesn't apply.
 
 ### Best Practices
 
-- **Coding repos use MUST/MUST NOT** — strict enforcement for production code
-- **Non-coding repos use RECOMMENDED/SHOULD** — softer enforcement for governance work
+- **Load-bearing clauses use MUST/MUST NOT in every domain** — per `rules/rule-authoring.md` MUST §1; "should"/"prefer" are BLOCKED as the primary modal regardless of domain (governance is not lower-stakes than codegen)
+- **RECOMMENDED/SHOULD is reserved for genuinely optional guidance** — never a downgrade of a load-bearing rule (put it in a separate `## SHOULD Rules` section)
 - **Scope section is critical** — without it, rules apply everywhere and cause friction
 - **Include examples** — abstract rules are hard to follow; concrete examples are clear
 - **Keep rules independent** — each rule file should be self-contained

@@ -17,7 +17,7 @@ These rules apply to ALL phases of any CO workflow, ALL agents, ALL artifacts. A
 
 ### 1. Fix What You Discover, This Run
 
-If you found it, you own it. By default, a pre-existing failure, broken cross-reference, or stale citation discovered mid-task MUST be fixed in THIS run — not deferred, not logged, not acknowledged-only. This default has exactly ONE bounded carve-out — the named **Exception** at the end of this clause (user says skip, OR the fix needs an out-of-authority decision); absent that carve-out, the fix is unconditional. The default and the Exception are not in tension: the default governs every discovery, and the Exception is the only path that converts "fix it now" into "surface the choice + track a todo" — never into silent dismissal.
+If you found it, you own it. By default, a pre-existing failure, broken cross-reference, or stale citation discovered mid-task MUST be fixed in THIS run — not deferred, not logged, not acknowledged-only. This default has exactly ONE bounded carve-out — the named **Exception** at the end of this clause (user says skip; the fix needs an out-of-authority decision; OR the same-class fix exceeds the shard budget); absent that carve-out, the fix is unconditional. The default and the Exception are not in tension: the default governs every discovery, and the Exception is the only path that converts "fix it now" into "surface the choice + track a todo" — never into silent dismissal.
 
 ```markdown
 # DO:
@@ -42,7 +42,7 @@ flagging for later." (acknowledgement without a fix)
 
 **Why:** Deferring creates a ratchet — every session inherits more unresolved defects, and "pre-existing" becomes the institutional excuse that defers every fix forever. The marginal cost of fixing a dead cross-reference the moment you see it is near zero; the cost of letting it propagate to every downstream domain on next sync is not.
 
-**Exception (the one bounded carve-out to the default above):** The fix-it-now default holds UNLESS one of exactly two conditions applies — (1) the user explicitly says "skip this," OR (2) the fix requires a decision outside your authority (e.g., deleting a referenced artifact rather than repairing the reference). When a carve-out condition applies, you do NOT defer silently: you surface the specific choice with a recommendation AND open a tracked todo, which is itself an action taken in THIS run. The carve-out narrows WHAT you do (surface + track instead of repair); it never licenses doing nothing. Silent dismissal — naming or logging the defect with no surfaced choice and no tracked todo — is the BLOCKED behavior above and is NOT covered by this carve-out.
+**Exception (the one bounded carve-out to the default above):** The fix-it-now default holds UNLESS one of exactly three conditions applies — (1) the user explicitly says "skip this," (2) the fix requires a decision outside your authority (e.g., deleting a referenced artifact rather than repairing the reference) — OR (3) the same-class fix exceeds the shard budget (`rules/autonomous-execution.md` MUST §3/§6), in which case the gap is a new shard: surface it and open a tracked todo rather than overflow this run. When a carve-out condition applies, you do NOT defer silently: you surface the specific choice with a recommendation AND open a tracked todo, which is itself an action taken in THIS run. The carve-out narrows WHAT you do (surface + track instead of repair); it never licenses doing nothing. Silent dismissal — naming or logging the defect with no surfaced choice and no tracked todo — is the BLOCKED behavior above and is NOT covered by this carve-out.
 
 ### 2. "Pre-Existing" Is Unprovable After a Context Boundary
 
@@ -91,5 +91,6 @@ Fix the defect, then record it in the deliverable's notes as resolved.
 
 - `rules/no-stubs.md` — placeholder, stub, and incomplete-content prohibitions (the discovery-time analogue for content you author rather than inherit)
 - `rules/execution-discipline.md` — draft/integrate split and cross-reference integrity at phase boundaries
+- `rules/autonomous-execution.md` MUST §6 — a same-class gap that exceeds the shard budget is Exception condition (3): file the follow-up as a new shard rather than overflow this run
 
 Enforcement is review-layer: `/vet` Step 5 (cross-reference integrity sweep) catches inherited dead references that this rule requires fixing on discovery.

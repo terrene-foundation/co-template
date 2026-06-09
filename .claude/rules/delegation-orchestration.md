@@ -16,6 +16,8 @@ Origin: inbound sync from loom 2026-06-05 — lifts the agent-orchestration core
 
 These rules apply whenever an orchestrator decomposes work across subagents — during `/analyze`, `/execute`, `/vet`, and any phase that dispatches specialists. They sit beside `rules/execution-discipline.md` (spec coverage, context anchoring, gate-level reviews) and `rules/subagent-delegation-verification.md` (the full post-exit verification protocol).
 
+The `subagent_type` names in the examples below (`analyst`, `intermediate-reviewer`, …) are **atelier's** concrete agent roster. A downstream repo that loads this synced rule substitutes its own roster — some co-\* repos ship a reduced set; map each named type to a local agent with the matching capability.
+
 ## MUST Rules
 
 ### 1. Decompose Onto Parallel Delegation By Default When the Work Earns It

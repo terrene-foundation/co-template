@@ -96,7 +96,7 @@ Atelier IMPLEMENTS Foundation-published methodology. Atelier is NOT a Foundation
 
 ### 5. Foundation-Owned Products MAY Be Named; Proprietary Variants MUST NOT
 
-A product that shares a brand with a Foundation-owned one is NOT automatically nameable — classify by OWNERSHIP, not brand. Per `terrene-naming.md` § License Accuracy: **Foundation-owned open-source** products (Kailash Python, EATP SDK, CO Toolkit — Apache 2.0) MAY be named in canonical artifacts; **proprietary third-party** products (e.g. Kailash RS, the "Kailash SDK" — classified Proprietary at `agents/gold-standards-validator.md`) MUST NOT appear in canonical methodology artifacts. **Carve-out:** the naming-authority artifacts — `terrene-naming.md`, this rule's own DO-NOT examples, and the `gold-standards-validator` checklist — MAY name a proprietary product solely to CLASSIFY it; naming-to-classify is not naming-to-couple.
+A product that shares a brand with a Foundation-owned one is NOT automatically nameable — classify by OWNERSHIP, not brand. Per `terrene-naming.md` § License Accuracy: **Foundation-owned open-source** products (Kailash Python, EATP SDK, CO Toolkit — Apache 2.0) MAY be named in canonical artifacts; **proprietary third-party** products (e.g. Kailash RS — classified Proprietary at `agents/gold-standards-validator.md`; and any proprietary "Kailash SDK" variant) MUST NOT appear in canonical methodology artifacts. **Carve-out:** the naming-authority artifacts — `terrene-naming.md`, this rule's own DO-NOT examples, and the `gold-standards-validator` checklist — MAY name a proprietary product solely to CLASSIFY it; naming-to-classify is not naming-to-couple.
 
 ```markdown
 # DO — name the Foundation product; describe a proprietary variant by role, not brand
@@ -115,7 +115,7 @@ A product that shares a brand with a Foundation-owned one is NOT automatically n
 - "Naming the variant just documents the sync topology, it isn't coupling"
 - "The classifier names it, so any artifact may"
 
-**Why**: Without a written ownership test, "may I name this product here?" is a per-artifact judgment call — two reviewers split on exactly this (`artifact-flow.md`'s proprietary-name use passed one and failed another). Pinning the test to Foundation-ownership-vs-proprietary makes the boundary mechanically checkable and stops a proprietary variant riding a Foundation brand into every downstream domain on next sync.
+**Why**: Without a written ownership test, "may I name this product here?" is a per-artifact judgment call — two reviewers split on exactly this — the proprietary-name use that USED to appear in `artifact-flow.md` (since de-vendored) passed one reviewer and failed another. Pinning the test to Foundation-ownership-vs-proprietary makes the boundary mechanically checkable and stops a proprietary variant riding a Foundation brand into every downstream domain on next sync.
 
 Origin: workspace `atelier-1.5.1-redteam` journal/0002 (the A2-001-confirmed / A2-002-refuted verifier split on naming "Kailash") + journal/0003 (codify gate A2-003).
 

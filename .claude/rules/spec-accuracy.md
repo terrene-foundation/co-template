@@ -45,9 +45,9 @@ Spec sections MUST NOT use "Phase-1 / Phase-2", "Promised / Current", "Target / 
 ```markdown
 # DO — describe what is real today, full stop
 
-| Phase | Canonical command | Workspace dir |
-| ----- | ----------------- | ------------- |
-| Vet   | /vet              | 04-vet/       |
+| Phase  | Canonical command | Workspace dir |
+| ------ | ----------------- | ------------- |
+| Review | /vet              | 04-vet/       |
 
 # DO NOT — split-state column
 
@@ -187,10 +187,10 @@ specs/phase-model.md says: "§7 Reconcile phase: sweeps cross-repo drift." (not 
 2. **Append-only `## §X Change log`** sections describing PAST transitions in past tense.
 3. **`§X [reserved for future work]`** section-numbering anchors with ZERO prose content (numbering placeholder only — no description).
 
-## Audit Protocol (runs in /vet)
+## Audit Protocol (checked at /vet)
 
-1. **Split-state framing scan** — grep spec content for `phase-?1.*phase-?2`, `promised.*current`, `scaffold.*later`, `TBD`, `to.be.wired`, `follow-?up`, `pending`. Zero matches required; any hit is HIGH.
-2. **Citation resolution** — every cited artifact path, section anchor, or cross-reference must resolve via `grep` / `find` against the real deliverable. Any unresolved citation is CRITICAL.
+1. **Split-state framing scan** — grep spec content for `phase-?1.*phase-?2`, `promised.*current`, `scaffold.*later`, `TBD`, `to.be.wired`, `follow-?up`, `pending`. Zero matches required; any hit is HIGH. (This phase the scan is covered by the `/vet` reviewer's judgment plus the no-stubs placeholder check at convergence-criterion #7; a dedicated mechanical split-state grep step in `commands/vet.md` is designed-not-yet-wired.)
+2. **Citation resolution** — every cited artifact path, section anchor, or cross-reference must resolve via `grep` / `find` against the real deliverable. Any unresolved citation is CRITICAL. (Mechanically run at `commands/vet.md` Step 1.3-1.4 + Step 5 cross-reference integrity.)
 
 ## Migration For Existing Violations
 

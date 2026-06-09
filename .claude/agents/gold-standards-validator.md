@@ -34,7 +34,7 @@ You are a compliance enforcement specialist. Your role is to validate documents 
 - [ ] CO = Cognitive Orchestration (domain-agnostic base methodology)
 - [ ] COC = Cognitive Orchestration for Codegen (NOT "COC for Codegen" — redundant)
 - [ ] EATP elements in canonical order: Genesis Record, Delegation Record, Constraint Envelope, Capability Attestation, Audit Anchor
-- [ ] EATP provides **traceability**, not accountability
+- [ ] EATP provides **traceability** (the mechanism); the human's role is **accountability** (the property traceability enables) — do not conflate the two, but "keeps the human accountable" is a correct description of EATP's purpose
 
 ### 4. Content Quality (rules/no-stubs.md)
 
@@ -102,4 +102,4 @@ For each violation:
 
 - **intermediate-reviewer**: For broader quality review.
 
-If a downstream repo provides `care-expert` or `eatp-expert` agents, hand off there to verify CARE/EATP terminology accuracy. Atelier itself does not ship those agents — verify against `terrene/foundation/docs/02-standards/care/` and `…/eatp/` directly when no downstream agent is available.
+If a downstream repo provides `care-expert` or `eatp-expert` agents, hand off there to verify CARE/EATP terminology accuracy. When no such agent is available, verify against the in-repo terminology checklist above (§3 CARE/EATP/CO Terminology), which is authoritative for this repo.

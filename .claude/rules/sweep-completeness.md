@@ -24,7 +24,7 @@ The substitution decision is the trigger. The human is the gate.
 
 ### 1. Substitution Decision Triggers a Human Gate
 
-When the agent identifies a mandated step as too expensive to run inline AND the skill/command/rule does not explicitly authorize the substitution, the agent MUST stop and surface to the human: WHICH step is being skipped, WHY (cost / time / "needs a separate trigger"), WHAT proxy is being considered, WHAT coverage is lost, and ASK: skip / substitute / run-full-step / different-approach.
+When the agent identifies a mandated step as too expensive to run inline AND the skill/command/rule does not explicitly authorize the substitution, the agent MUST stop and surface to the human: WHICH step is being skipped, WHY (cost / time / "needs a separate trigger"), WHAT proxy is being considered, WHAT coverage is lost, a RECOMMENDED disposition with its rationale (per `rules/recommendation-quality.md` MUST §1 — never a bare menu), and then ASK: skip / substitute / run-full-step / different-approach.
 
 ```markdown
 # DO — surface the substitution decision
@@ -33,8 +33,10 @@ The `/vet` spec-coverage step says "verify each deliverable fulfills its
 brief point-by-point." That is a full adversarial read (~15 min). I'm
 considering substituting a cross-reference check (~1s) that confirms every
 cited section resolves — it does NOT verify the deliverable actually
-covers what the brief specified. Skip / substitute / run full step /
-different approach?
+covers what the brief specified. I recommend running the full read: the
+proxy cannot verify coverage, so a missed gap ships as a false "clean";
+the trade-off is ~15 min vs ~1s. Run full step / substitute the proxy /
+skip / different approach?
 
 # DO NOT — silent substitution
 
