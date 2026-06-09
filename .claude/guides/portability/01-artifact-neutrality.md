@@ -238,4 +238,4 @@ Scope reminder: this discipline governs _workspace artifacts_ a future session i
 
 ## Navigation
 
-- **Home**: [README.md](../README.md)
+- **Home**: [README.md](README.md)

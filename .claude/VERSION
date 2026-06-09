@@ -1,15 +1,28 @@
 {
-  "version": "1.5.2",
+  "version": "1.5.3",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-06-08",
+  "released": "2026-06-09",
   "upstream": {
     "name": "co",
     "repo": "terrene-foundation/co",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "version_url": "https://raw.githubusercontent.com/terrene-foundation/co/main/.claude/VERSION"
   },
   "changelog": [
+    {
+      "version": "1.5.3",
+      "date": "2026-06-09",
+      "summary": "Non-held delta resync from atelier 1.5.3 — propagate the corpus-wide naming/phase sweeps (co/→atelier, Loom/→loom; Phase-04 'Vet'→'Review') and the F7 roster-genericization across the shared CC/CO artifacts. 27 files updated (21 verbatim + 6 adapted to scrub references to held-cluster rules absent here). Held cluster + the 8 customized phase-commands still held (GH atelier#15).",
+      "changes": [
+        "UPDATED verbatim (21): rules artifact-flow, delegation-orchestration, domain-independence, governed-throughput, independence, no-stubs, recommendation-quality, rule-authoring, spec-accuracy, specs-authority, specs-delegation, sweep-completeness; guides co-setup/{03-creating-components,05-conversion,09-proposal-protocol}, model-optimization/01-model-selection-by-task; agents management/{gh-manager,todo-manager}; commands/journal; skills cc-orchestration-patterns, co-reference — co-template tracked atelier 1.5.2 byte-for-byte for these, so the 1.5.3 delta applied cleanly",
+        "ADAPTED (6, held-ref scrub): resolve-on-discovery (kept the new shard-budget Exception condition 3 + autonomous-execution xref; dropped the repo-scope-discipline cross-repo weave); execution-discipline (kept the /codify-MUST gate via cc-enforcement §1; dropped the self-referential-codify clause); gold-standards-validator (kept CARE/EATP traceability-vs-accountability nuance; rewrote the care-expert handoff to drop orchestration-root + repo-scope-discipline mechanics); start (Phase-04 Vet→Review + codify/deliver stop annotations; rules-index line de-counted and held rules dropped); claude-code-architect (added command-/skill-authoring bullet, dropped absent hook-authoring); portability/01-artifact-neutrality (Home-link ../README.md→README.md)",
+        "HELD (8 customized phase-commands, GH atelier#15): analyze, autonomize, cc-audit, codify, deliver, execute, plan, vet — co-template maintains its own simpler versions; the atelier 1.5.3 deltas touch lines absent in co-template's copies and need a per-command three-way merge, not a propagation",
+        "STILL HELD (unchanged from 1.5.2, GH atelier#15): rules trust-posture, hook-output-discipline, journal-author-discipline, repo-scope-discipline, self-referential-codify; skills hook-authoring, trust-posture; agent management/settings-manager; all .claude/hooks/ — wire into a hook substrate co-template lacks",
+        "VERIFIED: synced set greps clean for references to the 5 absent held rules + hook-authoring skill + settings-manager (no dangling cross-references introduced)",
+        "NOTE: upstream.name/repo/version_url still read 'co' (atelier's historical name); the URL-metadata rename to 'atelier' is deferred — it points to a GitHub raw URL whose live name was not verifiable from the sync session. CLAUDE.md left untouched (configurable template, never overwritten)"
+      ]
+    },
     {
       "version": "1.5.2",
       "date": "2026-06-08",

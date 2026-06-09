@@ -1,8 +1,8 @@
 # Model Selection by Task Category
 
-Claude offers a tiered model family — a stronger, slower tier (Opus), a balanced tier (Sonnet), and a faster, cheaper tier (Haiku). These tiers are not interchangeable. Each has measurable advantages in specific task categories, and the cost and latency difference between them is real money and real waiting time. This guide gives task-category heuristics for choosing a tier, so that the methodology spends the strong model where it earns its premium and the fast model where it would only burn tokens and time.
+A capable agentic runtime typically offers a tiered model family — a stronger, slower tier, a balanced tier, and a faster, cheaper tier. These tiers are not interchangeable. Each has measurable advantages in specific task categories, and the cost and latency difference between them is real money and real waiting time. This guide gives task-category heuristics for choosing a tier, so that the methodology spends the strong model where it earns its premium and the fast model where it would only burn tokens and time.
 
-**Origin**: distilled from a model-comparison study of the Claude family across task categories. The numbers age as models version; the heuristic — match the task category to the tier whose strengths the task actually exercises — does not. Treat specific benchmark figures below as illustrative of the _shape_ of the gap, not as a fixed contract.
+**Origin**: distilled from a model-comparison study across a tiered model family. The numbers age as models version; the heuristic — match the task category to the tier whose strengths the task actually exercises — does not. Treat specific benchmark figures below as illustrative of the _shape_ of the gap, not as a fixed contract.
 
 ## The Core Principle
 

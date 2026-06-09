@@ -22,7 +22,7 @@ Canonical artifacts (anything in `.claude/`) MUST NOT contain:
 ```markdown
 # DO:
 
-"Phase 04 (Vet) produces a spec-coverage report at `04-vet/.spec-coverage`."
+"Phase 04 (Review) produces a spec-coverage report at `04-vet/.spec-coverage`."
 
 # DO NOT:
 

@@ -11,7 +11,7 @@ Origin: atelier 1.0.0 baseline (commit 16c4f69) — load-bearing for atelier's r
 
 ## Scope
 
-These rules apply to ALL artifacts at co/ (the root repo). Domain repos have their own domain-specific rules.
+These rules apply to ALL artifacts at atelier (the root methodology repo). Domain repos have their own domain-specific rules.
 
 ## MUST Rules
 
@@ -30,7 +30,7 @@ CC and CO artifacts must work for ANY domain: research, finance, compliance, edu
 "The human reviews the citations" (assumes research)
 ```
 
-**Why**: co/ is the methodology hub. Domain-specific language belongs in domain repos.
+**Why**: atelier is the methodology hub. Domain-specific language belongs in domain repos.
 
 ### 2. Template Placeholders
 
@@ -61,7 +61,7 @@ CO defines a standard six-phase workflow with canonical commands. The phase **na
 | 05    | Codify     | `/codify`         | `05-codify/` + `.claude/` | learn (pre-v1.2 name), evolve            |
 | 06    | Deliver    | `/deliver`        | `06-deliver/` → recipient | publish, release, deploy, submit         |
 
-**Phase 04**: name is "Review" but canonical command is `/vet` because Claude Code reserves `/review` and the collision causes contention. Phase 04 produces finalized output, promoted from `04-vet/` to `06-deliver/` on convergence.
+**Phase 04**: name is "Review" but canonical command is `/vet` because Claude Code reserves `/review` and the collision causes contention. Phase 04 produces finalized output, promoted on convergence to wherever the domain's deliverable lives — `06-deliver/` when the deliverable is a document, or directly to the canonical artifact location otherwise. In atelier, whose deliverable IS a `.claude/` artifact, `/vet` promotes from `04-vet/` to canonical `.claude/`.
 
 **Phase 05**: renamed from "Learn" to "Codify" in CO v1.2 because the verb describes what the phase actually does — modify validated patterns into canonical practice. Phase 05 has TWO output targets: `05-codify/` for the codification log and intermediate proposals (audit trail), and `.claude/` for the canonical codified artifacts. Per-proposal human approval is REQUIRED.
 

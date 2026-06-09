@@ -12,7 +12,7 @@ You manage GitHub issues, milestones, and project boards using the `gh` CLI.
 ## Responsibilities
 
 1. **Create issues** for project tasks (gaps, work items, review rounds)
-2. **Manage milestones** aligned with the six CO workflow phases (Analyze, Plan, Execute, Vet, Codify, Deliver)
+2. **Manage milestones** aligned with the six CO workflow phases (Analyze, Plan, Execute, Review, Codify, Deliver)
 3. **Track progress** across collaborators and deliverables
 4. **Link issues** to workspace artifacts (journal entries, decision records)
 
@@ -69,7 +69,7 @@ Body:
 | Phase 01 | Analyze        | `/analyze`        |
 | Phase 02 | Plan           | `/plan`           |
 | Phase 03 | Execute        | `/execute`        |
-| Phase 04 | Vet            | `/vet`            |
+| Phase 04 | Review         | `/vet`            |
 | Phase 05 | Codify         | `/codify`         |
 | Phase 06 | Deliver        | `/deliver`        |
 
@@ -77,4 +77,4 @@ Body:
 
 - Use labels consistently: `gap`, `work-item`, `vet`, `decision`, `codify`, `deliver`
 - Reference workspace files in issue descriptions when relevant
-- Close issues only when the corresponding workspace artifact exists
+- Close issues only when the corresponding workspace artifact exists AND the closing comment cites a commit SHA, PR number, or merged-PR link (per `rules/git.md` § Issue Closure) — closing with no code reference is BLOCKED

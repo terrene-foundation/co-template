@@ -4,15 +4,15 @@ CO applications ship in two formats: Claude Code CLI (`.claude/`) and Cowork Plu
 
 ## The Two Formats
 
-| Aspect | CLI (`.claude/`) | Plugin (`plugin/`) |
-|--------|-------------------|--------------------|
-| Runtime | Claude Code (terminal) | Claude Desktop Cowork |
-| Commands | `.claude/commands/{name}.md` | `plugin/skills/{name}/SKILL.md` |
-| Invocation | `/analyze` | `/plugin-name:analyze` |
-| Agents | `.claude/agents/` | `plugin/agents/` (identical) |
-| Rules | `.claude/rules/` | Not packaged |
-| Hooks | Full support | Not available |
-| Manifest | None | `.claude-plugin/plugin.json` |
+| Aspect     | CLI (`.claude/`)             | Plugin (`plugin/`)              |
+| ---------- | ---------------------------- | ------------------------------- |
+| Runtime    | Claude Code (terminal)       | Claude Desktop Cowork           |
+| Commands   | `.claude/commands/{name}.md` | `plugin/skills/{name}/SKILL.md` |
+| Invocation | `/analyze`                   | `/plugin-name:analyze`          |
+| Agents     | `.claude/agents/`            | `plugin/agents/` (identical)    |
+| Rules      | `.claude/rules/`             | Not packaged                    |
+| Hooks      | Full support                 | Not available                   |
+| Manifest   | None                         | `.claude-plugin/plugin.json`    |
 
 ## The Conversion Tool
 
@@ -43,15 +43,15 @@ scripts/co-convert.sh status    # Show what exists in each format
 
 ## What Gets Converted
 
-| Component | Converted? | How |
-|-----------|-----------|-----|
-| Commands/Skills | Yes | File structure + reference transformation |
-| Agents | Yes | Direct copy (identical content) |
-| plugin.json | Generated | Created with defaults if missing |
-| plugin/CLAUDE.md | Generated | Skills table, agents table, absolute directives |
-| Rules | No | Plugin format doesn't support rules |
-| Hooks | No | Cowork doesn't support hooks |
-| Root CLAUDE.md | No | Maintained separately (too complex to auto-generate) |
+| Component        | Converted? | How                                                  |
+| ---------------- | ---------- | ---------------------------------------------------- |
+| Commands/Skills  | Yes        | File structure + reference transformation            |
+| Agents           | Yes        | Direct copy (identical content)                      |
+| plugin.json      | Generated  | Created with defaults if missing                     |
+| plugin/CLAUDE.md | Generated  | Skills table, agents table, absolute directives      |
+| Rules            | No         | Plugin format doesn't support rules                  |
+| Hooks            | No         | Cowork doesn't support hooks                         |
+| Root CLAUDE.md   | No         | Maintained separately (too complex to auto-generate) |
 
 ## Reference Transformation
 
@@ -72,8 +72,4 @@ Use `--no-refs` to skip this transformation.
 
 ## Detailed Documentation
 
-For comprehensive documentation, see the [Conversion Guide](../conversion/README.md):
-
-- [01 - The Two Formats](../conversion/01-the-two-formats.md) — Detailed format comparison
-- [02 - Using co-convert](../conversion/02-using-co-convert.md) — All commands and workflows
-- [03 - Reference Transformation](../conversion/03-reference-transformation.md) — How references are matched and transformed
+The full conversion-guide subtree — `conversion/README.md`, `01-the-two-formats.md` (detailed format comparison), `02-using-co-convert.md` (all commands and workflows), and `03-reference-transformation.md` (how references are matched and transformed) — ships in repos that bundle the co-convert tooling (co-template and the domain repos). It is **not** present in atelier itself, so those links are not reproduced here as if local; consult `conversion/` in a repo that includes it. (Whether the subtree should also live in atelier is tracked as GH #13.)

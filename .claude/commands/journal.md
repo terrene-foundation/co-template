@@ -17,7 +17,7 @@ Parse `$ARGUMENTS`:
 
 1. Determine the active workspace:
    - If working in a workspace, use it
-   - Otherwise, use the most recently modified directory under `workspaces/` (excluding `_template/`)
+   - Otherwise, use the most recently modified directory under `workspaces/` (excluding `_template/` and `_archive/`)
 
 2. In the workspace's `journal/` directory:
    - Count total entries

@@ -17,14 +17,14 @@ Atelier is NOT a codegen shop. It produces methodology — agents, skills, rules
 
 You direct the AI to do CO methodology work. That work follows 6 phases:
 
-| #   | Phase   | Command    | What happens                                                                |
-| --- | ------- | ---------- | --------------------------------------------------------------------------- |
-| 1   | Analyze | `/analyze` | Research the problem space. Surface findings and gaps. No decisions yet.    |
-| 2   | Plan    | `/plan`    | Decompose findings into approved tasks. **STOPS for your approval.**        |
-| 3   | Execute | `/execute` | Draft artifacts one task at a time, with verification.                      |
-| 4   | Vet     | `/vet`     | Spec coverage + adversarial review. Promotes drafts to canonical artifacts. |
-| 5   | Codify  | `/codify`  | Extract reusable patterns into atelier's own .claude/ for future runs.      |
-| 6   | Deliver | `/deliver` | Package the work and identify which downstream syncs are needed.            |
+| #   | Phase   | Command    | What happens                                                                                   |
+| --- | ------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| 1   | Analyze | `/analyze` | Research the problem space. Surface findings and gaps. No decisions yet.                       |
+| 2   | Plan    | `/plan`    | Decompose findings into approved tasks. **STOPS for your approval.**                           |
+| 3   | Execute | `/execute` | Draft artifacts one task at a time, with verification.                                         |
+| 4   | Review  | `/vet`     | Spec coverage + adversarial review. Promotes drafts to canonical artifacts.                    |
+| 5   | Codify  | `/codify`  | Extract reusable patterns into atelier's .claude/. **STOPS for your approval (per proposal).** |
+| 6   | Deliver | `/deliver` | Package the work and identify downstream syncs. **STOPS for your approval.**                   |
 
 Plus cross-cutting commands you'll use along the way:
 
@@ -55,7 +55,7 @@ Run `/ws` to see current status, or jump straight to the next phase command if y
 ## Tips for working with atelier
 
 - **You don't need to write rules yourself.** Describe what you want; the AI proposes the artifacts and you approve.
-- **The plan gate is the only mandatory stop.** Phases 1, 3, 4, 5, 6 run autonomously between gates. Phase 2 (`/plan`) MUST stop for your approval.
+- **Three phases stop for your approval — `/plan` (the plan gate), `/codify` (per proposal — you approve or reject each codification individually), and `/deliver` (final delivery sign-off).** Phases 1, 3, 4 (`/analyze`, `/execute`, `/vet`) run autonomously between those gates, converging on their own quality bar.
 - **The journal is the memory.** Every session should produce journal entries — DECISION, DISCOVERY, TRADE-OFF, RISK, CONNECTION, GAP. This is how knowledge compounds across sessions.
 - **Atelier is the source.** Changes here propagate downstream via `/sync` and `/sync-to-coc`. Take care — what you ship from atelier becomes the canonical reference for every domain that consumes it.
 - **Domain neutrality matters.** Atelier methodology MUST work for codegen, research, finance, education, governance, and any future domain. Per `rules/domain-independence.md`, no domain-specific assumptions in CC/CO artifacts.
@@ -66,6 +66,6 @@ Run `/ws` to see current status, or jump straight to the next phase command if y
 - `.claude/skills/co-reference/` — CO methodology reference (8 principles, 5 layers, 6 phases)
 - `.claude/skills/cc-artifact-patterns/` — CC artifact quality reference
 - `.claude/skills/atelier-broker-model/` — atelier's role in the ecosystem
-- `.claude/rules/` — the enforced rules (artifact-flow, cc-artifacts, communication, domain-independence, execution-discipline, git, independence, journal, no-stubs, rule-authoring, specs-authority, terrene-naming)
+- `.claude/rules/` — the enforced rules (see the **Rules** index in `CLAUDE.md` for the full set). Key governance rules: cc-artifacts, cc-enforcement, execution-discipline, domain-independence, independence, no-stubs, rule-authoring
 
 Start with `/ws` to see current state, then `/analyze` if you have a brief ready.

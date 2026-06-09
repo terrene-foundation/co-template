@@ -67,7 +67,7 @@ Layer 4 (Instructions) is implemented through a six-phase workflow:
 | 05    | Codify  | `/codify`         | `05-codify/` + `.claude/` | Modify validated patterns into canonical practice (per-proposal human approval) |
 | 06    | Deliver | `/deliver`        | `06-deliver/` → recipient | Package and hand off the finalized output                                       |
 
-**Phase 04 (Review)** produces the finalized work. The canonical command is `/vet` because Claude Code reserves `/review`. Vetted artifacts move to `06-deliver/` upon convergence.
+**Phase 04 (Review)** produces the finalized work. The canonical command is `/vet` because Claude Code reserves `/review`. On convergence, vetted artifacts are promoted to wherever the domain's deliverable lives: in atelier (whose deliverable IS a `.claude/` artifact) `/vet` promotes them to canonical `.claude/`; in a domain whose deliverable is a document, they move to `06-deliver/`.
 
 **Phase 05 (Codify)** is unique — it has TWO output targets. Its workspace dir `05-codify/` keeps the codification log and intermediate proposals (audit trail). Its canonical output target is `.claude/` artifacts (agents, skills, rules, commands). This is Principle 7 (Knowledge Compounds) made concrete. Every run makes the system stronger. Proposals require human approval before modifying `.claude/`.
 
@@ -137,4 +137,4 @@ CO = Cognitive Orchestration
 
 ## For Detailed Information
 
-If Foundation source docs exist in this repo, read the CO Core Thesis and CO specification for additional depth. For comprehensive analysis, invoke the **co-expert** agent.
+If Foundation source docs exist in this repo, read the CO Core Thesis and CO specification for additional depth. For comprehensive analysis, invoke a CO-methodology specialist agent if your repo provides one (in atelier: the **co-expert** agent). For how to CONDUCT framework discussions — grounding answers in specs, distinguishing normative from ontological claims, the traceability-vs-accountability distinction — see `behavioral-guidelines.md`.

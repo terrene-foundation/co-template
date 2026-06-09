@@ -4,7 +4,7 @@ How `/codify` creates proposals for upstream review. Proposals track artifact ch
 
 ## Proposal Lifecycle (Domain → Atelier)
 
-**Applies to domain repos** (co-research, co-education, co-governance, and any future co-* repos) that discover methodology improvements. Also applies to Loom proposing CC/CO changes upstream.
+**Applies to domain repos** (co-research, co-education, co-governance, and any future co-\* repos) that discover methodology improvements. Also applies to Loom proposing CC/CO changes upstream.
 
 **Downstream project repos**: SKIP. Artifact changes stay local.
 
@@ -73,7 +73,7 @@ status: pending_review  # reset if was reviewed
 
 ## Loom → Atelier Proposals
 
-**Applies at Loom/.** When `/codify` at Loom produces or modifies CC/CO-tier artifacts, those are proposed upstream to atelier.
+**Applies at loom.** When `/codify` at loom produces or modifies CC/CO-tier artifacts, those are proposed upstream to atelier.
 
 Apply the **same append-not-overwrite logic** as above to `.claude/.proposals/latest.yaml`:
 

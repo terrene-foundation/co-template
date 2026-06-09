@@ -2,7 +2,7 @@
 
 <!-- Deliberately NO paths: frontmatter — this is an always-on universal rule.
      rule-authoring.md MUST §5 requires paths: scoping EXCEPT for rules that
-     "apply universally"; its example allowlist (communication, git, security,
+     "apply universally"; its example allowlist (communication, git,
      independence) is illustrative, not exhaustive. recommendation-quality
      qualifies under that same operative criterion: it governs ALL agent output
      that asks for user direction — any phase, any domain, including pure-
@@ -189,4 +189,4 @@ It depends on the deadline, the quality bar, and your time. Let me know.
 
 **Why:** "It depends" without a pick is a punt — the agent holds the context the user lacks. If it is genuinely the honest answer, the agent MUST name which context resolves the dependency and recommend the path under each branch.
 
-**Enforcement** is review-layer: gate-level reviewers (`intermediate-reviewer`, `claude-code-architect`) check at `/vet` and `/codify` whether each surfaced choice carried a recommendation with implications, symmetric pros/cons, and plain-language framing. Final disposition is human.
+**Enforcement** is review-layer: gate-level reviewers (atelier roster: `intermediate-reviewer` + `claude-code-architect`; a downstream repo that loads this synced rule substitutes its own quality + CC reviewers) check at `/vet` and `/codify` whether each surfaced choice carried a recommendation with implications, symmetric pros/cons, and plain-language framing. Final disposition is human.

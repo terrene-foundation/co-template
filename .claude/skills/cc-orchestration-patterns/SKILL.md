@@ -20,6 +20,13 @@ Use this skill when:
 
 The load-bearing MUST clauses live in the rules; this skill carries the procedural depth — the failure stories, the merge protocols, the throttle signal, the BLOCKED-rationalization corpus — that the orchestrator needs available when it is about to delegate, NOT on every session start.
 
+## Sub-File Index
+
+- `parallel-merge-workflow.md` — the deterministic merge protocol for parallel shards that touch the same file.
+- `worktree-orchestration.md` — isolating concurrent file-mutating shards in separate worktrees.
+- `workflow-orchestration-throughput.md` — the procedural how-to behind Patterns 1–3 (structured-return fragility, resume-from-run, the throttle signal).
+- `closure-parity-specialist-discipline.md` — the full BLOCKED-rationalization corpus + multi-incident evidence behind Pattern 4 (closure-parity).
+
 ## The Four Orchestration Decisions
 
 Every fan-out turns on four decisions. Getting any one wrong produces a recognizable failure.

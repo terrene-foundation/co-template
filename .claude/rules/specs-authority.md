@@ -12,7 +12,7 @@ paths:
 
 The `specs/` directory is the single source of domain truth for a project — detailed specification files organized by the project's own ontology (components, modules, user needs, domains). Phase commands read targeted spec files before acting and update them when domain truth changes. `specs/` is NOT a process artifact (that is what `workspaces/` does): it records WHAT the system is and does, not HOW we are building it. Plans, todos, and journals keep their existing roles.
 
-Origin: Analysis of 6 alignment drift failure modes across CO phase system. Specs/ addresses brief-to-plan lossy compression (FM-1), phase transition context thinning (FM-2), multi-session amnesia (FM-3), agent delegation context loss (FM-4), and silent scope mutation (FM-6).
+Origin: Analysis of 6 alignment drift failure modes across CO phase system. Specs/ addresses brief-to-plan lossy compression (FM-1), phase transition context thinning (FM-2), multi-session amnesia (FM-3), agent delegation context loss (FM-4), incremental mutation divergence (FM-5), and silent scope mutation (FM-6).
 
 ## MUST Rules
 
@@ -66,27 +66,26 @@ Each spec file MUST be comprehensive enough to be the authority on its topic. Ev
 ```markdown
 # DO — detailed authority (names the exact contracts, thresholds, edge cases)
 
-## Login Flow
+## [Process] Authority Flow
 
-1. POST /api/v1/auth/login → validate against bcrypt hash in users table
-2. On success: JWT (RS256, 24h expiry), HttpOnly cookie
-3. On 5th failed attempt: lock account, require email verification
-4. Rate limit: 10 attempts per IP per minute (429)
+1. [Trigger] → validate the input against the recorded authority for this domain
+2. On success: issue the domain's output with its EXACT parameters (format, validity window, scope)
+3. On the Nth failed attempt: apply the domain's lockout rule (the exact threshold + the recovery path)
+4. Throughput limit: N attempts per actor per window, with the exact rejection signal
 
 ## Edge Cases
 
-- Locked + valid password: 423 with unlock instructions
-- Expired JWT mid-request: 401, client redirects; concurrent sessions max 5, oldest evicted
+- Locked + otherwise-valid input: the exact rejection code + recovery instructions
+- Authority expires mid-operation: the exact failure signal + client recovery; concurrent-instance cap N, oldest evicted
 
 # DO NOT — thin summary
 
-## Login Flow
+## [Process] Authority Flow
 
-Users log in with email and password. JWT tokens are used. Failed logins
-are tracked. Rate limiting is applied.
+Actors submit input. Outputs are issued. Failures are tracked. Limits are applied.
 ```
 
-**Why:** Thin summaries lose the exact details that agents need to execute correctly. "JWT tokens are used" doesn't tell the agent RS256 vs HS256, expiry duration, or cookie strategy. These omissions become the bugs.
+**Why:** Thin summaries lose the exact details that agents need to execute correctly. "Outputs are issued" doesn't tell the agent the output format, the validity window, or the scope strategy — and those omissions become the bugs. (The example is deliberately domain-neutral per `rules/domain-independence.md` MUST §1–2: a real spec substitutes its own domain's contracts.)
 
 ### 4. Phase Commands Read Specs Before Acting
 
