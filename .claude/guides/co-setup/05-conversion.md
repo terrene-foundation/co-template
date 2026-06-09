@@ -72,4 +72,8 @@ Use `--no-refs` to skip this transformation.
 
 ## Detailed Documentation
 
-The full conversion-guide subtree — `conversion/README.md`, `01-the-two-formats.md` (detailed format comparison), `02-using-co-convert.md` (all commands and workflows), and `03-reference-transformation.md` (how references are matched and transformed) — ships in repos that bundle the co-convert tooling (co-template and the domain repos). It is **not** present in atelier itself, so those links are not reproduced here as if local; consult `conversion/` in a repo that includes it. (Whether the subtree should also live in atelier is tracked as GH #13.)
+For comprehensive documentation, see the [Conversion Guide](../conversion/README.md):
+
+- [01 - The Two Formats](../conversion/01-the-two-formats.md) — Detailed format comparison
+- [02 - Using co-convert](../conversion/02-using-co-convert.md) — All commands and workflows
+- [03 - Reference Transformation](../conversion/03-reference-transformation.md) — How references are matched and transformed

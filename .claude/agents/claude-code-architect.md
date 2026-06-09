@@ -132,5 +132,4 @@ For the full set of 12 hard limits and 12 anti-patterns to check, load `skills/c
 
 - `skills/cc-artifact-patterns/` — **CANONICAL REFERENCE** for all CC artifact quality standards
 - `skills/co-reference/` — CO methodology reference
-- `skills/atelier-broker-model/` — When auditing artifacts that affect downstream sync
 - `skills/command-authoring/`, `skills/skill-authoring/` — type-specific authoring guides; load the matching one when designing or auditing a command or skill
