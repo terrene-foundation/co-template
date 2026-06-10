@@ -1,13 +1,21 @@
 {
-  "version": "1.5.4",
+  "version": "1.5.5",
   "type": "co-template",
   "description": "CO USE template for domain applications",
   "released": "2026-06-10",
   "upstream": {
     "name": "atelier",
-    "version": "1.5.3"
+    "version": "1.5.4"
   },
   "changelog": [
+    {
+      "version": "1.5.5",
+      "date": "2026-06-10",
+      "summary": "Adopt atelier 1.5.4 delta: execution-discipline.md gains MUST §6 — a premise-touching HIGH reviewer finding blocks that decision's convergence at /vet (parking it as orthogonal follow-up is BLOCKED), with a PROVISIONAL disposition when the finding's evidence lies outside the session's authorized scope. Applied as a delta onto this repo's 1.5.3-adapted copy (the held self-referential-codify reference stays absent); the Why-line citation ships in origin-form provenance. Distribution ran under the hardened sync-curation machinery: held-set exclusions manifest-sourced; Rule 5 inbound sweep of this repo's governance corpus → CLEAN (no references to held members).",
+      "changes": [
+        "rules/execution-discipline.md: NEW MUST §6 (premise-gap blocks convergence + PROVISIONAL out-of-scope-evidence disposition); 159 lines, ≤200 cap"
+      ]
+    },
     {
       "version": "1.5.4",
       "date": "2026-06-10",

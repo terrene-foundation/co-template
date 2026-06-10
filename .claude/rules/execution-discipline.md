@@ -121,6 +121,39 @@ Agent(prompt: "Draft the sync rule.")
 
 **Why**: Specialists without domain context produce technically correct but intent-misaligned output. The delegation prompt is the specialist's only window into the project's domain truth. Origin: loom specs-authority system, failure mode FM-4 (agent delegation context loss).
 
+### 6. A Premise-Touching Reviewer Gap Blocks That Decision's Convergence
+
+When a gate-level reviewer surfaces a HIGH-or-above finding whose substance contradicts the PREMISE of
+a classification or decision in the promotion set — what the decision assumed, not how it was executed —
+`/vet` MUST NOT converge on that decision while parking the finding as an orthogonal follow-up. Either
+the finding resolves (the premise is re-validated against the evidence the finding cites) or the
+decision re-opens. If the finding's evidence lies outside the session's authorized scope, the decision
+MUST be marked PROVISIONAL with validation bound to the named checkpoint where the evidence becomes
+readable — it MUST NOT converge as final. Converging past a parked premise-gap is BLOCKED.
+
+```markdown
+# DO — premise gap re-opens the decision it undercuts
+
+Reviewer (HIGH): "downstream files cite this artifact as a named invariant" lands against a decision
+to WITHHOLD that artifact → the withhold re-opens; the dependency claim is verified before convergence.
+
+# DO NOT — park the premise gap as follow-up, converge anyway
+
+"The finding concerns downstream consumers; our classification is about this repo — orthogonal, file
+it as follow-up." (the classification's premise was exactly what the finding contradicted)
+```
+
+**BLOCKED responses:**
+
+- "The finding is adjacent, not blocking"
+- "The classification converged before this finding landed"
+- "Follow-up filed, convergence stands"
+- "The reviewer scoped it as a separate concern"
+
+**Why**: A premise-level gap invalidates the inputs the decision was made from, so converging past it
+ships a conclusion its own review round contradicted — the `domain-independence.md` mis-hold survived
+its round-1 vet exactly this way (origin: atelier workspace `sync-hub-reference-curation` journal/0005–0006).
+
 ## Related Rules
 
 How work is **decomposed and delegated** across subagents — parallel-decomposition triggers, brief-claim verification, gate-level mechanical sweeps, delegate tool-inventory checks, and post-exit deliverable verification — lives in `rules/delegation-orchestration.md` (extracted from this file 2026-06-05 to keep both under the 200-line cap). The full post-exit verification protocol is in `rules/subagent-delegation-verification.md`.
