@@ -1,12 +1,12 @@
-# Atelier Independence Rules
+# Independence Rules
 
 Origin: atelier commit 6b1b157 — formalises atelier's separation from commercial entities to protect the Foundation's CC BY 4.0 publication promise.
 
 ## Scope
 
-These rules apply to ALL artifacts in atelier — every agent, skill, rule, command, hook, workspace output, README, and CLAUDE.md.
+These rules apply to ALL artifacts in this repository — every agent, skill, rule, command, hook, workspace output, README, and CLAUDE.md.
 
-Atelier is the implementation of CO (Cognitive Orchestration) — a Foundation-published methodology under CC BY 4.0. Atelier has NO structural relationship with any commercial entity. Its canonical role as the methodology source for all downstream domains depends on remaining unbiased toward any specific product, vendor, or company.
+This repository implements CO (Cognitive Orchestration) — a Foundation-published methodology under CC BY 4.0 — and has NO structural relationship with any commercial entity. The methodology's credibility depends on remaining unbiased toward any specific product, vendor, or company.
 
 ## MUST NOT Rules
 
@@ -17,12 +17,12 @@ MUST NOT reference, compare with, or design against any commercial or proprietar
 ```markdown
 # DO:
 
-"Atelier publishes CO methodology patterns that any AI execution tool can implement."
+"This repository carries CO methodology patterns that any AI execution tool can implement."
 "The 6-phase workflow applies to research, finance, education, governance, and codegen."
 
 # DO NOT:
 
-"Atelier is the open-source version of [vendor product]."
+"This repository is the open-source version of [vendor product]."
 "CO is similar to [proprietary methodology] but better."
 "COC integrates with [commercial framework]."
 ```
@@ -32,7 +32,7 @@ MUST NOT reference, compare with, or design against any commercial or proprietar
 - No "unlike X", "open-source version of Y", or "differentiates from Z"
 - No "Python port of", "community edition of", or derivative language
 
-**Why**: Commercial references position atelier as derivative, undermining its independent identity and creating implicit coupling that constrains future methodology decisions. The CO methodology's value comes from being canonically cross-domain — naming a specific vendor in any artifact biases every downstream domain that inherits it.
+**Why**: Commercial references position the methodology as derivative, undermining its independent identity and creating implicit coupling that constrains future methodology decisions. The CO methodology's value comes from being canonically cross-domain — naming a specific vendor in any artifact biases every domain that inherits it.
 
 ### 2. No Proprietary Awareness in Methodology Artifacts
 
@@ -47,7 +47,7 @@ MUST NOT reference, compare with, or design against any commercial or proprietar
 "Compatible with [vendor product]'s workflow engine."
 ```
 
-- No proprietary file paths, module names, or architecture references in atelier methodology artifacts
+- No proprietary file paths, module names, or architecture references in methodology artifacts
 - No "compatibility" or "interop" claims with proprietary systems
 - No APIs or interfaces designed for a specific proprietary product
 - No revenue models, pricing tiers, or enterprise-vs-community splits
@@ -56,17 +56,17 @@ MUST NOT reference, compare with, or design against any commercial or proprietar
 
 ### 3. No Commercial Relationship Language
 
-MUST NOT describe atelier, the Foundation, CO, or any contributor as having a "relationship," "partnership," "arrangement," or "alignment" with any commercial entity:
+MUST NOT describe this repository, the Foundation, CO, or any contributor as having a "relationship," "partnership," "arrangement," or "alignment" with any commercial entity:
 
 ```markdown
 # DO:
 
-"Contributors to atelier act as individuals under the Foundation constitution."
+"Contributors act as individuals under the Foundation constitution."
 "Third parties MAY build commercial products on CO methodology."
 
 # DO NOT:
 
-"Atelier is developed in partnership with [company]."
+"This repository is developed in partnership with [company]."
 "[Company] contributes Kailash Python under [arrangement]."
 "The Foundation has a relationship with [vendor]."
 ```
@@ -75,24 +75,24 @@ MUST NOT describe atelier, the Foundation, CO, or any contributor as having a "r
 - Open-source IP is **Foundation-owned**, fully transferred, irrevocable — never "donated by" or "licensed from" any company
 - Third parties MAY build commercial products on CO methodology — that is the intended model, but the relationship is downstream, not structural
 
-**Why**: Implying structural commercial coupling violates the Foundation's non-profit charter and exposes atelier to perceived bias. The constitution explicitly prevents open-washing and self-interest by ANY party.
+**Why**: Implying structural commercial coupling violates the Foundation's non-profit charter and exposes the methodology to perceived bias. The constitution explicitly prevents open-washing and self-interest by ANY party.
 
-### 4. No Foundation-Owned Framing for Atelier
+### 4. No Foundation-Owned Framing for This Repository
 
-Atelier IMPLEMENTS Foundation-published methodology. Atelier is NOT a Foundation property.
+This repository IMPLEMENTS Foundation-published methodology. It is NOT a Foundation property — one implementation among possible others.
 
 ```markdown
 # DO:
 
-"Atelier implements CO v1.2 — the CO methodology is published by the Terrene Foundation under CC BY 4.0."
+"This repository implements CO v1.2 — the CO methodology is published by the Terrene Foundation under CC BY 4.0."
 
 # DO NOT:
 
-"Atelier is owned by the Terrene Foundation."
-"Atelier is the Foundation's implementation toolkit." (wrong direction)
+"This repository is owned by the Terrene Foundation."
+"This repository is the Foundation's implementation toolkit." (wrong direction)
 ```
 
-**Why**: Misframing atelier as Foundation-owned implies a structural relationship that does not exist. Atelier is one possible implementation of a published open methodology — there could be others.
+**Why**: Misframing this repository as Foundation-owned implies a structural relationship that does not exist. It is one possible implementation of a published open methodology — there could be others.
 
 ### 5. Foundation-Owned Products MAY Be Named; Proprietary Variants MUST NOT
 
@@ -121,11 +121,11 @@ Origin: workspace `atelier-1.5.1-redteam` journal/0002 (the A2-001-confirmed / A
 
 ## SHOULD Rules
 
-### 1. Describe Atelier on Its Own Terms
+### 1. Describe This Repository on Its Own Terms
 
-Always describe atelier and its artifacts independently. The existence of any other product is irrelevant to atelier's purpose.
+Always describe this repository and its artifacts independently. The existence of any other product is irrelevant to its purpose.
 
-**Why**: Atelier's role as the methodology source requires self-contained descriptions that work for any audience without prior knowledge of the broader ecosystem.
+**Why**: Independent, self-contained descriptions work for any audience without prior knowledge of the broader ecosystem.
 
 ### 2. Foundation-Only Dependencies in Methodology
 
