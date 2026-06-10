@@ -1,8 +1,6 @@
 ---
 paths:
   - ".claude/**"
-  - "co-template/**"
-  - "co-codegen/**"
 ---
 
 # Domain Independence Rules
@@ -11,7 +9,7 @@ Origin: atelier 1.0.0 baseline (commit 16c4f69) — load-bearing for atelier's r
 
 ## Scope
 
-These rules apply to ALL artifacts at atelier (the root methodology repo). Domain repos have their own domain-specific rules.
+These rules apply to the inherited CC/CO methodology artifacts in this repository — NOT this repository's own domain-specific content (which lives in its domain rules).
 
 ## MUST Rules
 
@@ -30,11 +28,11 @@ CC and CO artifacts must work for ANY domain: research, finance, compliance, edu
 "The human reviews the citations" (assumes research)
 ```
 
-**Why**: atelier is the methodology hub. Domain-specific language belongs in domain repos.
+**Why**: The inherited methodology layer stays domain-agnostic; domain-specific language belongs in this repository's own domain rules.
 
 ### 2. Template Placeholders
 
-When creating artifacts that will flow to co-template/, use placeholder markers for domain-specific sections:
+Artifacts in this template carry placeholder markers for domain-specific sections:
 
 ```markdown
 # DO:
@@ -46,7 +44,7 @@ When creating artifacts that will flow to co-template/, use placeholder markers 
 "research", "codegen", "financial accuracy"
 ```
 
-**Why**: co-template/ is configurable. Domain repos replace placeholders with their specifics.
+**Why**: This template is configurable. Domain repos replace placeholders with their specifics.
 
 ### 3. Six-Phase Naming (CO v1.2)
 
@@ -61,12 +59,12 @@ CO defines a standard six-phase workflow with canonical commands. The phase **na
 | 05    | Codify     | `/codify`         | `05-codify/` + `.claude/` | learn (pre-v1.2 name), evolve            |
 | 06    | Deliver    | `/deliver`        | `06-deliver/` → recipient | publish, release, deploy, submit         |
 
-**Phase 04**: name is "Review" but canonical command is `/vet` because Claude Code reserves `/review` and the collision causes contention. Phase 04 produces finalized output, promoted on convergence to wherever the domain's deliverable lives — `06-deliver/` when the deliverable is a document, or directly to the canonical artifact location otherwise. In atelier, whose deliverable IS a `.claude/` artifact, `/vet` promotes from `04-vet/` to canonical `.claude/`.
+**Phase 04**: name is "Review" but canonical command is `/vet` because Claude Code reserves `/review` and the collision causes contention. Phase 04 produces finalized output, promoted on convergence to wherever the domain's deliverable lives — `06-deliver/` when the deliverable is a document, or directly to the canonical artifact location otherwise. In a methodology-source repo, whose deliverable IS a `.claude/` artifact, `/vet` promotes from `04-vet/` to canonical `.claude/`.
 
 **Phase 05**: renamed from "Learn" to "Codify" in CO v1.2 because the verb describes what the phase actually does — modify validated patterns into canonical practice. Phase 05 has TWO output targets: `05-codify/` for the codification log and intermediate proposals (audit trail), and `.claude/` for the canonical codified artifacts. Per-proposal human approval is REQUIRED.
 
 **Phase 06**: packages the finalized output from `06-deliver/` and hands it off to the recipient.
 
-Domain repos rename commands for their context (loom/COC uses `/todos`, `/implement`, `/redteam`, `/codify`, `/release`+`/deploy`). Atelier uses the canonical names.
+Domain repos rename commands for their context (loom/COC uses `/todos`, `/implement`, `/redteam`, `/codify`, `/release`+`/deploy`). This repository uses the canonical names.
 
 **Why**: Neutral canonical names prevent methodology lock-in to any single domain's vocabulary. Phase names are the cross-domain reference; command renames are operational flavor.

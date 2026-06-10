@@ -1,13 +1,24 @@
 {
-  "version": "1.5.3",
+  "version": "1.5.4",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-06-09",
+  "released": "2026-06-10",
   "upstream": {
     "name": "atelier",
     "version": "1.5.3"
   },
   "changelog": [
+    {
+      "version": "1.5.4",
+      "date": "2026-06-10",
+      "summary": "SYNC-004 Part B downstream cleanup (operator-authorized; atelier workspace sync-hub-reference-curation journal/0005-0010): re-scope the wrongly-atelier-addressed rules to this repository's vantage. domain-independence.md KEPT and re-scoped to the inherited methodology layer (it was provisionally classified hub-only; the inbound-reference sweep showed it load-bearing downstream); no-stubs.md + terrene-naming.md + independence.md generalized — every atelier-self reference outside Origin: lines now reads from this repo's vantage (scope lines, directive headlines, DO/DO-NOT examples, Why lines). Template-Placeholders directive KEPT (this template IS the placeholder carrier). independence.md directive #4 preserves the 'one implementation among possible others' framing; #5's gold-standards-validator citation kept (agent present here).",
+      "changes": [
+        "domain-independence.md: scope re-addressed to 'the inherited CC/CO methodology artifacts in this repository'; paths: trimmed to .claude/**; §2 Template Placeholders adapted to template vantage (kept — load-bearing here); §3 phase-table prose de-self-referenced",
+        "independence.md: title + full-file generalization (scope, §1-§4 directives incl. both #4 example blocks and Why, SHOULD §1); #5 kept intact with resolving local gold-standards-validator citation",
+        "no-stubs.md + terrene-naming.md: scope labels and all remaining self-addressed directive/Why/example text generalized to this-repository vantage",
+        "VERIFIED: grep -in atelier on all four files returns Origin: lines only; all inbound references to domain-independence resolve; 'in atelier' absent from the three generalized files"
+      ]
+    },
     {
       "version": "1.5.3",
       "date": "2026-06-09",

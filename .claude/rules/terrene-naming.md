@@ -12,7 +12,7 @@ Origin: atelier commit 6b1b157 — formalises the OCEAN→Terrene rebrand and li
 
 ## Scope
 
-These rules apply to ALL artifacts in atelier — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, workspace outputs, and any markdown content that references the Foundation, CO methodology, the trinity (CARE/EATP/CO), CO domain applications (COC/COR/COE/COG/COL/COComp), or licensing.
+These rules apply to ALL artifacts in this repository — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, workspace outputs, and any markdown content that references the Foundation, CO methodology, the trinity (CARE/EATP/CO), CO domain applications (COC/COR/COE/COG/COL/COComp), or licensing.
 
 ## MUST Rules
 
@@ -38,7 +38,7 @@ The Foundation is **Terrene Foundation** (formerly OCEAN Foundation).
 - When editing a file that still says "OCEAN Foundation", update it to "Terrene Foundation" in the same edit
 - Existing legacy docs may still say "OCEAN" — known transition, not an error unless you're touching the file
 
-**Why**: The Foundation rebranded from OCEAN to Terrene. Mixed naming creates confusion and signals stale content. Atelier is the methodology authority — its artifacts are the canonical reference for downstream domains, so naming MUST be exact.
+**Why**: The Foundation rebranded from OCEAN to Terrene. Mixed naming creates confusion and signals stale content. These artifacts inherit the canonical methodology reference, so naming MUST be exact.
 
 ### 2. License Accuracy
 
@@ -46,12 +46,12 @@ The Foundation is **Terrene Foundation** (formerly OCEAN Foundation).
 # DO:
 
 "CO is published under CC BY 4.0 by the Terrene Foundation."
-"Atelier (the CO Toolkit) is licensed under Apache 2.0."
+"The CO Toolkit is licensed under Apache 2.0."
 
 # DO NOT:
 
 "CO is licensed under CC-BY-SA."
-"Atelier is open source under MIT."
+"The CO Toolkit is open source under MIT."
 ```
 
 - **Specifications** (CARE, EATP, CO, PACT, CDI): **CC BY 4.0** — NOT CC-BY-SA. ShareAlike would prevent proprietary implementations the Foundation explicitly intends to enable.
@@ -85,24 +85,24 @@ The Foundation is **Terrene Foundation** (formerly OCEAN Foundation).
 - **The Trinity**: CARE (philosophy) + EATP (protocol) + CO (methodology)
 - **PACT**: Principled Architecture for Constrained Trust (a Working Architecture, not yet a Foundation standard)
 
-**Why**: Atelier publishes the canonical CO reference. Terminology drift in atelier propagates to every downstream domain on next sync. The Foundation's published specs use these exact terms — atelier MUST match.
+**Why**: This repository inherits the canonical CO reference; terminology drift propagates to every consumer on next sync. The Foundation's published specs use these exact terms — these artifacts MUST match.
 
 ### 4. CO as Methodology, Not Product
 
-The Foundation publishes CO as an open methodology under CC BY 4.0. The Foundation does NOT sell methodology consulting. Atelier is the implementation of a Foundation-published methodology, not a Foundation property to be commercialized.
+The Foundation publishes CO as an open methodology under CC BY 4.0. The Foundation does NOT sell methodology consulting. This repository is an implementation of a Foundation-published methodology, not a Foundation property to be commercialized.
 
 ```markdown
 # DO:
 
-"Atelier implements CO v1.2 — the CO methodology is published by the Terrene Foundation under CC BY 4.0."
+"This repository implements CO v1.2 — the CO methodology is published by the Terrene Foundation under CC BY 4.0."
 
 # DO NOT:
 
 "Terrene Foundation sells CO methodology consulting."
-"Atelier is owned by the Terrene Foundation." (wrong relationship)
+"This repository is owned by the Terrene Foundation." (wrong relationship)
 ```
 
-**Why**: Misframing the Foundation as a commercial entity violates its non-profit charter. Misframing atelier as Foundation-owned implies a structural relationship that does not exist.
+**Why**: Misframing the Foundation as a commercial entity violates its non-profit charter. Misframing an implementation as Foundation-owned implies a structural relationship that does not exist.
 
 ## MUST NOT Rules
 
@@ -120,6 +120,6 @@ MUST NOT use any license name not explicitly listed in this rule. If a new licen
 
 ### 3. No Trademark or Commercial Coupling Language
 
-MUST NOT describe atelier or any CO artifact as having a "relationship," "partnership," or "arrangement" with any commercial entity. See `independence.md` for the full constraint.
+MUST NOT describe this repository or any CO artifact as having a "relationship," "partnership," or "arrangement" with any commercial entity. See `independence.md` for the full constraint.
 
-**Why**: Atelier's canonical role depends on its independence from commercial framing.
+**Why**: The methodology's credibility depends on its independence from commercial framing.

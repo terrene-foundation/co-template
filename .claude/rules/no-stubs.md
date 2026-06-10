@@ -9,7 +9,7 @@ Origin: atelier commit 6b1b157 — placeholder-propagation risk specific to atel
 
 ## Scope
 
-These rules apply to ALL canonical artifacts in atelier — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, and any artifact destined for `.claude/`.
+These rules apply to ALL canonical artifacts in this repository — agents, skills, rules, commands, hooks, CLAUDE.md, README.md, and any artifact destined for `.claude/`.
 
 **Exception**: Working drafts in `workspaces/` are excluded. Workspaces are explicitly in-progress; placeholder content is normal there until the work converges.
 
@@ -36,7 +36,7 @@ Canonical artifacts (anything in `.claude/`) MUST NOT contain:
 - "This section will be completed later" without a tracking reference
 - Lorem ipsum or generic placeholder text
 
-**Why**: Canonical artifacts are loaded by Claude on every relevant turn. Placeholder content forces Claude to interpret incomplete instructions probabilistically, which produces inconsistent behavior. Atelier is the canonical reference for downstream domains — placeholders propagate to every domain on next sync.
+**Why**: Canonical artifacts are loaded by Claude on every relevant turn. Placeholder content forces Claude to interpret incomplete instructions probabilistically, which produces inconsistent behavior — and placeholders propagate to every consumer of this repository's artifacts on the next sync.
 
 **Note**: `TODO` markers ARE acceptable in `workspaces/` directories during active drafting. They MUST be tracked and resolved before the artifact is promoted from a workspace into `.claude/` (this happens at `/vet` convergence and `/codify` approval).
 
