@@ -25,7 +25,7 @@ Run all 7 sweeps. Aggregate findings into a single report at the end with severi
 find workspaces/*/todos/active/ -name "*.md" 2>/dev/null
 ```
 
-Read frontmatter (`status`, `priority`, `phase`). Group by workspace. Surface stale (>14d) workspaces' todos with explicit "is this still relevant?" flag.
+Read frontmatter (`status`, `priority`, `phase`). Group by workspace. Per `rules/value-prioritization.md`, classify each stale (>14d) todo into one of THREE dispositions — never `Stale` alone, never auto-close: **(a) still-wanted** — re-validate the value-anchor, re-queue with an explicit value-rank citing the brief / spec § / a journal DECISION; **(b) abandon-with-user-gate** — recommend closure with a value-decay rationale and surface to the user (auto-closing as not-wanted by age is BLOCKED); **(c) queued-with-value-rank** — alive but lower priority, explicit anchor required. A todo lacking any value-anchor surfaces as a SEPARATE finding ("value-anchor absent — request from user before re-queuing"), not a closure.
 
 ### Sweep 2: Pending journal entries (auto-generated, awaiting promotion)
 
@@ -42,7 +42,7 @@ gh issue list --repo esperie-enterprise/atelier --state open --limit 50 \
   --json number,title,labels,createdAt,updatedAt,comments
 ```
 
-Categorize: **Stale** (no activity ≥30d), **Closeable** (delivered work but issue still open), **Blocked-on-external** (e.g., requires SGGC scheduling, requires astra git init), **Genuinely actionable**.
+Categorize: **Closeable** (delivered work but issue still open — cite the commit/PR per `rules/git.md` § Issue Closure), **Blocked-on-external** (e.g., requires an external scheduling decision, or a dependency repo to be provisioned — record the owner and the unblock condition), **Genuinely actionable**. Per `rules/value-prioritization.md`, `Stale` (no activity ≥30d) is NOT a closure category — auto-closing a stale issue as not-wanted because of age is BLOCKED. Stale issues route through the SAME three-disposition classification as Sweep 1 (still-wanted re-validate / abandon-with-user-gate / queued-with-value-rank); an issue lacking a value-anchor surfaces as a separate finding requesting the anchor before disposition.
 
 ### Sweep 4: Open PRs and stale feature branches
 

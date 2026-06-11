@@ -94,3 +94,28 @@ Specify scope: `all`, `fidelity`, `sync`, `phase-commands`, or a specific file/t
 ## Report + Convergence
 
 Report as CRITICAL/HIGH/NOTE. Run iteratively until zero CRITICAL and zero HIGH. Use `claude-code-architect` for the audit work.
+
+## Composition Precedence
+
+The mechanical sweeps (Phase 1 Step 5), the four-dimension judgment (Phase 1 Step 2), and any adversarial effectiveness A/B probe (per `rules/probe-driven-verification.md`) are NOT a flat list of equal findings — they **compose** into one verdict with a fixed precedence. Two signal classes are **load-bearing**; LLM judgment **corroborates**.
+
+- **Structural signal (load-bearing)**: any mechanical-sweep RED — a cross-reference that does not resolve, a frontmatter-lint hit, an over-limit line/char count, an empty frontmatter field. Each is CRITICAL **regardless of LLM-dimension judgment**.
+- **Adversarial signal (load-bearing)**: a failed effectiveness A/B — the same task run once with the artifact in context and once with it stripped, showing the artifact does NOT change behavior — is CRITICAL on an in-scope artifact **regardless of LLM-dimension judgment**.
+- **LLM judgment (corroborating)**: surfaced at reviewer-judged NOTE/HIGH. Additive on top of the load-bearing signals — it catches what they miss, but it is NEVER auto-cleared and NEVER used to override them.
+
+```markdown
+# DO — structural signal wins:
+
+The cross-reference integrity sweep flags a dangling reference in agent X.
+LLM read of X: "reads clean, well-scoped, no issues."
+→ Verdict: CRITICAL (the dangling ref). The LLM read is recorded as
+corroboration, not as a clearance.
+
+# DO NOT — LLM judgment overriding a structural red:
+
+A frontmatter-lint hit on rule Y is downgraded to NOTE because
+"the rule is obviously fine on reading and the key is harmless."
+→ A structural RED is CRITICAL. An LLM "looks fine" can NEVER clear it.
+```
+
+**Why**: Mechanical sweeps exist to catch silent failures — the class of defect an LLM read misses by construction (a key CC parses as no-frontmatter still "reads fine"). If a confident LLM judgment could downgrade a structural RED, the audit's deterministic backbone becomes advisory and the silent-failure class reopens. Precedence is one-directional: structure and adversarial proof gate the verdict; judgment enriches it.
