@@ -43,14 +43,14 @@ Autonomous execution operates INSIDE the user's permission envelope, not outside
 
 **You MUST still confirm before:**
 
-- **Destructive operations**: `rm -rf`, branch deletion (especially across repos), dropping anything from disk that has not been committed, killing processes, force-deleting files in shared trees, overwriting uncommitted changes.
+- **Destructive operations**: `rm -rf`, branch deletion, dropping anything from disk that has not been committed, killing processes, force-deleting files in shared trees, overwriting uncommitted changes.
 - **Hard-to-reverse operations**: force-push, `git reset --hard` on commits already shared with the user's eye, amending published commits, dependency removal, CI/CD pipeline edits.
-- **Shared-state changes visible to others**: pushing to remote (any repo), opening/closing/commenting on PRs or issues, posting to Slack/email/external services, modifying shared infrastructure or permissions, uploading content to third-party renderers.
-- **Multi-repo distribution**: running `/sync` to multiple downstream repos at once (co-template + 3 domain repos + loom) is high-blast-radius — recommend, then confirm. Single-repo sync IS within envelope.
+- **Shared-state changes visible to others**: pushing to remote, opening/closing/commenting on PRs or issues, posting to Slack/email/external services, modifying shared infrastructure or permissions, uploading content to third-party renderers.
+- **Multi-target distribution**: distributing artifacts to multiple of this project's downstream consumers (if any) at once is high-blast-radius — recommend, then confirm. Single-target distribution IS within envelope.
 - **Out-of-envelope scope expansion**: work exceeding the user's stated request by more than one reasonable session shard — state the expansion and confirm before continuing.
-- **Downstream-of-atelier repos**: never push remotely on the user's behalf to terrene-foundation/co-{template,research,education,governance} OR Integrum-Global/aegis OR loom — local commits OK, push stays with the user.
+- **Downstream consumers**: never push remotely on the user's behalf to this project's downstream consumers, if any — local commits OK, push stays with the user.
 
-Confirmation here is NOT hedging. It is the user's pre-declared safety check on actions whose blast radius they have not yet authorized. Skipping this confirmation violates `CLAUDE.md` § "Executing actions with care".
+Confirmation here is NOT hedging. It is the user's pre-declared safety check on actions whose blast radius they have not yet authorized.
 
 ## Rigor — verify before you commit
 
@@ -59,7 +59,7 @@ Autonomous execution does NOT mean reckless. Before declaring a pick optimal:
 - Run mechanical sweeps that VERIFY the claim (grep, file existence, JSON parse, diff) — not only LLM judgment.
 - Cite specific file paths, line numbers, or commit SHAs when recommending a change — never gesture at "the audit rule" without naming `rules/cc-artifacts.md:198`.
 - Distinguish what you OBSERVED from what you ASSUMED. If the claim rests on memory, verify against the current artifact on disk.
-- For high-blast-radius technical choices (multi-repo sync, version bumps, rule corpus changes), state your confidence level and the evidence behind it.
+- For high-blast-radius technical choices (multi-target distribution, version bumps, rule corpus changes), state your confidence level and the evidence behind it.
 
 ## If `/autonomize` fired WHILE you were mid-question
 
@@ -67,8 +67,8 @@ Re-answer the underlying choice yourself:
 
 - Pick the optimal option with rigor and evidence.
 - If genuinely undecidable: make that case explicit (what evidence is missing, what would resolve it).
-- Then execute — or, if the action falls under Prudence above, state the pick and request the SPECIFIC confirmation needed (e.g., "ready to push 5 repos to remote: confirm").
+- Then execute — or, if the action falls under Prudence above, state the pick and request the SPECIFIC confirmation needed (e.g., "ready to push to remote: confirm").
 
 Do NOT simply re-ask the question with a fresh recommendation tacked on — make the pick and move.
 
-Origin: absorbed from loom/.claude/commands/autonomize.md (loom 2.10.x), adapted for atelier's repo network — BUILD/USE/SDK references replaced with atelier→co-template→domain-repos+loom; LOC-budget framing dropped (atelier produces methodology artifacts, not code).
+Origin: adopted from atelier canonical autonomize.md (GH atelier#15), Prudence adapted for a standalone repo — multi-repo blast-radius items generalized to "this project's downstream consumers, if any".
