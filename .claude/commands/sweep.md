@@ -79,10 +79,15 @@ Roll up: per workspace, count findings by category. Workspaces with ≥3 unresol
 find workspaces/*/.session-notes -mtime +30 2>/dev/null            # stale session notes
 git worktree list                                                  # orphan worktrees
 find workspaces/*/journal/.pending/*.md -mtime +14 2>/dev/null     # stale .pending
-find workspaces/_template/01-analyze -newer workspaces/_template/brief.md 2>/dev/null  # template drift
+# template drift — only meaningful in an instantiated project where brief.md exists
+if [ -f workspaces/_template/brief.md ]; then
+  find workspaces/_template/01-analyze -newer workspaces/_template/brief.md 2>/dev/null
+else
+  echo "SWEEP-6-TEMPLATE-DRIFT: not applicable — workspaces/_template/brief.md absent (bare template context, not an instantiated project); skip with stated reason."
+fi
 ```
 
-Surface: workspaces with `.session-notes` >30d (archive or close), worktrees not at HEAD or zero-commit (cleanup), `.pending` >14d (promote OR discard), template directories newer than brief (template drifted from documented baseline).
+Surface: workspaces with `.session-notes` >30d (archive or close), worktrees not at HEAD or zero-commit (cleanup), `.pending` >14d (promote OR discard), template directories newer than brief (template drifted from documented baseline — only runs when `workspaces/_template/brief.md` exists; emits an explicit NOT-APPLICABLE notice in the bare template context rather than silently passing).
 
 ### Sweep 7: Process hygiene
 
