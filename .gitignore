@@ -1,7 +1,6 @@
 .DS_Store
 .session-notes
-.claude/learning/observations.jsonl
-.claude/learning/instincts.json
+.claude/learning/
 *.swp
 *.swo
 node_modules/
