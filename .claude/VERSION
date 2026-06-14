@@ -1,13 +1,23 @@
 {
-  "version": "1.5.5",
+  "version": "1.5.6",
   "type": "co-template",
   "description": "CO USE template for domain applications",
-  "released": "2026-06-10",
+  "released": "2026-06-14",
   "upstream": {
     "name": "atelier",
     "version": "1.5.4"
   },
   "changelog": [
+    {
+      "version": "1.5.6",
+      "date": "2026-06-14",
+      "summary": "PARTIAL adoption of post-1.5.4 distributables — the atelier item-7 (trust-posture hook cluster) Layer-0 set plus one execution-discipline clause. NOT a full atelier-version sync: upstream.version stays 1.5.4 because the other post-1.5.4 atelier drift (cc-audit/codify enforcement-engine content, autonomize, autonomous-execution) was deliberately held back, and the ~30 already-adapted shared artifacts were left untouched (re-syncing them would clobber this repo's generalizations). Curation: held members (trust-posture, self-referential-codify, repo-scope-discipline, hook-output-discipline, settings-manager, hooks) excluded per the manifest; the hub-only journal-write-guard mention in the new rule ships in CONDITIONAL 'where present' form so a hookless repo carries no false assertion; the execution-discipline addition's reference to the held hook-output-discipline.md was scrubbed to a generic 'its own output-discipline rule' form (hub-only-reference sweep). Landed via authorized, journaled cross-repo /sync from atelier.",
+      "changes": [
+        "NEW rules/journal-author-discipline.md: the author-field-is-a-verifiable-claim rule (Layer-0); paths-scoped to **/journal/**; journal-write-guard hook mentions conditionalized for a hookless repo; 95 lines",
+        "NEW skills/hook-authoring/SKILL.md: authoring/auditing Claude Code lifecycle hooks (Layer-0, transplant-clean — the skill a repo USES to build a substrate, useful before one exists)",
+        "rules/execution-discipline.md: MUST §3 (Draft/Integrate Split) gains the 'integration verification covers rule-imposed requirements, not only component presence' clause; held hook-output-discipline.md reference scrubbed; 170 lines, ≤200 cap"
+      ]
+    },
     {
       "version": "1.5.5",
       "date": "2026-06-10",

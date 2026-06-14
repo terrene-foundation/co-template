@@ -59,6 +59,17 @@ Write the deliverable and call it done without checking that references, depende
 
 **Why**: A deliverable can be internally correct but break the ecosystem — dangling cross-references, missing dependencies, or formats that downstream consumers cannot parse. Splitting the steps ensures both content quality and integration quality are explicitly verified.
 
+**Integration verification covers rule-imposed requirements, not only component presence.** When the deliverable bundles artifacts that impose requirements on each other or on the deliverable itself (a rule mandating fixtures, a spec mandating a section, an agent mandating a tool), Step B MUST verify those requirements are SATISFIED — not merely that the named components exist.
+
+```
+# DO: bundle ships rule R (R MUST §4: "detectors ship with fixtures") + the detectors
+#     → Step B confirms the fixtures are present, because R requires them
+# DO NOT: confirm "detectors present + registered" and call the bundle complete
+#         (R's fixture requirement went unverified — the bundle violates its own shipped rule)
+```
+
+**Why**: a deliverable can pass component-presence checks (files exist, references resolve) yet violate a MUST that one of its own bundled artifacts imposes — the bundle is then self-inconsistent the moment it lands. Origin: a substrate bundle that shipped detectors without the fixtures its own output-discipline rule (MUST §4) requires (workspace journal 0013).
+
 ### 4. Gate-Level Reviews at Phase Boundaries
 
 Reviews MUST run at specific phase boundaries, not per-edit. Phase boundary reviews use background agents for near-zero parent context cost.
