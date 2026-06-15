@@ -1,0 +1,1 @@
+cp draft.md /Users/esperie/repos/loom/.claude/rules/new.md

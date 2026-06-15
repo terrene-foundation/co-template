@@ -1,0 +1,1 @@
+mv draft.md $(resolve-target)/notes.md

@@ -125,6 +125,6 @@ scripts/co-convert.sh to-plugin --name co-medical --force
 | Component | Why |
 |-----------|-----|
 | Rules (`.claude/rules/`) | Plugin format has no rules directory. Rules are advisory in Cowork. |
-| Hooks (`scripts/hooks/`) | Cowork does not support hooks. |
+| Hooks (`.claude/hooks/`) | Cowork does not support hooks. |
 | Root CLAUDE.md | Too complex to auto-generate. Maintained separately. |
 | Workspace template | Shared between both formats (lives at project root). |

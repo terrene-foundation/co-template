@@ -1,0 +1,1 @@
+ls -la /Users/esperie/repos/loom/.claude 2>&1

@@ -29,7 +29,7 @@ The enforced rules live in **`rules/cc-artifacts.md`** — these are the MUST/MU
 | ---------------- | ----------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------- |
 | L1: Intent       | Agents (`.claude/agents/`)                                                                | Specialized delegation  | Agent can complete its task without human clarification |
 | L2: Context      | Skills (`.claude/skills/`)                                                                | Institutional knowledge | 80% of routine questions answered by SKILL.md alone     |
-| L3: Guardrails   | Rules (`.claude/rules/`) + Hooks (`.claude/hooks/` canonical, or `scripts/hooks/` legacy) | Enforcement             | Zero violations in production                           |
+| L3: Guardrails   | Rules (`.claude/rules/`) + Hooks (`.claude/hooks/`)                                       | Enforcement             | Zero violations in production                           |
 | L4: Instructions | Commands (`.claude/commands/`)                                                            | Structured workflows    | Each command produces predictable, verifiable output    |
 | L5: Learning     | Observations + Instincts + Evolution                                                      | Continuous improvement  | Patterns compound across sessions                       |
 
