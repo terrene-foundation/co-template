@@ -1,0 +1,1 @@
+cp draft.md "$LOOM/.claude/rules/new.md"

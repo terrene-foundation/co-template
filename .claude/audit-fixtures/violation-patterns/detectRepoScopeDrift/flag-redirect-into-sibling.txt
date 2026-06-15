@@ -1,0 +1,1 @@
+echo done > /Users/esperie/repos/loom/.claude/new.md

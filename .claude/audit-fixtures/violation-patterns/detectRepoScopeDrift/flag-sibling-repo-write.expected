@@ -1,0 +1,1 @@
+{"type":"repo-scope-drift","detail":"write/mutate command targets sibling-repo path /Users/esperie/repos/loom/.claude/rules/new.md outside cwd repo /Users/esperie/repos/atelier","severity":"warn"}

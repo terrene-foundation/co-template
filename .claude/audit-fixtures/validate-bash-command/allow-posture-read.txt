@@ -1,0 +1,1 @@
+{"tool_input":{"command":"cat .claude/learning/posture.json && grep -c repo-scope-drift .claude/learning/violations.jsonl"},"cwd":"/tmp/gh16-vbc-fixture"}

@@ -1,0 +1,1 @@
+git status --porcelain && git reset --hard origin/main

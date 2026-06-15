@@ -1,0 +1,1 @@
+cp draft.md /Users/esperie/repos/atelier/.claude/rules/new.md

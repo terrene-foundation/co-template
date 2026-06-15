@@ -13,21 +13,21 @@ const os = require("os");
  * Resolve the learning directory for a given project.
  *
  * Priority:
- *   1. KAILASH_LEARNING_DIR env var (for testing)
+ *   1. CO_LEARNING_DIR env var (for testing)
  *   2. <cwd>/.claude/learning/ (per-project)
- *   3. ~/.claude/kailash-learning/ (legacy fallback)
+ *   3. ~/.claude/learning/ (global fallback)
  *
  * @param {string} [cwd] - Project working directory
  * @returns {string} Absolute path to the learning directory
  */
 function resolveLearningDir(cwd) {
-  if (process.env.KAILASH_LEARNING_DIR) {
-    return process.env.KAILASH_LEARNING_DIR;
+  if (process.env.CO_LEARNING_DIR) {
+    return process.env.CO_LEARNING_DIR;
   }
   if (cwd) {
     return path.join(cwd, ".claude", "learning");
   }
-  return path.join(os.homedir(), ".claude", "kailash-learning");
+  return path.join(os.homedir(), ".claude", "learning");
 }
 
 /**

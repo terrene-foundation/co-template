@@ -52,6 +52,35 @@ Specify scope: `all`, `fidelity`, `phase-commands`, or a specific file/type.
 8. Workspace template dirs are aligned with CO v1.2 (`01-analyze` through `06-deliver`, plus `journal/`, `todos/active|completed`).
 9. **Learning files** (if present): `.claude/learning/learning-digest.json` is well-formed JSON matching the expected schema (version, period, corrections, error_patterns, accomplishments, decisions, workflow_patterns); `.claude/learning/learning-codified.json` has matching `digest_hash` for the most recent /codify run.
 
+## Phase: Trust-Posture Adjudication
+
+**Probe adjudication of recorded violations**: for each `.claude/learning/violations.jsonl` entry WITHOUT
+an `adjudicated:` field (the mechanical filter — the enforcement engine writes that marker), run the
+matching probe contract in `.claude/audit-fixtures/violation-patterns/probes.md` (question + schema +
+deterministic scoring, per `rules/probe-driven-verification.md` MUST §2) via the `test-harness-probe`
+protocol (`skills/test-harness-probe/` — present in co-template). The probe verdict — never the lexical
+hit — is the authoritative finding (`hook-output-discipline.md` MUST §2 / `probe-driven-verification.md`
+MUST §4: hook advisory tripwire, probe authoritative). Record every verdict (confirmed or retired) in the
+audit report, a workspace journal entry keyed to the violation entry's timestamp, AND via the engine CLI:
+
+```
+node .claude/hooks/lib/posture.js adjudicate --ts <ts> --verdict confirmed|retired \
+     --probe <probe-id> --by cc-audit-step15        # (+ --emergency <class> for emergency-class confirms)
+```
+
+The agent NEVER edits the state files directly (`trust-posture.md` MUST NOT §1 — the engine is the sole
+writer; it applies any cumulative-threshold or emergency downgrade). The three trust-substrate fixture
+runners MUST all pass before convergence:
+
+```
+node .claude/audit-fixtures/violation-patterns/run-fixtures.js
+node .claude/audit-fixtures/validate-bash-command/run-fixtures.js
+node .claude/audit-fixtures/posture-engine/run-fixtures.js
+```
+
+(co-template ships only the trust substrate — it does NOT carry atelier's `gitignored-claude-warn` runner,
+which is an atelier-specific hook outside this substrate.)
+
 ## Report + Convergence
 
 Report as CRITICAL/HIGH/NOTE. Run iteratively until zero CRITICAL and zero HIGH. Use `claude-code-architect` for the audit work.

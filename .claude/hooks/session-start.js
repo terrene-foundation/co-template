@@ -31,6 +31,7 @@ const {
   findAllSessionNotes,
 } = require("./lib/workspace-utils");
 const { checkVersion } = require("./lib/version-utils");
+const posture = require("./lib/posture.js");
 
 // Timeout fallback — prevents hanging the Claude Code session
 const TIMEOUT_MS = 10000;
@@ -47,10 +48,14 @@ process.stdin.on("end", () => {
     const data = JSON.parse(input);
     const result = initializeSession(data);
     const output = { continue: true };
-    if (result.sessionNotesContext) {
+    const contextParts = [
+      result.postureBanner,
+      result.sessionNotesContext,
+    ].filter(Boolean);
+    if (contextParts.length > 0) {
       output.hookSpecificOutput = {
         hookEventName: "SessionStart",
-        additionalContext: result.sessionNotesContext,
+        additionalContext: contextParts.join("\n\n"),
       };
     }
     console.log(JSON.stringify(output));
@@ -71,7 +76,7 @@ function initializeSession(data) {
   const homeDir = process.env.HOME || process.env.USERPROFILE;
   const sessionDir = path.join(homeDir, ".claude", "sessions");
   const learningDir = resolveLearningDir(cwd);
-  const result = { sessionNotesContext: null };
+  const result = { sessionNotesContext: null, postureBanner: null };
 
   // Ensure directories exist
   [sessionDir].forEach((dir) => {
@@ -130,6 +135,37 @@ function initializeSession(data) {
     for (const msg of versionResult.messages) {
       console.error(msg);
     }
+  } catch {}
+
+  // ── Trust-posture banner + 30-day mirror pruning (GH #16 engine) ─────
+  // Prune first (posture.json mirror + expired grace only — violations.jsonl
+  // is the durable audit log and is never pruned), then surface the posture
+  // on BOTH channels: stderr for the human, additionalContext for the agent.
+  try {
+    posture.pruneViolations(cwd);
+    const p = posture.readPosture(cwd);
+    const counts = posture.countRecent(cwd);
+    const graceActive = p.grace
+      .map(
+        (g) =>
+          `${g.type} (rule ${g.rule}, until ${String(g.until || "").slice(0, 10)})`,
+      )
+      .join("; ");
+    const banner =
+      `[TRUST-POSTURE] ${p.level}` +
+      (p.since ? ` since ${p.since.slice(0, 10)}` : "") +
+      ` — ${counts.total} violation(s) in last ${posture.WINDOW_DAYS}d` +
+      ` (${counts.unadjudicated} awaiting probe adjudication,` +
+      ` ${counts.confirmed} confirmed, ${counts.retired} retired)` +
+      (graceActive ? ` | grace windows: ${graceActive}` : "");
+    console.error(banner);
+    result.postureBanner =
+      banner +
+      "\nPosture ladder: L1 (observed) … L5 (delegated); rules/trust-posture.md " +
+      "defines the ceiling. Downgrades are automatic; only a human may upgrade. " +
+      (counts.unadjudicated > 0
+        ? `${counts.unadjudicated} recorded violation(s) await probe adjudication at the next /cc-audit (step 15).`
+        : "No violations awaiting adjudication.");
   } catch {}
 
   // ── Output workspace status (human-facing, stderr only) ──────────────
@@ -212,11 +248,14 @@ function initializeSession(data) {
 function detectProjectType(cwd) {
   try {
     const hasWorkspaces = fs.existsSync(path.join(cwd, "workspaces"));
-    const hasJournal = hasWorkspaces &&
+    const hasJournal =
+      hasWorkspaces &&
       fs.readdirSync(path.join(cwd, "workspaces")).some((d) => {
         try {
           return fs.existsSync(path.join(cwd, "workspaces", d, "journal"));
-        } catch { return false; }
+        } catch {
+          return false;
+        }
       });
 
     if (hasWorkspaces && hasJournal) return "co-workspace";

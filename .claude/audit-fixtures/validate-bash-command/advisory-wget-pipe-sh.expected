@@ -1,0 +1,1 @@
+{"exit":0,"stdout_contains":["[BASH-ADVISORY]","Piping wget to shell"],"stdout_not_contains":["deny"]}

@@ -1,0 +1,1 @@
+{"tool_input":{"command":"sed -i '' 's/L3/L5/' .claude/learning/posture.json"},"cwd":"/tmp/gh16-vbc-fixture"}

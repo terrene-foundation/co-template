@@ -1,0 +1,1 @@
+run.sh &>/Users/esperie/repos/loom/all.log

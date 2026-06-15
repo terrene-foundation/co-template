@@ -1,0 +1,1 @@
+{"type":"destructive-bash","detail":"git reset --hard / git clean -f without a preceding `git status --porcelain` safety check in the same command","severity":"warn"}

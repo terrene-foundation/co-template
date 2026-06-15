@@ -1,0 +1,1 @@
+{"exit":2,"stdout_contains":["permissionDecision","deny","trust-posture state file","rm targeting"],"stdout_not_contains":["BASH-ADVISORY"]}
