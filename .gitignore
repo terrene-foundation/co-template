@@ -1,5 +1,7 @@
 .DS_Store
 .session-notes
+.env
+.env.local
 .claude/learning/
 *.swp
 *.swo
