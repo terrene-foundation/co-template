@@ -8,7 +8,7 @@ paths:
 
 # Terrene Foundation Naming
 
-Origin: atelier commit 6b1b157 — formalises the OCEAN→Terrene rebrand and license-accuracy requirements across the artifact corpus.
+Origin: atelier commit 6b1b157 — formalises Foundation naming and license-accuracy requirements across the artifact corpus. Corrected per GH #73 (2026-06-19): removed a never-existent predecessor name and an unowned developer-portal domain; the Foundation is simply Terrene Foundation, with no prior name to transition from.
 
 ## Scope
 
@@ -18,7 +18,7 @@ These rules apply to ALL artifacts in this repository — agents, skills, rules,
 
 ### 1. Foundation Name
 
-The Foundation is **Terrene Foundation** (formerly OCEAN Foundation).
+The Foundation is **Terrene Foundation**. There is no predecessor name.
 
 ```markdown
 # DO:
@@ -27,18 +27,15 @@ The Foundation is **Terrene Foundation** (formerly OCEAN Foundation).
 
 # DO NOT:
 
-"Published by OCEAN Foundation."
-"Published by the Foundation." (ambiguous)
+"Published by the Foundation." (ambiguous — name the Foundation)
+"Published by Terrene." (incomplete on first reference)
 ```
 
-- Domain: `terrene.foundation`
-- Developer portal: `terrene.dev`
+- Domain: `terrene.foundation` (the only Foundation domain)
 - GitHub org: `terrene-foundation`
 - Always use the full name "Terrene Foundation" on first reference in any artifact
-- When editing a file that still says "OCEAN Foundation", update it to "Terrene Foundation" in the same edit
-- Existing legacy docs may still say "OCEAN" — known transition, not an error unless you're touching the file
 
-**Why**: The Foundation rebranded from OCEAN to Terrene. Mixed naming creates confusion and signals stale content. These artifacts inherit the canonical methodology reference, so naming MUST be exact.
+**Why**: These artifacts inherit the canonical methodology reference, so naming MUST be exact. An invented predecessor name or an unowned domain in this rule contaminates every consumer on next sync.
 
 ### 2. License Accuracy
 
@@ -106,11 +103,22 @@ The Foundation publishes CO as an open methodology under CC BY 4.0. The Foundati
 
 ## MUST NOT Rules
 
-### 1. No Mixed Foundation Naming
+### 1. No Predecessor-Name or Rebrand Framing
 
-MUST NOT mix "OCEAN" and "Terrene" in the same file. If you touch the file, update both to "Terrene" in the same edit.
+MUST NOT reference a predecessor name, "former" name, "rebrand," or "transition" for the Foundation — there is none. The Foundation is, and always has been in canonical artifacts, **Terrene Foundation**.
 
-**Why**: Mixed naming signals incomplete migration and undermines the canonical reference role.
+```markdown
+# DO:
+
+"Terrene Foundation publishes CO under CC BY 4.0."
+
+# DO NOT:
+
+"Terrene Foundation (formerly [Predecessor] Foundation)."
+"the [predecessor]→Terrene rebrand / transition / migration"
+```
+
+**Why**: Inventing a predecessor name is factually wrong, not merely stale, and the "formerly / rebrand" framing propagates that error to every consumer on next sync (GH #73). A canonical naming rule that is itself the contamination source defeats its own purpose.
 
 ### 2. No Inaccurate License References
 
