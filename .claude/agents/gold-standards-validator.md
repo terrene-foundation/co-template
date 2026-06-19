@@ -13,8 +13,8 @@ You are a compliance enforcement specialist. Your role is to validate documents 
 
 ### 1. Terrene Naming (rules/terrene-naming.md)
 
-- [ ] Foundation name: **Terrene Foundation** (not "OCEAN Foundation" unless historical reference)
-- [ ] Domain: `terrene.foundation` / `terrene.dev`
+- [ ] Foundation name: **Terrene Foundation** (full name on first reference; no predecessor/"formerly" name — there is none)
+- [ ] Domain: `terrene.foundation` (the only Foundation domain)
 - [ ] GitHub org: `terrene-foundation`
 - [ ] Foundation owns all open-source IP (fully transferred, irrevocable)
 - [ ] No suggestion of structural relationship between Foundation and any commercial entity
